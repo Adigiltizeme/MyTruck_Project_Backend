@@ -1,0 +1,41 @@
+[
+  {
+    "id": "recOwXJaKkJQY8xtU",
+    "fields": {
+      "NUMÉRO DE FACTURE": 3,
+      "STATUT": "En attente",
+      "MAGASIN": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "DATE DE FACTURATION": "2024-01-17",
+      "Date de création": "2024-01-17T21:34:47.000Z"
+    },
+    "createdTime": "2024-01-17T21:34:47.000Z"
+  },
+  {
+    "id": "recUHS9W76xLWI8cG",
+    "fields": {
+      "NUMÉRO DE FACTURE": 2,
+      "STATUT": "Payée",
+      "MAGASIN": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "DATE DE FACTURATION": "2024-01-17",
+      "Date de création": "2024-01-17T21:29:03.000Z"
+    },
+    "createdTime": "2024-01-17T21:29:03.000Z"
+  },
+  {
+    "id": "recliI3dPptd5AcYX",
+    "fields": {
+      "NUMÉRO DE FACTURE": 1,
+      "STATUT": "Payée",
+      "MAGASIN": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "DATE DE FACTURATION": "2024-01-17",
+      "Date de création": "2024-01-17T20:42:16.000Z"
+    },
+    "createdTime": "2024-01-17T20:42:16.000Z"
+  }
+]

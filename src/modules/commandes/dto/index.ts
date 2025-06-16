@@ -1,0 +1,299 @@
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import {
+    IsString,
+    IsOptional,
+    IsDateString,
+    IsEnum,
+    IsNumber,
+    IsBoolean,
+    IsArray,
+    IsUUID,
+    ValidateNested,
+    Min,
+    Max
+} from 'class-validator';
+import { Type, Transform } from 'class-transformer';
+
+// Enums pour les statuts
+export enum StatutCommande {
+    EN_ATTENTE = 'En attente',
+    CONFIRMEE = 'Confirmée',
+    ANNULEE = 'Annulée',
+    MODIFIEE = 'Modifiée',
+    TRANSMISE = 'Transmise'
+}
+
+export enum StatutLivraison {
+    EN_ATTENTE = 'EN ATTENTE',
+    CONFIRMEE = 'CONFIRMEE',
+    EN_COURS = 'EN COURS DE LIVRAISON',
+    LIVREE = 'LIVREE',
+    ECHEC = 'ECHEC',
+    ANNULEE = 'ANNULEE'
+}
+
+export enum CategorieVehicule {
+    UTILITAIRE_3M3 = '3M3 (Utilitaire 150kg, 180x125x180cm)',
+    CAMIONNETTE_6M3 = '6M3 (Camionnette 300kg, 240x169x138cm)',
+    CAMIONNETTE_10M3 = '10M3 (Camionnette 1000kg, 308x207x176cm)',
+    CAMION_20M3 = '20M3 (Avec hayon 1000kg, 420, 207, 230cm)'
+}
+
+export enum TypeAdresse {
+    DOMICILE = 'Domicile',
+    PROFESSIONNELLE = 'Professionnelle'
+}
+
+// DTOs pour les sous-objets
+export class CreateClientDto {
+    @ApiProperty({ example: 'Dupont' })
+    @IsString()
+    nom: string;
+
+    @ApiProperty({ example: 'Jean', required: false })
+    @IsOptional()
+    @IsString()
+    prenom?: string;
+
+    @ApiProperty({ example: '+33123456789' })
+    @IsString()
+    telephone: string;
+
+    @ApiProperty({ example: '+33987654321', required: false })
+    @IsOptional()
+    @IsString()
+    telephoneSecondaire?: string;
+
+    @ApiProperty({ example: '123 Rue de la Paix, 75001 Paris' })
+    @IsString()
+    adresseLigne1: string;
+
+    @ApiProperty({ example: '75001', required: false })
+    @IsOptional()
+    @IsString()
+    codePostal?: string;
+
+    @ApiProperty({ example: 'Paris', required: false })
+    @IsOptional()
+    @IsString()
+    ville?: string;
+
+    @ApiProperty({ example: 'Bâtiment A', required: false })
+    @IsOptional()
+    @IsString()
+    batiment?: string;
+
+    @ApiProperty({ example: '3ème étage', required: false })
+    @IsOptional()
+    @IsString()
+    etage?: string;
+
+    @ApiProperty({ example: '1234A', required: false })
+    @IsOptional()
+    @IsString()
+    interphone?: string;
+
+    @ApiProperty({ example: true, required: false })
+    @IsOptional()
+    @IsBoolean()
+    ascenseur?: boolean;
+
+    @ApiProperty({ example: TypeAdresse.DOMICILE, enum: TypeAdresse, required: false })
+    @IsOptional()
+    @IsEnum(TypeAdresse)
+    typeAdresse?: TypeAdresse;
+}
+
+export class CreateArticleDto {
+    @ApiProperty({ example: 5, description: 'Nombre d\'articles' })
+    @IsNumber()
+    @Min(1)
+    nombre: number;
+
+    @ApiProperty({
+        example: 'Plantes en pot, fragiles',
+        required: false,
+        description: 'Détails sur les articles'
+    })
+    @IsOptional()
+    @IsString()
+    details?: string;
+
+    @ApiProperty({
+        example: ['Plantes/Arbres', 'Mobilier'],
+        required: false,
+        description: 'Catégories d\'articles'
+    })
+    @IsOptional()
+    @IsArray()
+    @IsString({ each: true })
+    categories?: string[];
+}
+
+export class CreateCommandeDto {
+    @ApiProperty({
+        example: '2024-12-25',
+        description: 'Date de livraison souhaitée (format YYYY-MM-DD)'
+    })
+    @IsDateString()
+    dateLivraison: string;
+
+    @ApiProperty({
+        example: '10h-12h',
+        required: false,
+        description: 'Créneau de livraison'
+    })
+    @IsOptional()
+    @IsString()
+    creneauLivraison?: string;
+
+    @ApiProperty({
+        example: CategorieVehicule.CAMIONNETTE_6M3,
+        enum: CategorieVehicule,
+        required: false,
+        description: 'Type de véhicule requis'
+    })
+    @IsOptional()
+    @IsEnum(CategorieVehicule)
+    categorieVehicule?: CategorieVehicule;
+
+    @ApiProperty({
+        example: 1,
+        minimum: 0,
+        maximum: 3,
+        required: false,
+        description: 'Nombre d\'équipiers en plus du chauffeur'
+    })
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    @Max(3)
+    optionEquipier?: number;
+
+    @ApiProperty({
+        example: 45.50,
+        required: false,
+        description: 'Tarif HT en euros'
+    })
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    tarifHT?: number;
+
+    @ApiProperty({
+        example: false,
+        required: false,
+        description: 'Réserve de transport'
+    })
+    @IsOptional()
+    @IsBoolean()
+    reserveTransport?: boolean;
+
+    @ApiProperty({
+        example: 'uuid-du-magasin',
+        description: 'ID du magasin qui passe la commande'
+    })
+    @IsUUID()
+    magasinId: string;
+
+    @ApiProperty({
+        type: CreateClientDto,
+        description: 'Informations du client'
+    })
+    @ValidateNested()
+    @Type(() => CreateClientDto)
+    client: CreateClientDto;
+
+    @ApiProperty({
+        type: CreateArticleDto,
+        description: 'Informations sur les articles'
+    })
+    @ValidateNested()
+    @Type(() => CreateArticleDto)
+    articles: CreateArticleDto;
+
+    @ApiProperty({
+        example: ['uuid-chauffeur-1', 'uuid-chauffeur-2'],
+        required: false,
+        description: 'IDs des chauffeurs assignés'
+    })
+    @IsOptional()
+    @IsArray()
+    @IsUUID(4, { each: true })
+    chauffeurIds?: string[];
+
+    @ApiProperty({
+        example: 'Jean Martin',
+        required: false,
+        description: 'Prénom du vendeur/interlocuteur'
+    })
+    @IsOptional()
+    @IsString()
+    prenomVendeur?: string;
+}
+
+export class UpdateCommandeDto extends PartialType(CreateCommandeDto) {
+    @ApiProperty({
+        example: StatutCommande.CONFIRMEE,
+        enum: StatutCommande,
+        required: false,
+        description: 'Statut de la commande'
+    })
+    @IsOptional()
+    @IsEnum(StatutCommande)
+    statutCommande?: StatutCommande;
+
+    @ApiProperty({
+        example: StatutLivraison.EN_COURS,
+        enum: StatutLivraison,
+        required: false,
+        description: 'Statut de la livraison'
+    })
+    @IsOptional()
+    @IsEnum(StatutLivraison)
+    statutLivraison?: StatutLivraison;
+}
+
+export class CommandeFiltersDto {
+    @ApiProperty({ required: false, description: 'Filtrer par statut de commande' })
+    @IsOptional()
+    @IsEnum(StatutCommande)
+    statutCommande?: StatutCommande;
+
+    @ApiProperty({ required: false, description: 'Filtrer par statut de livraison' })
+    @IsOptional()
+    @IsEnum(StatutLivraison)
+    statutLivraison?: StatutLivraison;
+
+    @ApiProperty({ required: false, description: 'Filtrer par magasin' })
+    @IsOptional()
+    @IsUUID()
+    magasinId?: string;
+
+    @ApiProperty({ required: false, description: 'Filtrer par chauffeur' })
+    @IsOptional()
+    @IsUUID()
+    chauffeurId?: string;
+
+    @ApiProperty({ required: false, description: 'Date de livraison à partir de (YYYY-MM-DD)' })
+    @IsOptional()
+    @IsDateString()
+    dateLivraisonDebut?: string;
+
+    @ApiProperty({ required: false, description: 'Date de livraison jusqu\'à (YYYY-MM-DD)' })
+    @IsOptional()
+    @IsDateString()
+    dateLivraisonFin?: string;
+
+    @ApiProperty({ required: false, description: 'Numéro d\'éléments à ignorer', type: Number })
+    @IsOptional()
+    @Transform(({ value }) => parseInt(value))
+    @IsNumber()
+    skip?: number;
+
+    @ApiProperty({ required: false, description: 'Nombre d\'éléments à retourner', type: Number })
+    @IsOptional()
+    @Transform(({ value }) => parseInt(value))
+    @IsNumber()
+    take?: number;
+}

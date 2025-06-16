@@ -1,0 +1,386 @@
+[
+  {
+    "id": "rec1LMCwyLqxi0Ztl",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205750076017",
+      "TELEPHONE DU CLIENT": "+33651423274",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "5 avenue des 2 moulins\n\n",
+      "NOM COMPLET DU CLIENT": "CANCUNSM BURGER KING",
+      "CATEGORIE DE VEHICULE": "20M3 (Avec hayon 1000kg, 420, 207, 230cm)",
+      "BÂTIMENT": "0",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "BURGER KING",
+      "DATE DE LIVRAISON": "2024-11-18",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "15h-17h",
+      "AUTRES REMARQUES": "parking à l'arriere de Burger king",
+      "NOMBRE TOTAL D'ARTICLES": 6,
+      "PRENOM DU VENDEUR": "jéremy",
+      "NOM DU CLIENT": "CANCUNSM",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recNfq13UCz8Q3K7d"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "18 11 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "18/11/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "ANNULEE"
+      ]
+    },
+    "createdTime": "2024-10-29T17:01:43.000Z"
+  },
+  {
+    "id": "rec7RQoLp9PmekrfT",
+    "fields": {
+      "NUMERO DE COMMANDE": "2605709000436",
+      "TELEPHONE DU CLIENT": "+33616404835",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "56 AVENUE OUDINOT\n",
+      "NOM COMPLET DU CLIENT": " CDL OUDINOT",
+      "CATEGORIE DE VEHICULE": "3M3 (Utilitaire 150kg, 180x125x180cm)",
+      "BÂTIMENT": "CENTRE DE LOISIR",
+      "INTERPHONE/CODE": "AUCUN",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "CDL OUDINOT",
+      "DATE DE LIVRAISON": "2024-10-16",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "AUTRES REMARQUES": "CONTACTER LE CLIENT AU DEPART DE LA MARCHANDISE ",
+      "NOMBRE TOTAL D'ARTICLES": 11,
+      "PRENOM DU VENDEUR": "ARTHUR",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recYcIeEO5sT8eRBu"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "Chauffeur(s)": [
+        "recOJXIE0zjz0nqP9"
+      ],
+      "DATE DE LA LIVRAISON": "16 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "16/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-15T11:35:17.000Z"
+  },
+  {
+    "id": "recKnMgFNHmDq56O7",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205777003911",
+      "TELEPHONE DU CLIENT": "+33642085794",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "22 RUE EDMOND VITRY      \n94130 NOGENT SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "CHAPPERT OLIVIER",
+      "CATEGORIE DE VEHICULE": "6M3 (Camionnette 300kg, 240x169x138cm)",
+      "BÂTIMENT": "MAISON",
+      "INTERPHONE/CODE": "AUCUN",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "OLIVIER",
+      "DATE DE LIVRAISON": "2024-10-09",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "NOMBRE TOTAL D'ARTICLES": 8,
+      "PRENOM DU VENDEUR": "CATHERINE",
+      "NOM DU CLIENT": "CHAPPERT",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recBPQFpl2OnHZO4k"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée",
+        "Modifiée"
+      ],
+      "Chauffeur(s)": [
+        "recOJXIE0zjz0nqP9"
+      ],
+      "DATE DE LA LIVRAISON": "09 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "09/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": "10 09 2024",
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-09T09:33:46.000Z"
+  },
+  {
+    "id": "recLIWNO9MeivOXMH",
+    "fields": {
+      "NUMERO DE COMMANDE": "CESSION ROSNY > BRY",
+      "TELEPHONE DU CLIENT": "+33911335000",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "19 BIS BVD JEAN MONNET 94360 BRY SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "TRUFFAUT  BRY",
+      "CATEGORIE DE VEHICULE": "10M3 (Camionnette 1000kg, 308x207x176cm)",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "BRY",
+      "DATE DE LIVRAISON": "2024-10-03",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "18h-20h",
+      "NOMBRE TOTAL D'ARTICLES": 13,
+      "PRENOM DU VENDEUR": "AUDREY",
+      "NOM DU CLIENT": "TRUFFAUT ",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recimYbC2w3nPnbBx"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "03 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "03/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": "10 03 2024",
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "ANNULEE"
+      ]
+    },
+    "createdTime": "2024-10-27T04:03:13.000Z"
+  },
+  {
+    "id": "recO5LwnUOgEOfwyt",
+    "fields": {
+      "NUMERO DE COMMANDE": "220572216830",
+      "TELEPHONE DU CLIENT": "+33600000000",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "46 RUE DE LA MARNE 94500 CHAMPIGNY SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "BOISSIERE ROMAIN",
+      "CATEGORIE DE VEHICULE": "20M3 (Avec hayon 1000kg, 420, 207, 230cm)",
+      "INTERPHONE/CODE": "168ty4",
+      "ASCENSEUR": "Non",
+      "ETAGE": "99",
+      "PRENOM DU CLIENT": "ROMAIN",
+      "DATE DE LIVRAISON": "2024-10-31",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "2",
+      "CRENEAU DE LIVRAISON": "11h-13h",
+      "NOMBRE TOTAL D'ARTICLES": 99,
+      "PRENOM DU VENDEUR": "RAYAN",
+      "NOM DU CLIENT": "BOISSIERE",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Chauffeur(s)": [
+        "recOJXIE0zjz0nqP9"
+      ],
+      "DATE DE LA LIVRAISON": "31 10 2024",
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      }
+    },
+    "createdTime": "2024-10-12T07:33:37.000Z"
+  },
+  {
+    "id": "recOQ7TP5bQV9zCGj",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205780002895",
+      "TELEPHONE DU CLIENT": "+33612468740",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "18 RUE MUDIER 93160 NOISY-LE-GRAND\n",
+      "NOM COMPLET DU CLIENT": "MOTA PEREIRA",
+      "CATEGORIE DE VEHICULE": "6M3 (Camionnette 300kg, 240x169x138cm)",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "PEREIRA",
+      "DATE DE LIVRAISON": "2024-11-10",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "11h-13h",
+      "AUTRES REMARQUES": "CLIENT HABITANT EN MAISON",
+      "NOMBRE TOTAL D'ARTICLES": 15,
+      "PRENOM DU VENDEUR": "PAUL",
+      "NOM DU CLIENT": "MOTA",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recTdRjmiXVjcRgrc"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "10 11 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "10/11/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": "11 10 2024",
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-11-10T13:55:27.000Z"
+  },
+  {
+    "id": "recjYsn7w8IqBP02I",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205778027077",
+      "TELEPHONE DU CLIENT": "+33698691721",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "6 CHEMIN BLEUETS 93470 COUBRON\n",
+      "NOM COMPLET DU CLIENT": "DELCROIX  ANNE-SOPHIE",
+      "CATEGORIE DE VEHICULE": "6M3 (Camionnette 300kg, 240x169x138cm)",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "ANNE-SOPHIE",
+      "DATE DE LIVRAISON": "2024-10-28",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "NOMBRE TOTAL D'ARTICLES": 2,
+      "PRENOM DU VENDEUR": "THOMAS",
+      "NOM DU CLIENT": "DELCROIX ",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recEFD0uvhDKelt4x"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "28 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "28/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-27T13:55:56.000Z"
+  },
+  {
+    "id": "recw1Duc2vpLTOtrX",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205750076017C",
+      "TELEPHONE DU CLIENT": "+33164777467",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "5 AVENUE DES DEUX MOULINS 77230\n",
+      "NOM COMPLET DU CLIENT": "CANCUNSM BURGER KING  .",
+      "CATEGORIE DE VEHICULE": "20M3 (Avec hayon 1000kg, 420, 207, 230cm)",
+      "BÂTIMENT": "0",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": ".",
+      "DATE DE LIVRAISON": "2024-11-18",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "15h-17h",
+      "AUTRES REMARQUES": "PARKING A L4ARRIERE DU BK",
+      "NOMBRE TOTAL D'ARTICLES": 6,
+      "PRENOM DU VENDEUR": "JEREMY",
+      "NOM DU CLIENT": "CANCUNSM BURGER KING ",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE LA LIVRAISON": "18 11 2024",
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      }
+    },
+    "createdTime": "2024-10-21T16:44:47.000Z"
+  },
+  {
+    "id": "recxNVPLDuE075RRE",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205776003431",
+      "TELEPHONE DU CLIENT": "+33759244273",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "18 RUE ROBERT SCHUMAN 94350 VILLIERS SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "ALILAT IRIS",
+      "CATEGORIE DE VEHICULE": "3M3 (Utilitaire 150kg, 180x125x180cm)",
+      "BÂTIMENT": "0",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "IRIS",
+      "DATE DE LIVRAISON": "2024-10-25",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "NOMBRE TOTAL D'ARTICLES": 12,
+      "PRENOM DU VENDEUR": "RAPHAEL",
+      "NOM DU CLIENT": "ALILAT",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recs2ZeUEEWdTxVs7"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "25 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "25/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-23T10:29:15.000Z"
+  }
+]

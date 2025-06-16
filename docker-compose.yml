@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: mytruck_postgres
+    environment:
+      POSTGRES_USER: mytruck_user
+      POSTGRES_PASSWORD: mytruck_password
+      POSTGRES_DB: mytruck_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mytruck_user -d mytruck_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Interface d'administration PostgreSQL (optionnel)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: mytruck_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mytruck.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  # Redis pour la mise en cache (optionnel, pour les sessions et cache)
+  redis:
+    image: redis:7-alpine
+    container_name: mytruck_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: mytruck_network

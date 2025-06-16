@@ -1,0 +1,358 @@
+[
+  {
+    "id": "rec2K0rZEktvZnW0a",
+    "fields": {
+      "NOM": "Adama - Direction My Truck",
+      "RÔLE": [
+        "Direction My Truck"
+      ],
+      "NOM D'UTILISATEUR": "Adama",
+      "E-MAIL": "adama.digiltizeme@gmail.com",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ],
+      "AVATAR": [
+        {
+          "id": "att0H8tpn6ud4R5FV",
+          "width": 225,
+          "height": 225,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/VulpU-hLwe3-ajAg3f8hAg/ubY7L60a0u115tu_yasbIiT40P3qKMsRBsyY6rGPGsTMxk7Z3TCUDpll08Ko3sRtQzwTsaR40UEsGQncZrBUK9y1klZfTvihPBydnDRdHvR-e1sU11t9cJJ89ySMoaCtOaJHvGvPNyFiaG5HL9SoLQ/QFYeq0fLFcz4N3YB09won6nFiZ7xsh1BKR0CMaaic88",
+          "filename": "image-avatar.png",
+          "size": 5120,
+          "type": "image/png",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/Cjo3l7ONG6kNGNL9AtKN5A/WU6WluggkfO5tg8JEwM8B1czShZ3muPaEFnwyFUXtre4jfDLkvMa-3FdfXo5tLZaWxK00LDpEvBsk5TfyF5kXa5AGN5G9zpx4aruhfWkpdfLcS-qW_lj61IgkbHk1gIiwvwaY0kf4FBNj3wYyjoCFw/MCpd5CQKk29_5v4QDIUGH9-UM99-AKsSV8XIlWmV_9A",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/eiWlN01XLjXCV6jvkB_Kkg/iEbtivC8mZiVMfOsEsqTgbCSbtNK88eDy9QYEGJ1PlA5nAN2sgG4Tb4h6cYYykZQ32IX-3gZwHQKMgndGZLhQoW6nE1-GoO0tswa2CKyJbNH2ieuJWQN-vNC6-7afvCMTtGqwnyG2e1S25eXWEnYlg/H3aHdz7Dbm1Og-FrCok8QffzBxDWlxo92CzO25WlDCY",
+              "width": 225,
+              "height": 225
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/8jBqylpyCwkmsCiWrpQ0xw/DClEJPMCfoDkk4SgJZ_bN2lcVLpCJm9-UyU0qXGk8N-wrqTuCvm4d6FTnAdhAPMgjnSfpWeRXx4CXIBs8bOl0xyXDJijmZ_R8A3pqYotFYhnWWxKU-01CqVJJjEM3Dxf72QMraal04ySOsxpX3OHfQ/nMrdA36ZVIFYlntQ1BRwfc1y1g1BEJcMp-fIdYfmnsc",
+              "width": 225,
+              "height": 225
+            }
+          }
+        }
+      ]
+    },
+    "createdTime": "2024-02-16T20:12:56.000Z"
+  },
+  {
+    "id": "rec709K20ZnuuvBIs",
+    "fields": {
+      "NOM": "Blas - Direction My Truck",
+      "RÔLE": [
+        "Direction My Truck"
+      ],
+      "NOM D'UTILISATEUR": "Blas",
+      "E-MAIL": "yaraguille@gmail.com",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ]
+    },
+    "createdTime": "2024-03-17T00:00:42.000Z"
+  },
+  {
+    "id": "rec7HDG01Kjdm5bAt",
+    "fields": {
+      "NOM": "Blas - Interlocuteur Blas Store",
+      "RÔLE": [
+        "Interlocuteur Blas Store"
+      ],
+      "NOM D'UTILISATEUR": "Blas",
+      "E-MAIL": "blas_store@gmail.com"
+    },
+    "createdTime": "2025-05-06T21:48:36.000Z"
+  },
+  {
+    "id": "rec9ax2k3ARxflHbW",
+    "fields": {
+      "NOM": "Yahya - Chauffeur",
+      "RÔLE": [
+        "Chauffeur"
+      ],
+      "NOM D'UTILISATEUR": "Yahya",
+      "E-MAIL": "yahya@mytruck.com",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ]
+    },
+    "createdTime": "2024-03-24T23:44:22.000Z"
+  },
+  {
+    "id": "recAr7Ahc7JyyExcD",
+    "fields": {
+      "NOM": "Hamidou - Chauffeur",
+      "RÔLE": [
+        "Chauffeur"
+      ],
+      "NOM D'UTILISATEUR": "Hamidou",
+      "E-MAIL": "hamidou@mytruck.com",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ]
+    },
+    "createdTime": "2024-08-25T22:37:42.000Z"
+  },
+  {
+    "id": "recBT52FEWd2FXPQi",
+    "fields": {
+      "NOM": "Youssouf - Interlocuteur Truffaut Ivry",
+      "RÔLE": [
+        "Interlocuteur Truffaut Ivry"
+      ],
+      "NOM D'UTILISATEUR": "Youssouf",
+      "E-MAIL": "youssouf@trfi.com",
+      "ENTREPRISE/MAGASIN": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "AVATAR": [
+        {
+          "id": "attEYM6RRGI0NAjFH",
+          "width": 225,
+          "height": 225,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/WhaNQOTSFnP8R6hBHDISWQ/YGAL8PGvdUy4jD_Cei-IKSTo0Bs7-GvxUiOjAN3c28ADMIzi8-lLorw5LjzZAWNAy8f6jsndQ41dBUAsoNQdR-d-U5w7mJBLIM6mcGVLUVSxe8i1aQWypRJ_vENp-gsy0XnMAVXoxOUTZ1DNA1Lv1w/j65DORn_4QeVdiUTNluNxyQI-8PCs9G9HUUYh242sas",
+          "filename": "image-avatar.png",
+          "size": 5120,
+          "type": "image/png",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/WftVq4IZgqqLrn9sQxJfLA/CPcM8xoNfqEgjVOe-pwLorxYgIynz_dbQYxOax4BZIWsC-9PSiokOfwis6kBR74a-RprfB1JuUKqu3bgGefD0ycZ9J2aY34GTs9E2FKOFdaOE5BUJfedxvlHNEHMxnoMM-WPhgrbBTCZN_DNqAuRnQ/DWoZBpFxvFB0DMVr7rUcz37gBW-zLaR0JkhCd1nDAkY",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/ZRthTzKIoeFltdvsA863Ig/V_KweuKKxXERid9JISuo6dX1w1iQtdWWfvguAtWe2zjg74jUyS4ERD0BrYdTRv6G_AcxWvxPLaIB52akxYCYsKyLX8urWHrhVbD1b3PEcq7v1XeSVRp4Z_fGMqMkIZExIjbgA429pxumwEUCsLQ0Mg/K1O5YGCdL0mmm_PqSQ2Z7ollqKhzeL12y4W1tq6KCjw",
+              "width": 225,
+              "height": 225
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/5n6AQUs-IdH3bfjCs8nRgA/46Se1KIfBZivKZYfU5OctemgQ2IL60zg81b3dD6c1j7lUBOfKJAxZBqqgMkgZm2ZyXnQgezPzYEQj9nY01jcULM3kgl5lqi6Vc9zydxDAk1Tl0RcS-5nZkqgtYkP9IJrupL7BIEsWAGICX3ErWqIPg/_GN8kG_skk1Ev208EM6YUfae2XR1VxILJSNTAKy0cHI",
+              "width": 225,
+              "height": 225
+            }
+          }
+        }
+      ]
+    },
+    "createdTime": "2024-02-13T06:09:18.000Z"
+  },
+  {
+    "id": "recBZ8Ff8Uybq5CpA",
+    "fields": {
+      "NOM": "Banou Adama - Chauffeur",
+      "RÔLE": [
+        "Chauffeur"
+      ],
+      "NOM D'UTILISATEUR": "Banou Adama",
+      "E-MAIL": "banouadamasamassa@gmail.com",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ]
+    },
+    "createdTime": "2024-03-24T23:37:52.000Z"
+  },
+  {
+    "id": "recIxbIYGCsaS5YJO",
+    "fields": {
+      "NOM": "Adama S - Interlocuteur Adam Store",
+      "RÔLE": [
+        "Interlocuteur Adam Store"
+      ],
+      "NOM D'UTILISATEUR": "Adama S",
+      "E-MAIL": "adam@admin.com"
+    },
+    "createdTime": "2025-04-19T16:01:23.000Z"
+  },
+  {
+    "id": "recRskaEXNuzkwxas",
+    "fields": {
+      "NOM": "AdamSam - Chauffeur",
+      "RÔLE": [
+        "Chauffeur"
+      ],
+      "NOM D'UTILISATEUR": "AdamSam",
+      "E-MAIL": "samassaadama@hotmail.fr",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ]
+    },
+    "createdTime": "2024-06-20T19:51:27.000Z"
+  },
+  {
+    "id": "recT25lOhNcG28Azn",
+    "fields": {
+      "NOM": "Adama - Interlocuteur Truffaut Boulogne",
+      "RÔLE": [
+        "Interlocuteur Truffaut Boulogne"
+      ],
+      "NOM D'UTILISATEUR": "Adama",
+      "E-MAIL": "adama@trfb.com",
+      "ENTREPRISE/MAGASIN": [
+        "recBN0zhysFhX9tCN"
+      ],
+      "AVATAR": [
+        {
+          "id": "attw34SkAkkz5wIYU",
+          "width": 225,
+          "height": 225,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/4i-tHB6xGQyuGeYItkewmQ/G7eSe8POpSHAL9eM473MoURHJpBu2JzPwYtXbjDTKvq1_4Zg0jAWEIQnVv02MhbayMPzy419TUYqIrAFrzlLI5tMYyy1hx-d_oSRUnvZVVz8rTKV9TwEf4vTLmxcAbPFkTFqwVZeJWAOvrmrRu-Y9w/va6KqybI2P4KuJfsbgTAvIa-9ktFRGIp6fRGiI19LMg",
+          "filename": "image-avatar.png",
+          "size": 5120,
+          "type": "image/png",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/9HyB8d8l4t4LBgBfY2x28A/TJRe3HJflPfY322OH7c-YN38nUf7zT6egEEYY6d773P4ZcjsTosZH-_CUrm1X4WwszmuKZx81f6DwsXX1shh-QJiVbk1hejEzEnciXvu7uxsPRYxJfuN7XpES9B7n7BeTZqjPAUiGfxzHLvwbIyFoQ/I13MFeD59ND7Zx2Vn0DraTQgGtIY5sjv-qpB6qi5pVo",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/Q8LfZ3dGCMUOQhdQrbPYWA/CPeBd7xFfkWR0xxMC4fJs6VaKBUcI6GaJvmaPkY84NKnVSEomMw_5ttbegFbMR6T38g3D1uQWNjqHxq4v4Gmf0ZAGPNhlgFnsGsqXOQ2I1HFLKdkHtmCVrSzzfVavBKzwlTBNuHGDEBiib67OPXBeg/WX-e2wjPrlx-aSmrsz5D2Mbhysk2jmI0BK1cQN0_BW4",
+              "width": 225,
+              "height": 225
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/PnPowY2qGnXLhp3JwE5qxg/HjDveYO9vjOAFKDMpTLmp-t_A-ClAemJS2CbyrK5ab2B-C_3dpT1l07_aIQfuBRiI0mL9aBhq894J-SKHC_uSoLQJCg1lr7idMORTn7HeLdxwiXRa4XTxm32Un9YjMJkjyEj54V1ws1H370-e-yGgA/Uf93pK60nJZDHaPOF6P7W5eWyo2kr29421o5U0LOU-8",
+              "width": 225,
+              "height": 225
+            }
+          }
+        }
+      ]
+    },
+    "createdTime": "2024-02-16T21:03:54.000Z"
+  },
+  {
+    "id": "recVo8tGYCXWF6KVm",
+    "fields": {
+      "NOM": "Trf_Bry - Interlocuteur Truffaut Bry-Sur-Marne",
+      "RÔLE": [
+        "Interlocuteur Truffaut Bry-Sur-Marne"
+      ],
+      "NOM D'UTILISATEUR": "Trf_Bry",
+      "E-MAIL": "mytruckbry@gmail.com",
+      "ENTREPRISE/MAGASIN": [
+        "recc1nE9KB0WVIuF2"
+      ]
+    },
+    "createdTime": "2024-10-08T12:16:04.000Z"
+  },
+  {
+    "id": "receaqvWXDlXIpDrZ",
+    "fields": {
+      "NOM": "Ryan - Interlocuteur Truffaut Bry-Sur-Marne",
+      "RÔLE": [
+        "Interlocuteur Truffaut Bry-Sur-Marne"
+      ],
+      "NOM D'UTILISATEUR": "Ryan",
+      "E-MAIL": "r.bessaraoui@truffaut.com",
+      "ENTREPRISE/MAGASIN": [
+        "recc1nE9KB0WVIuF2"
+      ]
+    },
+    "createdTime": "2024-08-25T17:24:03.000Z"
+  },
+  {
+    "id": "reckrvSPL9dizzv1C",
+    "fields": {
+      "NOM": "Adam Store - Direction My Truck",
+      "RÔLE": [
+        "Direction My Truck"
+      ],
+      "NOM D'UTILISATEUR": "Adam Store",
+      "E-MAIL": "adam@store.com"
+    },
+    "createdTime": "2025-04-19T18:41:10.000Z"
+  },
+  {
+    "id": "recm7e4XxemgzNibp",
+    "fields": {
+      "NOM": "Nicolas - Chauffeur",
+      "RÔLE": [
+        "Chauffeur"
+      ],
+      "NOM D'UTILISATEUR": "Nicolas",
+      "E-MAIL": "nicolas@mytruck.com",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ],
+      "AVATAR": [
+        {
+          "id": "attLN1HbkujJ9Sfoi",
+          "width": 360,
+          "height": 360,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/7tEWXnlHMwo9cwjin32Z3Q/3VAkEGiwKJEOd0_v-rFrFs5FVf8FxmehY7PmtwcRk5Jhr44Oa-G0iKSEg6WMULuzTdafsPDh6os57vZADRqPqcJeA9KC_ukdtjj5Z1mr5lbRBlpJ9mcJXah5mR00V05BvZzAzKCcmzDpsrAXo6EZ057lYEkMGxLjfBrnXEYkPTQ6WmuS3lmwYz74rdj9CwQm5f85vNAKCSEVWvB9ecXJfw/q8dQCg5mLs9MWXByR9ymP1u3jCnc52Hp_bNx2KEP4V0",
+          "filename": "pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg",
+          "size": 11719,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/6eZqt-6blhyI5eoS33YABg/pKHWhjalf60c6LRlkLTVhYJEatnL6zBT44F_v5OnfljCJAAxApgZvhm3OV87h58AvbF-9M4SSyLepAOgxivY9JMf8RetvUH7fGtyaVADLoi6xh-RFOKhat4-3O7cjngw4mdqBSc1NEh6U9mh3lKSYQ/5xcSOC5Ux6SpDSd9k9iiq4yYrGiyck-If_D0cIYylp4",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/mdFL2Qg6JVCt1BrAL5uaWQ/mWbO_X132aowTXnu9G-8a_HZxPPGEqx8-z5r0L23IkUD-W2-DmUO8Oc3AIH07rFJx8-GBusCVKvBRLUcn7YMQ9gNY9dnnmZkZI89B4BLCFhbfe7739IE__1zL-9kMdhTCXbltdb9MK87cgUac7dXOw/WHp54a23dA32Q-JTNE-nnDq1nBe6NElI0AxbLzS_MQ0",
+              "width": 360,
+              "height": 360
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/AAqzjGyS2KEoRXWBDzveag/_Wy79nqS6A0QO8SFwmQPBlMbxVVnnYvFXcBqEXshqWhBQ9nvHKit_7ntzGrANakTA15aJx50F4NQOszCkPUohIUcenFv0BodXeTLKpfPp3G65gylJ0B5PEhau_hzsGLun_CYZVgDv7722SLydV06Jg/ZMIvEBA0w4G1DzzvcrOhNKQg6RnBpfq63nXCYBcWUpY",
+              "width": 360,
+              "height": 360
+            }
+          }
+        }
+      ]
+    },
+    "createdTime": "2024-02-13T01:55:07.000Z"
+  },
+  {
+    "id": "recp2KoyQlMfELctk",
+    "fields": {
+      "NOM": "Yahaya - Direction My Truck",
+      "RÔLE": [
+        "Direction My Truck"
+      ],
+      "NOM D'UTILISATEUR": "Yahaya",
+      "E-MAIL": "mytruck.transport@gmail.com",
+      "ENTREPRISE/MAGASIN": [
+        "rec21a6GbihhgzwDP"
+      ],
+      "AVATAR": [
+        {
+          "id": "att904aWmURdawobF",
+          "width": 225,
+          "height": 225,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/CrgWF5mI8PBoy9wbMtJLcg/tPe7M2oTqm_KwLoqjVuwTdirDQ7HMP4a8iBeKBYZ3mW2M1J8wO8X1lQ638L3ILXcIOInjeW7erOqbgkV9-GlX95r7eMwN9DYV_OtAtF14y6Jc7o7ljwPS9dS4dMC6kOoTik3G3f4i9wPSbNu89uc4g/KgjCTbURAUk1OauTquRgaaqIZokacrebzOD1vUIG3Qw",
+          "filename": "image-avatar.png",
+          "size": 5120,
+          "type": "image/png",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/H-TcgZoNxl8jhw4uDhQBTg/JVGd07tsSa0k49wiINsN7YgzshMWP6jihddcfIv9BttjCa2IdIgvezV-3WKWo2yVkSaqptTP3UkDQ1SFEhkW3Lo2p9iqxNh74oha31WUWba1_rMBksHMq66xw53dmyOH63fqIJ2t8CsaZulPhcBoEQ/YXCN9qCoqQwiyh962VzX6LpB7GDrfz2rTc43iw60dAA",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/wzIJSpJkG8QLD_NxHVxQlA/PPSBewJoqNx1-qwxb47fhCgL9MLl3fGDUymvh8M9HzYfhywWDzujEr09Aq7EdXKxTD8hiVrvKO9Rvfu24z-Rhh59rAU-V-S1cuIRgTQXbNyDWP6PoavsKLsBDw6R8qCnbZl_1EInb9tHcXrH_RvcUg/dVrc2GmXwfLoJdCqxL024XJBhNZ-DSQFGOwXRNdeGTY",
+              "width": 225,
+              "height": 225
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/fN9SyoJFUa97FO_uVw1p5A/kTTVFtSg5XSKGarQ5xkztVkc7RtAgXvroZiD9LrPDZCTSDgtPk47kPPdcym-q1m3fsTHaumwYWuxZ9wIq-mG0PkBcWjTXy5QsXzB9_EE9s0fb5_NoDzhbO_bsPFHiZbzHNchy0hgNce04rAIG5zX9g/hPtdTD-95iUy938xCdZ6-XD-duZBucCMSzQSsPvoMBI",
+              "width": 225,
+              "height": 225
+            }
+          }
+        }
+      ]
+    },
+    "createdTime": "2024-02-13T01:55:07.000Z"
+  }
+]

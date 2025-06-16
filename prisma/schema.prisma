@@ -1,0 +1,280 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  password     String
+  nom          String
+  prenom       String?
+  telephone    String?
+  role         UserRole
+  status       String    @default("Actif")
+  magasinId    String?
+  airtableId   String?   @unique
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastSyncedAt DateTime?
+  magasin      Magasin?  @relation(fields: [magasinId], references: [id])
+
+  @@map("users")
+}
+
+model Magasin {
+  id                  String                @id @default(uuid())
+  nom                 String
+  adresse             String
+  telephone           String?
+  email               String?
+  status              String                @default("Actif")
+  categories          String[]
+  airtableId          String?               @unique
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  lastSyncedAt        DateTime?
+  cessionsDestination CessionInterMagasin[] @relation("MagasinDestination")
+  cessionsOrigine     CessionInterMagasin[] @relation("MagasinOrigine")
+  commandes           Commande[]
+  devis               Devis[]
+  factures            Facture[]
+  users               User[]
+
+  @@map("magasins")
+}
+
+model Chauffeur {
+  id                 String                 @id @default(uuid())
+  nom                String
+  prenom             String?
+  telephone          String?
+  email              String?
+  status             String                 @default("Actif")
+  longitude          Float?
+  latitude           Float?
+  notes              Int?
+  airtableId         String?                @unique
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+  lastSyncedAt       DateTime?
+  assignations       ChauffeurSurCommande[]
+  rapportsEnlevement RapportEnlevement[]
+  rapportsLivraison  RapportLivraison[]
+
+  @@map("chauffeurs")
+}
+
+model Client {
+  id                  String     @id @default(uuid())
+  nom                 String
+  prenom              String?
+  telephone           String?
+  telephoneSecondaire String?
+  adresseLigne1       String
+  codePostal          String?
+  ville               String?
+  batiment            String?
+  etage               String?
+  interphone          String?
+  ascenseur           Boolean    @default(false)
+  typeAdresse         String?
+  airtableId          String?    @unique
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  lastSyncedAt        DateTime?
+  commandes           Commande[]
+
+  @@map("clients")
+}
+
+model Commande {
+  id                 String                 @id @default(uuid())
+  numeroCommande     String                 @unique
+  dateCommande       DateTime               @default(now())
+  dateLivraison      DateTime
+  creneauLivraison   String?
+  statutCommande     String                 @default("En attente")
+  statutLivraison    String                 @default("EN ATTENTE")
+  tarifHT            Decimal                @default(0)
+  reserveTransport   Boolean                @default(false)
+  categorieVehicule  String?
+  optionEquipier     Int                    @default(0)
+  clientId           String
+  magasinId          String
+  prenomVendeur      String?
+  remarques          String?
+  airtableId         String?                @unique
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+  lastSyncedAt       DateTime?
+  articles           Article[]
+  chauffeurs         ChauffeurSurCommande[]
+  client             Client                 @relation(fields: [clientId], references: [id])
+  magasin            Magasin                @relation(fields: [magasinId], references: [id])
+  commentaires       Commentaire[]
+  devis              Devis[]
+  factures           Facture[]
+  photos             Photo[]
+  rapportsEnlevement RapportEnlevement[]
+  rapportsLivraison  RapportLivraison[]
+
+  @@map("commandes")
+}
+
+model ChauffeurSurCommande {
+  id          String    @id @default(uuid())
+  chauffeurId String
+  commandeId  String
+  assignedAt  DateTime  @default(now())
+  chauffeur   Chauffeur @relation(fields: [chauffeurId], references: [id])
+  commande    Commande  @relation(fields: [commandeId], references: [id])
+
+  @@unique([chauffeurId, commandeId])
+  @@map("chauffeur_sur_commande")
+}
+
+model Article {
+  id         String   @id @default(uuid())
+  nombre     Int
+  details    String?
+  categories String[]
+  commandeId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  commande   Commande @relation(fields: [commandeId], references: [id])
+
+  @@map("articles")
+}
+
+model Photo {
+  id         String    @id @default(uuid())
+  url        String
+  filename   String?
+  size       Int?
+  type       PhotoType
+  commandeId String
+  createdAt  DateTime  @default(now())
+  commande   Commande  @relation(fields: [commandeId], references: [id])
+
+  @@map("photos")
+}
+
+model Commentaire {
+  id         String          @id @default(uuid())
+  message    String
+  type       CommentaireType
+  commandeId String
+  createdAt  DateTime        @default(now())
+  commande   Commande        @relation(fields: [commandeId], references: [id])
+
+  @@map("commentaires")
+}
+
+model RapportEnlevement {
+  id          String    @id @default(uuid())
+  message     String
+  chauffeurId String
+  commandeId  String
+  createdAt   DateTime  @default(now())
+  chauffeur   Chauffeur @relation(fields: [chauffeurId], references: [id])
+  commande    Commande  @relation(fields: [commandeId], references: [id])
+
+  @@map("rapports_enlevement")
+}
+
+model RapportLivraison {
+  id          String    @id @default(uuid())
+  message     String
+  chauffeurId String
+  commandeId  String
+  createdAt   DateTime  @default(now())
+  chauffeur   Chauffeur @relation(fields: [chauffeurId], references: [id])
+  commande    Commande  @relation(fields: [commandeId], references: [id])
+
+  @@map("rapports_livraison")
+}
+
+model Facture {
+  id            String    @id @default(uuid())
+  numeroFacture Int       @unique @default(autoincrement())
+  dateFacture   DateTime  @default(now())
+  statut        String    @default("En attente")
+  magasinId     String
+  commandeId    String?
+  airtableId    String?   @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  commande      Commande? @relation(fields: [commandeId], references: [id])
+  magasin       Magasin   @relation(fields: [magasinId], references: [id])
+
+  @@map("factures")
+}
+
+model Devis {
+  id          String    @id @default(uuid())
+  numeroDevis Int       @unique @default(autoincrement())
+  dateDevis   DateTime  @default(now())
+  statut      String    @default("Validé")
+  magasinId   String
+  commandeId  String?
+  airtableId  String?   @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  commande    Commande? @relation(fields: [commandeId], references: [id])
+  magasin     Magasin   @relation(fields: [magasinId], references: [id])
+
+  @@map("devis")
+}
+
+model CessionInterMagasin {
+  id                   String    @id @default(uuid())
+  numeroCession        String    @unique
+  dateCession          DateTime  @default(now())
+  dateLivraison        DateTime
+  creneauLivraison     String?
+  statutCession        String    @default("En attente")
+  statutLivraison      String    @default("EN ATTENTE")
+  categorieVehicule    String?
+  optionEquipier       Int       @default(0)
+  tarifHT              Decimal   @default(0)
+  reserveTransport     Boolean   @default(false)
+  nombreArticles       Int       @default(0)
+  categoriesArticles   String[]
+  detailsArticles      String?
+  remarques            String?
+  magasinOrigineId     String
+  magasinDestinationId String
+  airtableId           String?   @unique
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  lastSyncedAt         DateTime?
+  magasinDestination   Magasin   @relation("MagasinDestination", fields: [magasinDestinationId], references: [id])
+  magasinOrigine       Magasin   @relation("MagasinOrigine", fields: [magasinOrigineId], references: [id])
+
+  @@map("cessions_inter_magasin")
+}
+
+enum UserRole {
+  ADMIN
+  DIRECTION
+  MAGASIN
+  CHAUFFEUR
+  INTERLOCUTEUR
+}
+
+enum PhotoType {
+  ARTICLE
+  ENLEVEMENT
+  LIVRAISON
+}
+
+enum CommentaireType {
+  GENERAL
+  ENLEVEMENT
+  LIVRAISON
+}

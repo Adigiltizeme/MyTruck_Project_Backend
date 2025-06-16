@@ -1,0 +1,249 @@
+[
+  {
+    "id": "rec21a6GbihhgzwDP",
+    "fields": {
+      "NOM DU MAGASIN": "My Truck",
+      "ADRESSE DU MAGASIN": "Vitry-Sur-Seine",
+      "TÉLÉPHONE": "+33708090102",
+      "INTERLOCUTEUR": "Yahya",
+      "E-MAIL": "mytruck@gmail.com",
+      "STATUT": "Ouvert",
+      "CATEGORIE": [
+        "Préstataire"
+      ],
+      "PHOTO": [
+        {
+          "id": "att77DHXVbSwlWBdW",
+          "width": 507,
+          "height": 270,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/atc5PurIWlbeJuTuyDOByA/VQZow74-_n4qxnNO8umpKu2Q5-M2oGFX6yTFw58UnWkKRbml9Ojm1C9qwy9QrQ2QgZMA6yKTUeojr5smp2EmG7_j88sthdrHRHjUKp4WoxGqiqZ9duSDtOBq7kAsCjN-3ixj6fK_cFna0nXvzYEi8Q/wwgxWZw2yF5vHeKIvyBKQqL6cXJ4HTv79_VgwYyFZvw",
+          "filename": "myTruck2.jpg",
+          "size": 26367,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/uXCwB0vICk1DgniAcvAcjw/y_Hd4MKetfRSmk8o34JJxaAx9SIKNGcTWA6NX5fJCHz71Ne0ZRxadAxhZ-NiDpB65nfFxqXvZxbafWZAEC1mHzO2kXFfEa1VM4U7kZmScC6TfEvZyMc4XdOoyd_TCJ5rI2iP4u7CERA3PgBpRF7DFA/Jx8ZLHWwZ74NrGWSYK9sKPYi17ih0YlTIwNfDNsxauA",
+              "width": 68,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/njxTD0SbMywZxMkOQ1gfew/-7S6bcS0K-MfW8s6Qe4Wx_Gs4JG5Fs4Am03Kr9zOhmUlansUZQoTvPuD8xsL3SwxIqvaloruKUYCaDvh_xM3OcBDQF3eZerME2_QdWueUECsyTZ4fvcogw5QEDrJZuTDgEd63zrAm1W64Ht8951Esg/8J-PG3Jr-KLHE-GelgSM35V9cDN8vwVtGMVOp2hINyg",
+              "width": 507,
+              "height": 270
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/_B6MmAnsMnEXDS0uYasYdg/6c1ATVCoaJOS3G9RHah76ixms6SU03dMNIE9hUYFUSDWsLTXL_xgnlmxeUcEGDVoWiV_kuSDdXSYCmC0WeE-lacoSThm7e1wXxMaUUTVjBJ7pinHGbYmI6CCRuxz1qVzkReAZMxJbVydVZBN0vPwdQ/wQ4sFlwrc37btM2dt1c967x_WhlRmXzPyonGKqg-ny4",
+              "width": 507,
+              "height": 270
+            }
+          }
+        }
+      ],
+      "Users 2": [
+        "recp2KoyQlMfELctk",
+        "recm7e4XxemgzNibp",
+        "rec2K0rZEktvZnW0a",
+        "rec709K20ZnuuvBIs",
+        "recBZ8Ff8Uybq5CpA",
+        "rec9ax2k3ARxflHbW",
+        "recRskaEXNuzkwxas",
+        "recAr7Ahc7JyyExcD"
+      ]
+    },
+    "createdTime": "2024-02-16T19:50:15.000Z"
+  },
+  {
+    "id": "rec96grCPH3mNObvD",
+    "fields": {
+      "NOM DU MAGASIN": "mag_demo8",
+      "Commandes": [
+        "recJljNrVg8AkPaX3"
+      ]
+    },
+    "createdTime": "2025-05-02T14:36:52.000Z"
+  },
+  {
+    "id": "recBN0zhysFhX9tCN",
+    "fields": {
+      "NOM DU MAGASIN": "Truffaut Boulogne",
+      "ADRESSE DU MAGASIN": "33 Av. Edouard Vaillant, 92100 Boulogne-Billancourt",
+      "TÉLÉPHONE": "+33132333435",
+      "INTERLOCUTEUR": "Adama",
+      "E-MAIL": "adama@trfb.com",
+      "STATUT": "Ouvert",
+      "Commandes": [
+        "recz7SpePkg36RQo8",
+        "recjhcKhRzqyNXMMP"
+      ],
+      "CATEGORIE": [
+        "Plantes/Arbres"
+      ],
+      "PHOTO": [
+        {
+          "id": "attWOe3aMwd7mOFyc",
+          "width": 5620,
+          "height": 3747,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/TeDK4gMsq0B5qjFjPJOGQg/R82nBSNgPpr4TQiXsJSmpFLJ2KHN7ZTe-UlTkr0LBuv8pS0VwTARS3AJbaNkHewoYBFTrEX4Iwuma1XBvzWMY-Ayi7PE5CjuAMjl_bEDohYLRhV-Nftf3moD6GUpYKj5jhBkz6OLSvjvNPRyso8pmHomBquT0Ek6rZ4rKbLcPlngq4W0Bb27zeNXMFs8Tx2z/QDZcrzrI6WlKUvJ6rOfwX7CLb4-wjvPJQA__Fmk1Kms",
+          "filename": "ACT-Saison-jardinage-1.jpeg",
+          "size": 9223132,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/JtgrUSnugV4JbH_AOdKiYw/RwxiaNl6uFsdcFp5ZKzr2dzTtNpp3QtFEwhKJbelWWY1AAqwv30FN4wLdOEKQRDW0npimacyFYhADJU8jzooUcS1T_v2Nbqiy7jzL9IBhhZfiK8dR0gXqCQLCKFi3n9qZSCsuS8fNc9sa57VKsPywQ/rpIIYxXn7Si1Jd-rtQYSl_r3YPoIpEs-nNuRpjFZyt8",
+              "width": 54,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/XXO3J5P-pl3H5vAMhgneUg/NHIpIZsLvc__lTc3Ic7U1ueXjGUolmS2T6TwSj2q3RbZNYih7YeTA-AomjD1q4Lbzs7If1Kj1YwfBOHNgvbozwASFGB2RIkfkz3CURAcA316AnD9olRL6ZW7hTflAn-DmQaomLWZL0jxs_UZqiVHFg/X-nD3GamYEyG0ka4Q3dQ9l5-zrCWqQC8GLwuEfZ-XIc",
+              "width": 768,
+              "height": 512
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/SubBqrFiniYXcz9V0Oq3JQ/loe9VlhbPc0gNQJYoVsl836MXdf2c1Wjr01kSvGSMbRU6yKFk77DW35XetGUvAt3182e0wnFjRz4X9RYuA1eL1EtRavQxuEhlYIs2uFBZFaaKoTnuOBkPCLLPiLYB3M2USstzF0xO5Urs92aaDw6lA/Ae8dYK3zEmNZntYQherX09XhtAinHsgEcy7oTvM5Kts",
+              "width": 3000,
+              "height": 2000
+            }
+          }
+        }
+      ],
+      "Users 2": [
+        "recT25lOhNcG28Azn"
+      ]
+    },
+    "createdTime": "2024-07-02T15:22:34.000Z"
+  },
+  {
+    "id": "recV62uMdBdEe3Cs0",
+    "fields": {
+      "NOM DU MAGASIN": "mag_demo4",
+      "Commandes": [
+        "recYDxHGPO7mzHUtc"
+      ]
+    },
+    "createdTime": "2025-05-02T14:37:09.000Z"
+  },
+  {
+    "id": "recc1nE9KB0WVIuF2",
+    "fields": {
+      "NOM DU MAGASIN": "Truffaut Bry-Sur-Marne",
+      "ADRESSE DU MAGASIN": "19 bis Boulevard Jean Monnet, Bry-sur-Marne",
+      "TÉLÉPHONE": "+33 1 44 33 50 00",
+      "INTERLOCUTEUR": "Rayan",
+      "E-MAIL": "r.bessaraoui@truffaut.com",
+      "STATUT": "Ouvert",
+      "Commandes": [
+        "recBPQFpl2OnHZO4k",
+        "recYcIeEO5sT8eRBu",
+        "recs2ZeUEEWdTxVs7",
+        "recimYbC2w3nPnbBx",
+        "recEFD0uvhDKelt4x",
+        "recNfq13UCz8Q3K7d",
+        "recTdRjmiXVjcRgrc",
+        "recFDVqiXrhZUBMz0"
+      ],
+      "CATEGORIE": [
+        "Plantes/Arbres"
+      ],
+      "PHOTO": [
+        {
+          "id": "attO2swqcpvwVQB1u",
+          "width": 225,
+          "height": 224,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/bAyK5rC7v5vv3S9_l5NJew/n0Vbwz8kxaTAr6WeOZ4V6PdLBVT9U12D_E23t1FegvAGvC87nnmBvLTpsQS8A46_2Rs0tZlLlEsyVBnPKSc1OKD6xNCUTFc9arGDmcshPoNuy_sEJv-NWWLCyTkhlLSD0G0V4D1oYFHx7R-6bsrZdXImWTXPgA7wp54NDbYoR04/qiVf-qDiRtcNTDAeoiK4nQpPtQzzvP0Jx_SI0JCbTdU",
+          "filename": "truffaut_bry-s-marne.jpeg",
+          "size": 13877,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/Wo-AsG_H2AbbMcaDAoO5_A/DjaltDCyY-cMBYGA5zWWSbZjSmS1R7Q4AxeVbIxBR9BG58CUR2sFLI9RiU_Hb5PvMbrqOgX0ABVpEotg-yN9JPwxcbtW5HA_2ColFqyTmjxCCT8XPkN4OW3jsboSiLtvGvT4nAse90iRaHn_Ldx31A/WWFEM09unzdPbjiHCvJbojr9A6ntrsHHQyOnUOz0Jps",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/_hyzUYKArYCJeEBBZdFulA/-4KsLuAMk47cyu2FktOsyo6wROL-P-OYb68DuOXDDa3KZs1DvWRgmpCcIM6XpH6AS-ElgFMK6bk_CLZpL-yzg0e7_8Cqhp9TXvAnO959I-D-6ykePZzYUpdM3cfrP_OQG62fEbZMDXDGbXR1q6arzA/Vy6Sc4jWxoW3YFvCa0w5qDWBnLQOOIBf7o3g26pvMNA",
+              "width": 225,
+              "height": 224
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/kQXMtx3L9JnbrhFnlCLzyQ/3PkV41ec1IKptiALHij7WVb4_eiLLZCqS1y93M9LnmMZq2n2oEAPgPznDJ_dDsVuJ5QUpp63Ti9WYvB3wY0ZSeMHntNJnyV_ceAIMuntpScbNFTQQKGYebPaLSruKwO6uuvMj_eURfPU5rXKL59uPw/uA_-Lg9UZr7aJCjgHmCSmvfuGTJwW0VFyUQ75F2TNn0",
+              "width": 225,
+              "height": 224
+            }
+          }
+        }
+      ],
+      "Users 2": [
+        "receaqvWXDlXIpDrZ",
+        "recVo8tGYCXWF6KVm"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recKnMgFNHmDq56O7",
+        "recO5LwnUOgEOfwyt",
+        "rec7RQoLp9PmekrfT",
+        "recw1Duc2vpLTOtrX",
+        "recxNVPLDuE075RRE",
+        "recLIWNO9MeivOXMH",
+        "recjYsn7w8IqBP02I",
+        "rec1LMCwyLqxi0Ztl",
+        "recOQ7TP5bQV9zCGj"
+      ]
+    },
+    "createdTime": "2024-10-08T12:08:23.000Z"
+  },
+  {
+    "id": "reci8VL1IE4KULzyr",
+    "fields": {
+      "NOM DU MAGASIN": "Truffaut Ivry",
+      "ADRESSE DU MAGASIN": "36 Rue Ernest Renan, 94200 Ivry-sur-Seine",
+      "TÉLÉPHONE": "+33140253030",
+      "INTERLOCUTEUR": "Adam",
+      "E-MAIL": "adama.digiltizeme@gmail.com",
+      "Factures": [
+        "recliI3dPptd5AcYX",
+        "recUHS9W76xLWI8cG",
+        "recOwXJaKkJQY8xtU"
+      ],
+      "STATUT": "Ouvert",
+      "CATEGORIE": [
+        "Plantes/Arbres"
+      ],
+      "PHOTO": [
+        {
+          "id": "attNH5t51zby0cdKj",
+          "width": 943,
+          "height": 473,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/MMtLbMlDMB_32vjSyFdl7w/eh8mD1JWI_Q5LAd5Two4rpKZz0FvyC46ZgFgEL9UqRKMaeUCeG9lqeK_GDV8Ndnynrv3uTOPycOx-t0_qE7XFT_idHnCR6jvQghn-THVISeFWL_o6MW1f1frzXKnIeV7HqjkFZD0lCx-f0IY5GyoXJ2x2k_CJWgfwBZDiW59Vs0/ruwve-Yp7aDgHHYNJtKtF4OHRzCA1Y66oCYcBkR4xBM",
+          "filename": "truffaut_facade_mag_2021_2.jpg",
+          "size": 193568,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/ux7GD1oK7neTs69vVK4NEQ/b0-LOrVBWeAdqEN0zJBzZJUrGRDf1o8VMvybEXtsNq_Bgs8QTMKN4UFP1KDQ-xYePjKn68ertZWMKvkvmngkpklyeHjMUh3vXksiKFc8LV1ItTIgfll6RP5ayEuPEEjgAVyAos_Il2gop9khZ5u--Q/M79it56OecvtWsT0K3W8jIvPQMlk_1ayrS2LLxDAFP8",
+              "width": 71,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/j3hhvtcjH58M6znAS3SuYw/H9iMd99YXVRv1SqPfi3tbnjSGvA_qtYZ4kstWcV6Ohb41WyJI3KjyUmfdQigEE54Bsxsbb_r9NEC6MA2hpuIPfDB4ROZ7NemnIo7w4LWEBIuvUSkJm5-mwMcr1JAzaaz93vR157Rk1zFmwM7uBgh1Q/43nI9J-QpnL3fj7YTYnQlb-MhXciBRpYlu0ri-YtRWI",
+              "width": 943,
+              "height": 473
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750032000000/LmGGvuJoPEJjU4i3cbY7jQ/Sj51Yg343xjzBDcwtWdq9BEZsRtWyr4PB4mkBDNQ1rvVLwt1hxU8mAJwEcQFXrZIUGCtaeATZM75Z_o_vG4G4YfTd5rTv-jQgqjhU2q_MH1c3Uv-t94dn1yHHirXo6eRQhY09NEmDnMA5Cpje8bsJA/j5c6n8Aqk06toy3f_bh2FWsPRt0Uuvf4zI-az28W_z8",
+              "width": 943,
+              "height": 473
+            }
+          }
+        }
+      ],
+      "Users 2": [
+        "recBT52FEWd2FXPQi"
+      ],
+      "Copie de Factures": [
+        "recuPcAVcO2Cme4gX",
+        "rec3emGEuv6adm0uG",
+        "recX3rgS7JiffMpLU"
+      ]
+    },
+    "createdTime": "2024-01-11T15:10:24.000Z"
+  }
+]
