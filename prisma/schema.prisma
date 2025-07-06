@@ -122,8 +122,52 @@ model Commande {
   photos             Photo[]
   rapportsEnlevement RapportEnlevement[]
   rapportsLivraison  RapportLivraison[]
+  statusHistory     StatusHistory[]
+  estimatedDelivery DateTime?
+  actualDelivery    DateTime?
+  trackingEvents    TrackingEvent[]
 
+  @@index([statutLivraison, dateLivraison])
+  @@index([magasinId, statutCommande])
+  @@index([clientId])
+  
   @@map("commandes")
+}
+
+model StatusHistory {
+  id          String   @id @default(uuid())
+  commandeId  String
+  oldStatus   String
+  newStatus   String
+  reason      String?
+  changedBy   String
+  changedAt   DateTime @default(now())
+  commande    Commande @relation(fields: [commandeId], references: [id])
+  
+  @@map("status_history")
+}
+
+model TrackingEvent {
+  id          String   @id @default(uuid())
+  commandeId  String
+  eventType   TrackingEventType
+  latitude    Float?
+  longitude   Float?
+  timestamp   DateTime @default(now())
+  metadata    Json?
+  commande    Commande @relation(fields: [commandeId], references: [id])
+  
+  @@map("tracking_events")
+}
+
+enum TrackingEventType {
+  PICKUP_STARTED
+  PICKUP_COMPLETED
+  IN_TRANSIT
+  DELIVERY_ATTEMPTED
+  DELIVERY_COMPLETED
+  EXCEPTION
+  POSITION_UPDATE
 }
 
 model ChauffeurSurCommande {
@@ -257,6 +301,19 @@ model CessionInterMagasin {
   magasinOrigine       Magasin   @relation("MagasinOrigine", fields: [magasinOrigineId], references: [id])
 
   @@map("cessions_inter_magasin")
+}
+
+model SyncLog {
+  id        String   @id @default(uuid())
+  tableName String   @unique
+  lastSync  DateTime
+  direction String   @default("db_to_airtable")
+  status    String   @default("success")
+  errorLog  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sync_logs")
 }
 
 enum UserRole {

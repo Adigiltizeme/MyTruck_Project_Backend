@@ -33,7 +33,7 @@ async function listAirtableTables() {
     data.tables.forEach((table, index) => {
       console.log(`${index + 1}. 📋 ${table.name}`);
       console.log(`   ID: ${table.id}`);
-      console.log(`   Champs principaux: ${table.fields.slice(0, 5).map(f => f.name).join(', ')}${table.fields.length > 5 ? '...' : ''}`);
+      console.log(`   Champs principaux: ${table.fields.slice(0, 20).map(f => f.name).join(', ')}${table.fields.length > 20 ? '...' : ''}`);
       console.log('');
     });
     

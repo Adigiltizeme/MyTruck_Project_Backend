@@ -1,0 +1,870 @@
+[
+  {
+    "id": "rec1LMCwyLqxi0Ztl",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205750076017",
+      "TELEPHONE DU CLIENT": "+33651423274",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "5 avenue des 2 moulins\n\n",
+      "NOM COMPLET DU CLIENT": "CANCUNSM BURGER KING",
+      "CATEGORIE DE VEHICULE": "20M3 (Avec hayon 1000kg, 420, 207, 230cm)",
+      "BÂTIMENT": "0",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "BURGER KING",
+      "DATE DE LIVRAISON": "2024-11-18",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "15h-17h",
+      "AUTRES REMARQUES": "parking à l'arriere de Burger king",
+      "NOMBRE TOTAL D'ARTICLES": 6,
+      "PRENOM DU VENDEUR": "jéremy",
+      "NOM DU CLIENT": "CANCUNSM",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recNfq13UCz8Q3K7d"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "18 11 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "18/11/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "ANNULEE"
+      ]
+    },
+    "createdTime": "2024-10-29T17:01:43.000Z"
+  },
+  {
+    "id": "rec7RQoLp9PmekrfT",
+    "fields": {
+      "NUMERO DE COMMANDE": "2605709000436",
+      "TELEPHONE DU CLIENT": "+33616404835",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "56 AVENUE OUDINOT\n",
+      "NOM COMPLET DU CLIENT": " CDL OUDINOT",
+      "CATEGORIE DE VEHICULE": "3M3 (Utilitaire 150kg, 180x125x180cm)",
+      "BÂTIMENT": "CENTRE DE LOISIR",
+      "INTERPHONE/CODE": "AUCUN",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "CDL OUDINOT",
+      "DATE DE LIVRAISON": "2024-10-16",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "AUTRES REMARQUES": "CONTACTER LE CLIENT AU DEPART DE LA MARCHANDISE ",
+      "NOMBRE TOTAL D'ARTICLES": 11,
+      "PRENOM DU VENDEUR": "ARTHUR",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recYcIeEO5sT8eRBu"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "Chauffeur(s)": [
+        "recOJXIE0zjz0nqP9"
+      ],
+      "DATE DE LA LIVRAISON": "16 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "16/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-15T11:35:17.000Z"
+  },
+  {
+    "id": "recE3q8HZzFfWjmB3",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750279944724",
+      "TELEPHONE DU CLIENT": "07 87 86 95 48",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "7 Avenue Gambetta 75020 Paris\n",
+      "NOM COMPLET DU CLIENT": "SIMA Mama",
+      "CATEGORIE DE VEHICULE": "1M3",
+      "INTERPHONE/CODE": "Sima",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "Mama",
+      "DATE DE LIVRAISON": "2025-06-29",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "NOMBRE TOTAL D'ARTICLES": 10,
+      "PRENOM DU VENDEUR": "Adam",
+      "NOM DU CLIENT": "Sima",
+      "Magasins": [
+        "recbUX3N1SsYZWU6F"
+      ],
+      "DATE DE LA LIVRAISON": "29 06 2025",
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      }
+    },
+    "createdTime": "2025-06-18T20:52:28.000Z"
+  },
+  {
+    "id": "recKnMgFNHmDq56O7",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205777003911",
+      "TELEPHONE DU CLIENT": "+33642085794",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "22 RUE EDMOND VITRY      \n94130 NOGENT SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "CHAPPERT OLIVIER",
+      "CATEGORIE DE VEHICULE": "6M3 (Camionnette 300kg, 240x169x138cm)",
+      "BÂTIMENT": "MAISON",
+      "INTERPHONE/CODE": "AUCUN",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "OLIVIER",
+      "DATE DE LIVRAISON": "2024-10-09",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "NOMBRE TOTAL D'ARTICLES": 8,
+      "PRENOM DU VENDEUR": "CATHERINE",
+      "NOM DU CLIENT": "CHAPPERT",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recBPQFpl2OnHZO4k"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée",
+        "Modifiée"
+      ],
+      "Chauffeur(s)": [
+        "recOJXIE0zjz0nqP9"
+      ],
+      "DATE DE LA LIVRAISON": "09 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "09/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": "10 09 2024",
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-09T09:33:46.000Z"
+  },
+  {
+    "id": "recLIWNO9MeivOXMH",
+    "fields": {
+      "NUMERO DE COMMANDE": "CESSION ROSNY > BRY",
+      "TELEPHONE DU CLIENT": "+33911335000",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "19 BIS BVD JEAN MONNET 94360 BRY SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "TRUFFAUT  BRY",
+      "CATEGORIE DE VEHICULE": "10M3 (Camionnette 1000kg, 308x207x176cm)",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "BRY",
+      "DATE DE LIVRAISON": "2024-10-03",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "18h-20h",
+      "NOMBRE TOTAL D'ARTICLES": 13,
+      "PRENOM DU VENDEUR": "AUDREY",
+      "NOM DU CLIENT": "TRUFFAUT ",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recimYbC2w3nPnbBx"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "03 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "03/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": "10 03 2024",
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "ANNULEE"
+      ]
+    },
+    "createdTime": "2024-10-27T04:03:13.000Z"
+  },
+  {
+    "id": "recO5LwnUOgEOfwyt",
+    "fields": {
+      "NUMERO DE COMMANDE": "220572216830",
+      "TELEPHONE DU CLIENT": "+33600000000",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "46 RUE DE LA MARNE 94500 CHAMPIGNY SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "BOISSIERE ROMAIN",
+      "CATEGORIE DE VEHICULE": "20M3 (Avec hayon 1000kg, 420, 207, 230cm)",
+      "INTERPHONE/CODE": "168ty4",
+      "ASCENSEUR": "Non",
+      "ETAGE": "99",
+      "PRENOM DU CLIENT": "ROMAIN",
+      "DATE DE LIVRAISON": "2024-10-31",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "2",
+      "CRENEAU DE LIVRAISON": "11h-13h",
+      "NOMBRE TOTAL D'ARTICLES": 99,
+      "PRENOM DU VENDEUR": "RAYAN",
+      "NOM DU CLIENT": "BOISSIERE",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Chauffeur(s)": [
+        "recOJXIE0zjz0nqP9"
+      ],
+      "DATE DE LA LIVRAISON": "31 10 2024",
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      }
+    },
+    "createdTime": "2024-10-12T07:33:37.000Z"
+  },
+  {
+    "id": "recOQ7TP5bQV9zCGj",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205780002895",
+      "TELEPHONE DU CLIENT": "+33612468740",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "18 RUE MUDIER 93160 NOISY-LE-GRAND\n",
+      "NOM COMPLET DU CLIENT": "MOTA PEREIRA",
+      "CATEGORIE DE VEHICULE": "6M3 (Camionnette 300kg, 240x169x138cm)",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "PEREIRA",
+      "DATE DE LIVRAISON": "2024-11-10",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "11h-13h",
+      "AUTRES REMARQUES": "CLIENT HABITANT EN MAISON",
+      "NOMBRE TOTAL D'ARTICLES": 15,
+      "PRENOM DU VENDEUR": "PAUL",
+      "NOM DU CLIENT": "MOTA",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recTdRjmiXVjcRgrc"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "10 11 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "10/11/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": "11 10 2024",
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-11-10T13:55:27.000Z"
+  },
+  {
+    "id": "reccjeIugzOcIG38L",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750348469506",
+      "TELEPHONE DU CLIENT": "01 04 07 01 05",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "10 Avenue de la République 94120 Fontenay-sous-Bois\n",
+      "NOM COMPLET DU CLIENT": "SIMSAM Mass",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "INTERPHONE/CODE": "Aucun",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "Mass",
+      "DATE DE LIVRAISON": "2025-06-28",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "18h-20h",
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "PRENOM DU VENDEUR": "Blas",
+      "NOM DU CLIENT": "Simsam",
+      "Commandes": [
+        "recDVg1NezdP0qOVB"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "28 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "28/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-19T15:54:33.000Z"
+  },
+  {
+    "id": "recdi572jV06hQu5T",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750116343447",
+      "TELEPHONE DU CLIENT": "05 64 96 84 13",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "1 Square de la Liberation 93100 Montreuil\n",
+      "NOM COMPLET DU CLIENT": "OKLM sqx",
+      "CATEGORIE DE VEHICULE": "20M3",
+      "INTERPHONE/CODE": "Part",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "sqx",
+      "DATE DE LIVRAISON": "2025-06-28",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "2",
+      "CRENEAU DE LIVRAISON": "16h-18h",
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "PRENOM DU VENDEUR": "Adam",
+      "PHOTOS ARTICLES": [
+        {
+          "id": "attZQJ6yG3JvWUtXb",
+          "width": 800,
+          "height": 800,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/3rHRkqkYYIvaPRMmdydHWA/i_Sb2rrKfcDSrVOExBPJajv5g7oSPhJtbNmvxRhHtWo36LOe6jJaMeAp6tOOW340INVI_bs-jGct2GHRKDV2Cm37Vb15HsVKZO07iucICgj0XgcgP9Zz9b-gp412Bf8Yk6bXTANLqtuHaw3qKMlKgoESXSY6cPdQnWc2C-yd41Mx63I6s39StSiIkdPWciDk/6QrX31pdScPyNHdz4ylE9ioH2UrFRAqhKu_b_etTnLs",
+          "filename": "pbu5ghjyifahdynvv8af.jpg",
+          "size": 50994,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/hCbLNilFI3WZ_r7unIZksw/eH0vpDizI6JGtTz8sp0e276K3htzKyI-u3QbdgJuVL9OL1DeDAPimYYdmlnyRMcTlHRzvytxpablul03tlLJ0_4r38eRMC58fH9ouy7VCUlf785Khj9ajBxNT1tsJN81rd7dz4w36I3NDb4iAtU0sQ/-pAjK26DTJQ56QZvsjsraedY9p1ZWVUgJps_Uom4Cqo",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/_f8Snfyq7NVL_PccW24Btw/SB8KlJpg0JaT_PjxoFhvASJapfvHwDVCcfMbtQsFbUNuXbzINK4z9RLyVs1WSO-80r-pA1fBfnnbP6ELYJ81S5ZcXynsMXp53JjY-rJyj1LGqE07A098JD4DTjUyf1wv-W0z-LpAQ_xBiy6_8O1wwA/OC9cWi6jGNVgXPq0A6M887nNEL51qPtEdL8LyLENUh4",
+              "width": 512,
+              "height": 512
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/_V9P2IvraCSjLFMFx77m0A/OgMmM-tn7CPL_3zg8-zaQv-bsmOiofOUUm5WdIt492PKrdx3Kartg0JfvoTk-e-8tDdC3tA8wwNAPJasLI7SxolyfaiTPfrDj6npPI9fxcLUkJVLUU6O8d5MzZRUUmawmJm0rm5ODzJGtyI5u-5yyw/EJ4jFeGSvOkQFpKE9esZ2EanudM1AaqJCbSVMZUyE2s",
+              "width": 800,
+              "height": 800
+            }
+          }
+        }
+      ],
+      "NOM DU CLIENT": "oklm",
+      "Magasins": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "Commandes": [
+        "recH5AC3L2cOJMNzc"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "28 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "28/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-16T23:25:47.000Z"
+  },
+  {
+    "id": "rechKvNiEXfbsqTJf",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750350402441",
+      "TELEPHONE DU CLIENT": "01 91 91 91 91",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "91 Boulevard Lefebvre 75015 Paris\n",
+      "NOM COMPLET DU CLIENT": "BLAS Dams",
+      "CATEGORIE DE VEHICULE": "10M3",
+      "INTERPHONE/CODE": "Aucun",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "Dams",
+      "DATE DE LIVRAISON": "2025-06-30",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "2",
+      "CRENEAU DE LIVRAISON": "18h-20h",
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "PRENOM DU VENDEUR": "Simon",
+      "NOM DU CLIENT": "Blas",
+      "Magasins": [
+        "rec5sEy0PUUG9nlXg"
+      ],
+      "Commandes": [
+        "recm1OVWTKbsxH84F"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "30 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "30/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-19T16:26:45.000Z"
+  },
+  {
+    "id": "recio5dLx1dXduuXX",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750116072830",
+      "TELEPHONE DU CLIENT": "05 64 96 84 13",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "88 Avenue des Champs Elysées 75008 Paris\n",
+      "NOM COMPLET DU CLIENT": "ZABOUN Zabouza",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "INTERPHONE/CODE": "Egyptair",
+      "ASCENSEUR": "Oui",
+      "ETAGE": "1",
+      "PRENOM DU CLIENT": "Zabouza",
+      "DATE DE LIVRAISON": "2025-06-27",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "PRENOM DU VENDEUR": "Simon",
+      "NOM DU CLIENT": "Zaboun",
+      "Magasins": [
+        "recBN0zhysFhX9tCN"
+      ],
+      "Commandes": [
+        "recjhcdSZwO8AkPVS"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "27 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "27/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-16T23:21:17.000Z"
+  },
+  {
+    "id": "recjMFxw8anYXRlS8",
+    "fields": {
+      "NUMERO DE COMMANDE": "237377495568375256",
+      "NOM COMPLET DU CLIENT": " ",
+      "Commandes": [
+        "recIIsUjUAm7TxZce"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ": [
+        {
+          "error": "#ERROR!"
+        }
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-18T20:54:04.000Z"
+  },
+  {
+    "id": "recjY82Qha1ufsRn2",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750116561596",
+      "TELEPHONE DU CLIENT": "05 64 96 84 16",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "5 Rue de la Poterne des Peupliers 75013 Paris\n",
+      "NOM COMPLET DU CLIENT": "CLIENT 5 Cinq",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "INTERPHONE/CODE": "Aucun",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "Cinq",
+      "DATE DE LIVRAISON": "2025-06-28",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "08h-10h",
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "PRENOM DU VENDEUR": "Blas",
+      "NOM DU CLIENT": "Client 5",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "rec9o0QPrIghIiA2Z"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "28 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "28/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-16T23:29:30.000Z"
+  },
+  {
+    "id": "recjYsn7w8IqBP02I",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205778027077",
+      "TELEPHONE DU CLIENT": "+33698691721",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "6 CHEMIN BLEUETS 93470 COUBRON\n",
+      "NOM COMPLET DU CLIENT": "DELCROIX  ANNE-SOPHIE",
+      "CATEGORIE DE VEHICULE": "6M3 (Camionnette 300kg, 240x169x138cm)",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "ANNE-SOPHIE",
+      "DATE DE LIVRAISON": "2024-10-28",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "NOMBRE TOTAL D'ARTICLES": 2,
+      "PRENOM DU VENDEUR": "THOMAS",
+      "NOM DU CLIENT": "DELCROIX ",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recEFD0uvhDKelt4x"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "28 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "28/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-27T13:55:56.000Z"
+  },
+  {
+    "id": "reclnKV5mEi9gQb7I",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750277161112",
+      "TELEPHONE DU CLIENT": "01 02 03 04 05",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "7 Rue de Rosny 93100 Montreuil\n",
+      "NOM COMPLET DU CLIENT": "SAMASSA Particulier",
+      "CATEGORIE DE VEHICULE": "1M3",
+      "INTERPHONE/CODE": "Samassa",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "Particulier",
+      "DATE DE LIVRAISON": "2025-06-28",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "16h-18h",
+      "NOMBRE TOTAL D'ARTICLES": 10,
+      "PRENOM DU VENDEUR": "Adam",
+      "NOM DU CLIENT": "Samassa",
+      "Magasins": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "Commandes": [
+        "recVF7qg0H0OCMFPd"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "28 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "28/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-18T20:06:07.000Z"
+  },
+  {
+    "id": "recnSDPQi105VeKH0",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750451481263",
+      "TELEPHONE DU CLIENT": "01 60 14 02 58",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "12 Allée Circulaire 93600 Aulnay-sous-Bois\n",
+      "NOM COMPLET DU CLIENT": "ADAM Sam",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "INTERPHONE/CODE": "Sam",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "Sam",
+      "DATE DE LIVRAISON": "2025-06-30",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "12h-14h",
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "PRENOM DU VENDEUR": "Blas",
+      "NOM DU CLIENT": "Adam",
+      "Magasins": [
+        "rec5sEy0PUUG9nlXg"
+      ],
+      "Commandes": [
+        "rechM9ax74mnCDfHA"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "30 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "30/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-20T20:31:27.000Z"
+  },
+  {
+    "id": "recnTxCtv1FQITfsp",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750279944650",
+      "TELEPHONE DU CLIENT": "07 87 86 95 48",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "7 Avenue Gambetta 75020 Paris\n",
+      "NOM COMPLET DU CLIENT": "SIMA Mama",
+      "CATEGORIE DE VEHICULE": "1M3",
+      "INTERPHONE/CODE": "Sima",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "Mama",
+      "DATE DE LIVRAISON": "2025-06-29",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "NOMBRE TOTAL D'ARTICLES": 10,
+      "PRENOM DU VENDEUR": "Adam",
+      "NOM DU CLIENT": "Sima",
+      "Magasins": [
+        "recbUX3N1SsYZWU6F"
+      ],
+      "Commandes": [
+        "recW14Yj7iBnGLlH8"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "29 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "29/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-18T20:52:27.000Z"
+  },
+  {
+    "id": "recp5COeZPsNV7tkX",
+    "fields": {
+      "NUMERO DE COMMANDE": "CMD1750282365271",
+      "TELEPHONE DU CLIENT": "01 00 00 00 00",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "1 Avenue des Ternes 75017 Paris\n",
+      "NOM COMPLET DU CLIENT": "SAMSIM Sams",
+      "CATEGORIE DE VEHICULE": "1M3",
+      "INTERPHONE/CODE": "Sams",
+      "ASCENSEUR": "Non",
+      "ETAGE": "1",
+      "PRENOM DU CLIENT": "Sams",
+      "DATE DE LIVRAISON": "2025-06-27",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "NOMBRE TOTAL D'ARTICLES": 20,
+      "PRENOM DU VENDEUR": "Adam",
+      "NOM DU CLIENT": "Samsim",
+      "Magasins": [
+        "recbUX3N1SsYZWU6F"
+      ],
+      "Commandes": [
+        "recC110S21LnlMS8F"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "27 06 2025",
+      "DATE DE LIVRAISON MAJ": [
+        "27/06/2025"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "EN ATTENTE"
+      ]
+    },
+    "createdTime": "2025-06-18T21:32:48.000Z"
+  },
+  {
+    "id": "recw1Duc2vpLTOtrX",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205750076017C",
+      "TELEPHONE DU CLIENT": "+33164777467",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "ADRESSE DE LIVRAISON": "5 AVENUE DES DEUX MOULINS 77230\n",
+      "NOM COMPLET DU CLIENT": "CANCUNSM BURGER KING  .",
+      "CATEGORIE DE VEHICULE": "20M3 (Avec hayon 1000kg, 420, 207, 230cm)",
+      "BÂTIMENT": "0",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": ".",
+      "DATE DE LIVRAISON": "2024-11-18",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "1",
+      "CRENEAU DE LIVRAISON": "15h-17h",
+      "AUTRES REMARQUES": "PARKING A L4ARRIERE DU BK",
+      "NOMBRE TOTAL D'ARTICLES": 6,
+      "PRENOM DU VENDEUR": "JEREMY",
+      "NOM DU CLIENT": "CANCUNSM BURGER KING ",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE LA LIVRAISON": "18 11 2024",
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      }
+    },
+    "createdTime": "2024-10-21T16:44:47.000Z"
+  },
+  {
+    "id": "recxNVPLDuE075RRE",
+    "fields": {
+      "NUMERO DE COMMANDE": "2205776003431",
+      "TELEPHONE DU CLIENT": "+33759244273",
+      "TYPE D'ADRESSE": "Domicile",
+      "ADRESSE DE LIVRAISON": "18 RUE ROBERT SCHUMAN 94350 VILLIERS SUR MARNE\n",
+      "NOM COMPLET DU CLIENT": "ALILAT IRIS",
+      "CATEGORIE DE VEHICULE": "3M3 (Utilitaire 150kg, 180x125x180cm)",
+      "BÂTIMENT": "0",
+      "INTERPHONE/CODE": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU CLIENT": "IRIS",
+      "DATE DE LIVRAISON": "2024-10-25",
+      "OPTION EQUIPIER DE MANUTENTION (en plus du livreur)": "0",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "NOMBRE TOTAL D'ARTICLES": 12,
+      "PRENOM DU VENDEUR": "RAPHAEL",
+      "NOM DU CLIENT": "ALILAT",
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "Commandes": [
+        "recs2ZeUEEWdTxVs7"
+      ],
+      "STATUT DE LA COMMANDE (from Commandes)": [
+        "Confirmée"
+      ],
+      "DATE DE LA LIVRAISON": "25 10 2024",
+      "DATE DE LIVRAISON MAJ": [
+        "25/10/2024"
+      ],
+      "DATE DE LIVRAISON MAJ_STRING": {
+        "error": "#ERROR!"
+      },
+      "DATE DE LIVRAISON MAJ_DATE": {
+        "error": "#ERROR!"
+      },
+      "STATUT DE LA LIVRAISON (ENCART)": [
+        "LIVREE"
+      ]
+    },
+    "createdTime": "2024-10-23T10:29:15.000Z"
+  }
+]

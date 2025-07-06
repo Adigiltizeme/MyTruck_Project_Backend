@@ -6,6 +6,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 // Modules core
 import { PrismaModule } from '../prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { SyncModule } from './modules/sync/sync.module';
 
 // Modules métier (seulement ceux qui existent)
 import { UsersModule } from './modules/users/users.module';
@@ -21,6 +22,9 @@ import { authConfig } from './config/auth.config';
 import { CommandesModule } from './modules/commandes/commandes.module';
 import { ClientsModule } from './modules/clients/clients.module';
 import { ChauffeursModule } from './modules/chauffeurs/chauffeurs.module';
+import { TrackingModule } from './modules/tracking/tracking.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
+import { WebSocketModule } from './modules/websocket/websocket.module';
 
 @Module({
   imports: [
@@ -46,10 +50,14 @@ import { ChauffeursModule } from './modules/chauffeurs/chauffeurs.module';
     // Modules core
     PrismaModule,
     AuthModule,
+    SyncModule,
 
     // Modules métier (par ordre de priorité)
     UsersModule,
     MagasinsModule,
+    TrackingModule,
+    NotificationsModule,
+    WebSocketModule,
 
     // Modules utilitaires
     HealthModule,
@@ -63,4 +71,4 @@ import { ChauffeursModule } from './modules/chauffeurs/chauffeurs.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

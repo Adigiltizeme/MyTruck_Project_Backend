@@ -1,0 +1,38 @@
+### Test 1: Connexion Admin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@test.com",
+  "password": "admin123"
+}
+
+### Test 2: Test profil (remplacez TOKEN par celui reçu ci-dessus)
+GET http://localhost:3000/auth/test-profile
+Authorization: Bearer TOKEN
+
+### Test 3: Test accès admin
+GET http://localhost:3000/auth/test-admin
+Authorization: Bearer TOKEN
+
+### Test 4: Test accès chauffeur (doit échouer)
+GET http://localhost:3000/auth/test-chauffeur
+Authorization: Bearer TOKEN
+
+### Test 5: Connexion Magasin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "magasin@test.com",
+  "password": "magasin123"
+}
+
+### Test 6: Connexion Chauffeur
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "chauffeur@test.com",
+  "password": "chauffeur123"
+}

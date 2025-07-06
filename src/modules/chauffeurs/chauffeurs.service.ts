@@ -2,12 +2,16 @@ import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateChauffeurDto, UpdateChauffeurDto, ChauffeurFiltersDto } from './dto';
 import { Prisma } from '@prisma/client';
+import { TrackingService } from '../tracking/tracking.service';
 
 @Injectable()
 export class ChauffeursService {
     private readonly logger = new Logger(ChauffeursService.name);
 
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(
+        private readonly prisma: PrismaService,
+        private readonly trackingService: TrackingService
+    ) { }
 
     async findAll(filters: ChauffeurFiltersDto) {
         const { skip, take, status, noteMinimum } = filters;
@@ -323,20 +327,11 @@ export class ChauffeursService {
     async updatePosition(id: string, longitude: number, latitude: number) {
         await this.findOne(id); // Vérifier que le chauffeur existe
 
-        const chauffeur = await this.prisma.chauffeur.update({
-            where: { id },
-            data: {
-                longitude,
-                latitude,
-            },
-            select: {
-                id: true,
-                nom: true,
-                prenom: true,
-                longitude: true,
-                latitude: true,
-            },
-        });
+        const chauffeur = await this.trackingService.updateChauffeurPosition(
+            id,
+            latitude,
+            longitude
+        );
 
         this.logger.debug(`📍 Position mise à jour pour ${chauffeur.nom} ${chauffeur.prenom}: ${longitude}, ${latitude}`);
 

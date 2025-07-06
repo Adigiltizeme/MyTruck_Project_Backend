@@ -2,12 +2,17 @@ import { Injectable, NotFoundException, BadRequestException, Logger } from '@nes
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateCommandeDto, UpdateCommandeDto, CommandeFiltersDto } from './dto';
 import { Prisma } from '@prisma/client';
+import { TrackingService } from '../tracking/tracking.service';
+import { TrackingEventType } from '@prisma/client';
 
 @Injectable()
 export class CommandesService {
     private readonly logger = new Logger(CommandesService.name);
 
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(
+        private readonly prisma: PrismaService,
+        private readonly trackingService: TrackingService
+    ) { }
 
     async findAll(filters: CommandeFiltersDto) {
         const {
@@ -361,6 +366,49 @@ export class CommandesService {
 
         // Retourner la commande mise à jour
         return this.findOne(id);
+    }
+
+    async updateStatutLivraison(
+        commandeId: string,
+        newStatus: string,
+        userId: string,
+        reason?: string
+    ) {
+        const existingCommande = await this.findOne(commandeId);
+
+        // Mettre à jour via le tracking service pour l'historique
+        const updatedCommande = await this.trackingService.updateCommandeStatus(
+            commandeId,
+            newStatus,
+            userId,
+            reason
+        );
+
+        // Créer l'événement de tracking approprié
+        let eventType: TrackingEventType;
+        switch (newStatus) {
+            case 'EN COURS':
+                eventType = TrackingEventType.PICKUP_STARTED;
+                break;
+            case 'EN ROUTE':
+                eventType = TrackingEventType.IN_TRANSIT;
+                break;
+            case 'LIVREE':
+                eventType = TrackingEventType.DELIVERY_COMPLETED;
+                break;
+            default:
+                eventType = TrackingEventType.EXCEPTION;
+        }
+
+        await this.trackingService.createTrackingEvent({
+            commandeId,
+            eventType,
+            metadata: { statusChange: { from: existingCommande.statutLivraison, to: newStatus } }
+        });
+
+        this.logger.log(`✅ Statut mis à jour: ${existingCommande.numeroCommande} -> ${newStatus}`);
+
+        return this.findOne(commandeId);
     }
 
     async remove(id: string) {

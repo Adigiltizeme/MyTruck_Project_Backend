@@ -12,10 +12,16 @@ async function bootstrap() {
 
   // Configuration CORS
   app.enableCors({
-    origin: configService.get('CORS_ORIGIN', 'http://localhost:3001'),
+    origin: ['CORS_ORIGIN',
+      'http://localhost:3001',   // Frontend dev
+      'http://localhost:3000',   // Au cas où
+      'http://localhost:5173',   // Vite parfois utilise ce port
+      'http://127.0.0.1:3001',
+      'http://127.0.0.1:5173'
+    ],
     credentials: configService.get('CORS_CREDENTIALS', true),
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   });
 
   // Préfixe global pour l'API

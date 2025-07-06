@@ -1,0 +1,1017 @@
+[
+  {
+    "id": "rec9o0QPrIghIiA2Z",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-28",
+      "NUMERO DE COMMANDE": "CMD1750116561596",
+      "OPTION EQUIPIER DE MANUTENTION": "1",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "CRENEAU DE LIVRAISON": "08h-10h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "Clients": [
+        "rec2DscoNy0ZWzGvd"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2025-06-16T23:29:23.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recjY82Qha1ufsRn2"
+      ],
+      "ADRESSE DE LIVRAISON": "5 Rue de la Poterne des Peupliers 75013 Paris\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "05 64 96 84 16",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Client 5",
+      "PRENOM DU CLIENT": "Cinq",
+      "NOM COMPLET DU CLIENT": "CLIENT 5 Cinq",
+      "INTERPHONE/CODE": "Aucun",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Blas",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-16T23:29:31.000Z",
+      "DATE DE LA COMMANDE": "17/06/2025 - 01:29",
+      "DATE DE LA LIVRAISON": "28/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-16T23:29:23.000Z"
+  },
+  {
+    "id": "recBPQFpl2OnHZO4k",
+    "fields": {
+      "DATE DE LIVRAISON": "2024-10-09",
+      "NUMERO DE COMMANDE": "CMD1741532652610",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "DETAILS SUR LES ARTICLES": "Ajout d'un détail pour tester\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "LIVREE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "TARIF HT": 38,
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [
+        "Test 2 à l'enlèvement"
+      ],
+      "NOMBRE TOTAL D'ARTICLES": 8,
+      "PHOTOS ARTICLES": [
+        {
+          "id": "attHaOQo1oiiloGOo",
+          "width": 800,
+          "height": 800,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/iHZ09P0eUpW0qr_zWf5cOw/_JieJejtA-YmDAv_meG38P865GPiMmebs12B-pWxNUzYcQVZA9BQM655bfIeLwYPOrZK6tvj12hXpw2Ua_Ml7AOJ-RCXGNTzM0y2lPHKZTPspeSjQLj4wpiasDIsABZHYBe043hwRj29_tuIN5NaxQ/S_9hCDp_OzYLLNko0z_tkkGVdYcH3r9Nfs9RsLGsdLI",
+          "filename": "vz3ydbxf7a9cmcrhqjce.jpg",
+          "size": 50992,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/EvOY3kfgL53XQMt61WOIAg/3TE8vFNp-BAE-NqkL0tHXNN8ojXYRDCGdZ1wEEyfeIqNRN3EVzY7hKoFwSf75NGPcLEkIXOXCiiy0GGs4FVRpwYsdCH7O7lhJYTAipzNBjMCfIADiCf4kpmJ3jFD-fQ59FK4N6m9GMszeAP0tziRIg/8fw_TNelPhqvGETHyEr1-jjnUsmshJEInUfOvXrip4Y",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/ncX1Eet8JDmdGwBR0v4HRg/ZRQ4XjNSTN2d6zZAhkMwcdw4cZY_PRk4zT0grXwDek7C3VRn3l4p-VpR8GnQh_Z_e2UAOnvZheO1i6_BarHYjDTz41OiV-LdDtmk4I_2k26UYs9oe7EhstEPPurZN0Y-hPqUOyZPJk04lvlzLMniWw/FcEH5TwiCLc7cHd1ybWPpU23PR8v6JGQM9E_vlJClok",
+              "width": 512,
+              "height": 512
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/UPzVbaI4WMLIY__qzabj7Q/UCVg-O87DcRR3JcAerlDa6bCUGsNnv9Sb_GRnd5_ddQ0DhZL9nnGL7lxE-DPMIB8wq1Ok_5dbV7SW8aZQd383m87VuyVqaQo9EZowbT5TX04ue6CCjh0ShHxGFWFZxopET3ABbQfa-nOAFhGLSa2Sg/XOGvjEDS80MZCxu1V6hMemKAZ4gyWwpAebEpWCwaidw",
+              "width": 800,
+              "height": 800
+            }
+          }
+        }
+      ],
+      "Clients": [
+        "recBCa2HYcZQJYvzz"
+      ],
+      "Chauffeurs": [
+        "Yahya"
+      ],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2024-10-09T09:33:36.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée",
+        "Modifiée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recKnMgFNHmDq56O7"
+      ],
+      "ADRESSE DE LIVRAISON": "22 RUE EDMOND VITRY      \n94130 NOGENT SUR MARNE\n",
+      "STATUT DE LA LIVRAISON": [
+        "LIVREE"
+      ],
+      "TELEPHONE DU CLIENT": "+33642085794",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "CHAPPERT",
+      "PRENOM DU CLIENT": "OLIVIER",
+      "NOM COMPLET DU CLIENT": "CHAPPERT OLIVIER",
+      "BÂTIMENT": "MAISON",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "CATHERINE",
+      "DATE DE MISE A JOUR COMMANDE": "2025-03-09T15:04:15.000Z",
+      "DATE DE LA COMMANDE": "09/10/2024 - 11:33",
+      "DATE DE LA LIVRAISON": "09/10/2024",
+      "Lien rapport à l'enlèvement": [
+        "recU8qHGBAzSuyhOH"
+      ],
+      "PHOTO COMMENTAIRE A L'ENLEVEMENT": [
+        {
+          "id": "attA8sYqiU3qQ0ct4",
+          "width": 1200,
+          "height": 900,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/gP_dYPYVW06s5E2qy5EgHA/B4rrZIO7AofxzdGufBb7L614i2ykSr54wuk7dZdw_4qrznRTJWSGpg47yG7gUoolwsuEUW-v29KoFyJehvxND9SatzwKCaGtbIcBZLl0rtwRxBiBg87FN0swRgBVoD-gRcwaS0wXMLtjCglm9OQPBKBsVfSpXLsAaDJnZALKeQc/jD1FLwDfO1JaW0-LC-0iKUTqjxLkjfPGItMmjqlXSdw",
+          "filename": "Saint-Léger-sur-Dheune.JPG",
+          "size": 291876,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/wB50_oimvvIvgCPfCi2tBg/h-MAGGKjTZvUK_gY1sG392owi_5GrE9QRe0GWvwK980ncOaKjcz9VczVYGHKmpKTryEmaa2uwg2wQDUeYMcshL4GjViJ1XazqOmpR_1W0bBq9s8rZX50TS_ngNtp64MZynMW-KSge1KXxdZLbC60gA/pTG_4V14fgoHtwVLAXjpFWqlWHsFwDexxfK5XVyuL3c",
+              "width": 48,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/9xnTXwGiA2VqxCJeN0yzYQ/BaXKeR1e443onaKDY8ErAjB--jpjMh72nlNdnG36552pan0gUFJwgTsqGbuKtS65ViBOn5uzq0QOQY6fvul83joxBi-p7Ug5g608mLi8SEcCEdizon47veZyTiGSP5Y-DsHnStTLVb6nY84Drz6hHQ/cYu8cd3OQ-NWOr6NGDZWnfVBd4kttv0mieEcVl4lkxE",
+              "width": 683,
+              "height": 512
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/ijoCPQ28PdxF1pT2w3ZSvA/wRoXh9TZ6HM6ZgwhdTOsBW1b9MHMD14a8KnhfJ2rH6J1HuGFPVi92q7F3LRHgIAZtrQySc-RGgAfOW-axCEbHRfM_zHvCufwHJI3POxsQPA-B5Rp4ipWxHp2FkW1j44v7F-IO5rzwEybcjHEcOvilg/Awm-jSmoyqftosmcBPZRo6lYbfrIzQZ_wZ8rY6YgPXY",
+              "width": 1200,
+              "height": 900
+            }
+          }
+        }
+      ],
+      "PHOTO COMMENTAIRE A LA LIVRAISON": [
+        {
+          "id": "attVKfINVf3eSoUv0",
+          "width": 550,
+          "height": 549,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/IH9wXJHA3jkhtWESfGJRUA/2vCoUosYdVfy1Olqr0-c48j5HgZ7c90zRCB7XywkUzEmZlRJ1qOjcF9P_WEIAfollubpHDHdFo-Cq-kgk98A8zb2I22m3QwQpGqx-goCTB2-b3eCwNZVlE106OO1WyzRslXxXJHzO4veZUa-8uohaOs1cioa5KcWVV6m_tLwHGA/b2DXCE6nncTi3OZ2jY6k5Goxbyvs_bMwQ1rWDVVMGog",
+          "filename": "550x549.jpg",
+          "size": 133766,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/Aqt5bO14j8fOzHBP9ZAKxg/ymGkjPr6z_1YpfwZDtPH0nW2sDLVDhzmbm6ZdWeB5lBL084JNchxuul04n1SQgwbCYb6FM4yTmkeR49T3oW0Stisf66aU46IrPMHHs5hMEDBlx4nSjWy6BPrXXkmED3NyNxLmi-57WjYw-BU6HhJ0Q/c1f8tST28QiqICxSrqZ10ih3MeXEXE94C76mXuI2mCc",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/Kjz9yG9Im0a8KIs_anRG5g/IFh6kLmJRAeqPuDBrHvh-cklurqzxHKFU_FBmZRYixZMev2M2izzl_sbrYJaF8nB-UerGF5z7Ve3dgG4qoJMrJ5d1G81w3SOHs9oNiZTSk8rL3osF-zfICnMNgiLikz7mXbAuQzcx7l0Y83xUIKixA/nXNzas9gH50ur6cjbY-Evac_scqTQHNPhfV8tRF9iKM",
+              "width": 513,
+              "height": 512
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/kxXBEd-J0ICBBf92bLkPWw/-EFXlr5Tf1z0hGNAnt8iE2DLCfCv7L68KT9ZFXK0IpPv3GUuTEoUuaLmCzSpoF9YR8GtFtrJ0dB1nTvCS3jw3AlSXKV_krqKaojHO_hY_E7tC8NCwrC8ULTooMfgdnxYfT7yvw4DLLe4rki5oiPYaQ/xlAVjy0zI6C8NP6daPAiTyogz_2PwxnI38F5pfxgjis",
+              "width": 550,
+              "height": 549
+            }
+          }
+        }
+      ],
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": [
+        "Test 2 à la livraison :\nEssai d'un texte long, histoire de voir ce que ça donne dans l'application, dans les détails de la commande, section \"Informations\"..."
+      ],
+      "Rapports à la livraison": [
+        "recMa7mSqlZp9PDfw"
+      ],
+      "CHAUFFEUR(S)": [
+        "recOJXIE0zjz0nqP9"
+      ]
+    },
+    "createdTime": "2024-10-09T09:33:36.000Z"
+  },
+  {
+    "id": "recC110S21LnlMS8F",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-27",
+      "NUMERO DE COMMANDE": "CMD1750282365271",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "1M3",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 20,
+      "Clients": [
+        "reck6ghkOytP5SFjf"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "recbUX3N1SsYZWU6F"
+      ],
+      "DATE DE COMMANDE": "2025-06-18T21:32:46.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recp5COeZPsNV7tkX"
+      ],
+      "ADRESSE DE LIVRAISON": "1 Avenue des Ternes 75017 Paris\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "01 00 00 00 00",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Samsim",
+      "PRENOM DU CLIENT": "Sams",
+      "NOM COMPLET DU CLIENT": "SAMSIM Sams",
+      "INTERPHONE/CODE": "Sams",
+      "ASCENSEUR": "Non",
+      "ETAGE": "1",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Adam",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-18T21:32:49.000Z",
+      "DATE DE LA COMMANDE": "18/06/2025 - 23:32",
+      "DATE DE LA LIVRAISON": "27/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-18T21:32:46.000Z"
+  },
+  {
+    "id": "recDVg1NezdP0qOVB",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-28",
+      "NUMERO DE COMMANDE": "CMD1750348469506",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "CRENEAU DE LIVRAISON": "18h-20h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "Clients": [
+        "rec2sbIWPMRFW2tzQ"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "rec5sEy0PUUG9nlXg"
+      ],
+      "DATE DE COMMANDE": "2025-06-19T15:54:30.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "reccjeIugzOcIG38L"
+      ],
+      "ADRESSE DE LIVRAISON": "10 Avenue de la République 94120 Fontenay-sous-Bois\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "01 04 07 01 05",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Simsam",
+      "PRENOM DU CLIENT": "Mass",
+      "NOM COMPLET DU CLIENT": "SIMSAM Mass",
+      "INTERPHONE/CODE": "Aucun",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Blas",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-19T16:05:11.000Z",
+      "DATE DE LA COMMANDE": "19/06/2025 - 17:54",
+      "DATE DE LA LIVRAISON": "28/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-19T15:54:30.000Z"
+  },
+  {
+    "id": "recEFD0uvhDKelt4x",
+    "fields": {
+      "DATE DE LIVRAISON": "2024-10-28",
+      "NUMERO DE COMMANDE": "CMD1741463658961",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "LIVREE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "TARIF HT": 54,
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 2,
+      "Clients": [
+        "recikAEqOXSL6ddxe"
+      ],
+      "Chauffeurs": [
+        "Yahya"
+      ],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2024-10-27T13:55:53.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recjYsn7w8IqBP02I"
+      ],
+      "ADRESSE DE LIVRAISON": "6 CHEMIN BLEUETS 93470 COUBRON\n",
+      "STATUT DE LA LIVRAISON": [
+        "LIVREE"
+      ],
+      "TELEPHONE DU CLIENT": "+33698691721",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "DELCROIX ",
+      "PRENOM DU CLIENT": "ANNE-SOPHIE",
+      "NOM COMPLET DU CLIENT": "DELCROIX  ANNE-SOPHIE",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "THOMAS",
+      "DATE DE MISE A JOUR COMMANDE": "2025-03-08T00:49:34.000Z",
+      "DATE DE LA COMMANDE": "27/10/2024 - 14:55",
+      "DATE DE LA LIVRAISON": "28/10/2024",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": [],
+      "CHAUFFEUR(S)": [
+        "recOJXIE0zjz0nqP9"
+      ]
+    },
+    "createdTime": "2024-10-27T13:55:53.000Z"
+  },
+  {
+    "id": "recH5AC3L2cOJMNzc",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-28",
+      "NUMERO DE COMMANDE": "CMD1750116343447",
+      "OPTION EQUIPIER DE MANUTENTION": "2",
+      "CATEGORIE DE VEHICULE": "20M3",
+      "CRENEAU DE LIVRAISON": "16h-18h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "PHOTOS ARTICLES": [
+        {
+          "id": "attgvmiLa3ubQvUAz",
+          "width": 800,
+          "height": 800,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/l39-Gd_PDjMNpjo2tMLK5A/zz1FNGUGgObmiwP6OYAzYGcR2a4LYmmwl9UQf0jc7icEBhLPSSKQyv6CHXEhkl-ypv11NlONHQhFuuDihFpdjXyw6tIDbFvzZJxJOXwHKN3-66dIR0j-99h4wPdeVxqAe-61QhoC7QVCk7LcFJGSjA/uIc4bjTZWexlTmLoWqg7F20iR4_026QeTScaiRi54kk",
+          "filename": "pbu5ghjyifahdynvv8af.jpg",
+          "size": 50994,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/TcVQKTcZqh2LaYGgHvXZ_A/imqfQ6A5yoFB_fxUZ9JedIhYV87tTKgzkH4ILqEGRqhOS0TkoAqSa8GWSiw7Z-XduNScnyo1eJW03NpXmjPI4TEqXZ7f3forpHp34MfqHjpqJ6dphRuAeX2dDdIXyBn9eyMTKWRWv4p8ZKteciCMxQ/eK4A0eAK3vo4CdHyQ0hLJOPQcURPggroVXg7XtHuxBo",
+              "width": 36,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/wk9r5KVP7ZbJ7cDkanFvOg/OOJ42Qvt4wfDyptFWCIPA7it4MmkOKchYNPD3q2Py_EMmHcplY5_RM6fZ4Tp1yI7xVixPUpst1fFryz6qMAa47cgNeYI2AWuXRwPWVgrv5iVDeD7r8CEbZhrCTiugHxccWva8EWINigMCQkGFrJcFQ/zq2KF8VAtk4HPNPGBKMDF7aOdQVz48NtDQhHseDwiDA",
+              "width": 512,
+              "height": 512
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/eUBWdycVEhdFC_2P8cmSbA/tNgNj4oGVkN8-vOBf5j3oiEgS5CkVA6tR0zs8dy4hoTgyW_wH1pxmCcWWmnXcgNAbXQ_8bI0XP1uA7R8i2FaB0NX8fzECzayxNBEnN-2npTx8QyrVbrjA7V3fKmpCGRSBj3wyrPjUnc_W9p2AYb2dQ/ixOzo96BVOsvWpgnYNUBSLMdLTSgCIEqtAXdlPXcn5g",
+              "width": 800,
+              "height": 800
+            }
+          }
+        }
+      ],
+      "Clients": [
+        "recdyfyCiZtdEgZ9p"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "DATE DE COMMANDE": "2025-06-16T23:25:45.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recdi572jV06hQu5T"
+      ],
+      "ADRESSE DE LIVRAISON": "1 Square de la Liberation 93100 Montreuil\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "05 64 96 84 13",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "oklm",
+      "PRENOM DU CLIENT": "sqx",
+      "NOM COMPLET DU CLIENT": "OKLM sqx",
+      "INTERPHONE/CODE": "Part",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Adam",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-16T23:25:48.000Z",
+      "DATE DE LA COMMANDE": "17/06/2025 - 01:25",
+      "DATE DE LA LIVRAISON": "28/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-16T23:25:45.000Z"
+  },
+  {
+    "id": "recIIsUjUAm7TxZce",
+    "fields": {
+      "NUMERO DE COMMANDE": "237377495568375256",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [
+        "Un Pot abîmé "
+      ],
+      "Clients": [
+        "recjjQJUWbjSlgV7N"
+      ],
+      "Chauffeurs": [],
+      "DATE DE COMMANDE": "2025-06-18T20:54:01.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recjMFxw8anYXRlS8"
+      ],
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "NOM COMPLET DU CLIENT": " ",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-18T20:54:04.000Z",
+      "DATE DE LA COMMANDE": "18/06/2025 - 22:54",
+      "DATE DE LA LIVRAISON": {
+        "error": "#ERROR!"
+      },
+      "Lien rapport à l'enlèvement": [
+        "recuJWjxz6iDI39sQ"
+      ],
+      "PHOTO COMMENTAIRE A L'ENLEVEMENT": [
+        {
+          "id": "attJZWLz5UEYObVak",
+          "width": 4032,
+          "height": 3024,
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/TUKSmxJQ3AGHD_haFcQSiw/Quy2HxMBjcYRZoAFfvAP4x2cUriFXBFoqF1k0POAfjN-K93yut0qGcvAxM7OJkRpgIyUG-dLDQITGWe4SWjIaR7JGcSmCZRvBH8LFNAWKPQ4Wl13Zz3ueTjxtP8p8iyuPU03EQG4DobuC71hYapZEYUzI_5ndqCbPWpNVQ948j0/r8DltcdSNTDAWqWr6whh_Ds0MC5W_4PmlZrsGLJmK5Y",
+          "filename": "IMG_0796.jpeg",
+          "size": 2040888,
+          "type": "image/jpeg",
+          "thumbnails": {
+            "small": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/E2XwHLaU_1JlQCaE19ZL4g/aNXH_ItT0mo91f-uCxagN_FegjzH46dMg45GAILiEI-f1Gly1O9Q9OHqrakVPFZw8dQEc5yEf33IimyetZNzxjljUNUYtW8CKZzW0KwhQLx-EIemDDaSWNwgV68lxAx1U4r2xx3nHnrJIA6rLuETlQ/ip5Scw6ibJmjMtGPMl20_brtE7XXzkL8OrN-CuIE_MI",
+              "width": 48,
+              "height": 36
+            },
+            "large": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/78nvhO4DPFPIDWNOUqz3XA/_OjF9r5qmrjHth3p_ig9zEqZ5PuEwCJb4mqfp41NsY5ritbGyytDK-vhcK8UxKR4cOdwrwhSEMtFrJnVLHRf8YjgVwwGO059SE9MjDZJ3ewdB1UpEZRjYTbGAqYb-7Mi3FLASt11MGKWNIDr3JheeQ/q_llKxdHHNj_HUG1BNaE6wKmOdEzwtlvfu5eGjT-h90",
+              "width": 683,
+              "height": 512
+            },
+            "full": {
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/GO_uTKhqvfi3YI60MS6rhA/onaZcxnIwr9shRFbjHj4GKbLVm_Fj78BRvJgf7fEefYs2OQ3X6bN4H87_kiAQemxbdAa4OO_kdAUt3zsNlhLSMcJsUwyCZX30rd-bqna6oOr6edd7adgJHFsYMGYyQpQCqsNOCAUEZuoAegczgc7LA/hjyLhGegoj8mvDBROSluLSb_HF04mTIwWO7g1q1kdIw",
+              "width": 3000,
+              "height": 2250
+            }
+          }
+        }
+      ],
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-18T20:54:01.000Z"
+  },
+  {
+    "id": "recNfq13UCz8Q3K7d",
+    "fields": {
+      "DATE DE LIVRAISON": "2024-11-18",
+      "NUMERO DE COMMANDE": "CMD1741463660456",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "20M3",
+      "CRENEAU DE LIVRAISON": "15h-17h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "AUTRES REMARQUES": "parking à l'arriere de Burger king",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "ANNULEE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "TARIF HT": 0,
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 6,
+      "Clients": [
+        "recQJe2pkd4jyWN8H"
+      ],
+      "Chauffeurs": [
+        "Yahya"
+      ],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2024-10-29T17:01:29.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "rec1LMCwyLqxi0Ztl"
+      ],
+      "ADRESSE DE LIVRAISON": "5 avenue des 2 moulins\n\n",
+      "STATUT DE LA LIVRAISON": [
+        "ANNULEE"
+      ],
+      "TELEPHONE DU CLIENT": "+33651423274",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "NOM DU CLIENT": "CANCUNSM",
+      "PRENOM DU CLIENT": "BURGER KING",
+      "NOM COMPLET DU CLIENT": "CANCUNSM BURGER KING",
+      "BÂTIMENT": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "jéremy",
+      "DATE DE MISE A JOUR COMMANDE": "2025-03-08T00:49:39.000Z",
+      "DATE DE LA COMMANDE": "29/10/2024 - 18:01",
+      "DATE DE LA LIVRAISON": "18/11/2024",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": [],
+      "CHAUFFEUR(S)": [
+        "recOJXIE0zjz0nqP9"
+      ]
+    },
+    "createdTime": "2024-10-29T17:01:29.000Z"
+  },
+  {
+    "id": "recTdRjmiXVjcRgrc",
+    "fields": {
+      "DATE DE LIVRAISON": "2024-11-10",
+      "NUMERO DE COMMANDE": "CMD1741463662502",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "CRENEAU DE LIVRAISON": "11h-13h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "AUTRES REMARQUES": "CLIENT HABITANT EN MAISON",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "LIVREE"
+      ],
+      "RESERVE TRANSPORT": "OUI",
+      "TARIF HT": 46,
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 15,
+      "Clients": [
+        "rechBL0ErDExsimUc"
+      ],
+      "Chauffeurs": [
+        "Yahya"
+      ],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2024-11-10T13:55:24.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recOQ7TP5bQV9zCGj"
+      ],
+      "ADRESSE DE LIVRAISON": "18 RUE MUDIER 93160 NOISY-LE-GRAND\n",
+      "STATUT DE LA LIVRAISON": [
+        "LIVREE"
+      ],
+      "TELEPHONE DU CLIENT": "+33612468740",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "MOTA",
+      "PRENOM DU CLIENT": "PEREIRA",
+      "NOM COMPLET DU CLIENT": "MOTA PEREIRA",
+      "INTERPHONE/CODE": "N/A",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "PAUL",
+      "DATE DE MISE A JOUR COMMANDE": "2025-05-02T18:11:20.000Z",
+      "DATE DE LA COMMANDE": "10/11/2024 - 14:55",
+      "DATE DE LA LIVRAISON": "10/11/2024",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": [],
+      "CHAUFFEUR(S)": [
+        "recOJXIE0zjz0nqP9"
+      ]
+    },
+    "createdTime": "2024-11-10T13:55:24.000Z"
+  },
+  {
+    "id": "recVF7qg0H0OCMFPd",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-28",
+      "NUMERO DE COMMANDE": "CMD1750277161112",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "1M3",
+      "CRENEAU DE LIVRAISON": "16h-18h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 10,
+      "Clients": [
+        "recOltf7sy97GVebh"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "reci8VL1IE4KULzyr"
+      ],
+      "DATE DE COMMANDE": "2025-06-18T20:06:02.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "reclnKV5mEi9gQb7I"
+      ],
+      "ADRESSE DE LIVRAISON": "7 Rue de Rosny 93100 Montreuil\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "01 02 03 04 05",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Samassa",
+      "PRENOM DU CLIENT": "Particulier",
+      "NOM COMPLET DU CLIENT": "SAMASSA Particulier",
+      "INTERPHONE/CODE": "Samassa",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Adam",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-18T20:06:08.000Z",
+      "DATE DE LA COMMANDE": "18/06/2025 - 22:06",
+      "DATE DE LA LIVRAISON": "28/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-18T20:06:02.000Z"
+  },
+  {
+    "id": "recW14Yj7iBnGLlH8",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-29",
+      "NUMERO DE COMMANDE": "CMD1750279944650",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "1M3",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 10,
+      "Clients": [
+        "recXnL3vqtbW9EI82"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "recbUX3N1SsYZWU6F"
+      ],
+      "DATE DE COMMANDE": "2025-06-18T20:52:25.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recnTxCtv1FQITfsp"
+      ],
+      "ADRESSE DE LIVRAISON": "7 Avenue Gambetta 75020 Paris\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "07 87 86 95 48",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Sima",
+      "PRENOM DU CLIENT": "Mama",
+      "NOM COMPLET DU CLIENT": "SIMA Mama",
+      "INTERPHONE/CODE": "Sima",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Adam",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-18T20:52:27.000Z",
+      "DATE DE LA COMMANDE": "18/06/2025 - 22:52",
+      "DATE DE LA LIVRAISON": "29/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-18T20:52:25.000Z"
+  },
+  {
+    "id": "recYcIeEO5sT8eRBu",
+    "fields": {
+      "DATE DE LIVRAISON": "2024-10-16",
+      "NUMERO DE COMMANDE": "CMD1741463664238",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "3M3",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "AUTRES REMARQUES": "CONTACTER LE CLIENT AU DEPART DE LA MARCHANDISE ",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "LIVREE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "TARIF HT": 38,
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 11,
+      "Clients": [
+        "recbesytJdyL8wfN7"
+      ],
+      "Chauffeurs": [
+        "Yahya"
+      ],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2024-10-15T11:35:13.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "rec7RQoLp9PmekrfT"
+      ],
+      "ADRESSE DE LIVRAISON": "56 AVENUE OUDINOT\n",
+      "STATUT DE LA LIVRAISON": [
+        "LIVREE"
+      ],
+      "TELEPHONE DU CLIENT": "+33616404835",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "PRENOM DU CLIENT": "CDL OUDINOT",
+      "NOM COMPLET DU CLIENT": " CDL OUDINOT",
+      "BÂTIMENT": "CENTRE DE LOISIR",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "ARTHUR",
+      "DATE DE MISE A JOUR COMMANDE": "2025-03-08T00:49:47.000Z",
+      "DATE DE LA COMMANDE": "15/10/2024 - 13:35",
+      "DATE DE LA LIVRAISON": "16/10/2024",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": [],
+      "CHAUFFEUR(S)": [
+        "recOJXIE0zjz0nqP9"
+      ]
+    },
+    "createdTime": "2024-10-15T11:35:13.000Z"
+  },
+  {
+    "id": "rechM9ax74mnCDfHA",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-30",
+      "NUMERO DE COMMANDE": "CMD1750451481263",
+      "OPTION EQUIPIER DE MANUTENTION": "1",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "CRENEAU DE LIVRAISON": "12h-14h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "Clients": [
+        "recdwy47eEukZH238"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "rec5sEy0PUUG9nlXg"
+      ],
+      "DATE DE COMMANDE": "2025-06-20T20:31:24.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recnSDPQi105VeKH0"
+      ],
+      "ADRESSE DE LIVRAISON": "12 Allée Circulaire 93600 Aulnay-sous-Bois\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "01 60 14 02 58",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Adam",
+      "PRENOM DU CLIENT": "Sam",
+      "NOM COMPLET DU CLIENT": "ADAM Sam",
+      "INTERPHONE/CODE": "Sam",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Blas",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-20T20:31:27.000Z",
+      "DATE DE LA COMMANDE": "20/06/2025 - 22:31",
+      "DATE DE LA LIVRAISON": "30/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-20T20:31:24.000Z"
+  },
+  {
+    "id": "recimYbC2w3nPnbBx",
+    "fields": {
+      "DATE DE LIVRAISON": "2024-10-03",
+      "NUMERO DE COMMANDE": "CMD1741463669777",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "10M3",
+      "CRENEAU DE LIVRAISON": "18h-20h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "ANNULEE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "TARIF HT": 0,
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 13,
+      "Clients": [
+        "rec2AvXuH1LF5ilmI"
+      ],
+      "Chauffeurs": [
+        "Yahya"
+      ],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2024-10-27T04:02:53.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recLIWNO9MeivOXMH"
+      ],
+      "ADRESSE DE LIVRAISON": "19 BIS BVD JEAN MONNET 94360 BRY SUR MARNE\n",
+      "STATUT DE LA LIVRAISON": [
+        "ANNULEE"
+      ],
+      "TELEPHONE DU CLIENT": "+33911335000",
+      "TYPE D'ADRESSE": "Professionnelle",
+      "NOM DU CLIENT": "TRUFFAUT ",
+      "PRENOM DU CLIENT": "BRY",
+      "NOM COMPLET DU CLIENT": "TRUFFAUT  BRY",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "AUDREY",
+      "DATE DE MISE A JOUR COMMANDE": "2025-03-08T00:49:58.000Z",
+      "DATE DE LA COMMANDE": "27/10/2024 - 05:02",
+      "DATE DE LA LIVRAISON": "03/10/2024",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": [],
+      "CHAUFFEUR(S)": [
+        "recOJXIE0zjz0nqP9"
+      ]
+    },
+    "createdTime": "2024-10-27T04:02:53.000Z"
+  },
+  {
+    "id": "recjhcdSZwO8AkPVS",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-27",
+      "NUMERO DE COMMANDE": "CMD1750116072830",
+      "OPTION EQUIPIER DE MANUTENTION": "1",
+      "CATEGORIE DE VEHICULE": "6M3",
+      "CRENEAU DE LIVRAISON": "10h-12h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "Clients": [
+        "recTKfP0kqiR4D3UP"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "recBN0zhysFhX9tCN"
+      ],
+      "DATE DE COMMANDE": "2025-06-16T23:21:15.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recio5dLx1dXduuXX"
+      ],
+      "ADRESSE DE LIVRAISON": "88 Avenue des Champs Elysées 75008 Paris\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "05 64 96 84 13",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Zaboun",
+      "PRENOM DU CLIENT": "Zabouza",
+      "NOM COMPLET DU CLIENT": "ZABOUN Zabouza",
+      "INTERPHONE/CODE": "Egyptair",
+      "ASCENSEUR": "Oui",
+      "ETAGE": "1",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Simon",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-16T23:21:18.000Z",
+      "DATE DE LA COMMANDE": "17/06/2025 - 01:21",
+      "DATE DE LA LIVRAISON": "27/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-16T23:21:15.000Z"
+  },
+  {
+    "id": "recm1OVWTKbsxH84F",
+    "fields": {
+      "DATE DE LIVRAISON": "2025-06-30",
+      "NUMERO DE COMMANDE": "CMD1750350402441",
+      "OPTION EQUIPIER DE MANUTENTION": "2",
+      "CATEGORIE DE VEHICULE": "10M3",
+      "CRENEAU DE LIVRAISON": "18h-20h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "EN ATTENTE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 1,
+      "Clients": [
+        "recxkSORxB4KEYSLw"
+      ],
+      "Chauffeurs": [],
+      "Magasins": [
+        "rec5sEy0PUUG9nlXg"
+      ],
+      "DATE DE COMMANDE": "2025-06-19T16:26:43.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "rechKvNiEXfbsqTJf"
+      ],
+      "ADRESSE DE LIVRAISON": "91 Boulevard Lefebvre 75015 Paris\n",
+      "STATUT DE LA LIVRAISON": [
+        "EN ATTENTE"
+      ],
+      "TELEPHONE DU CLIENT": "01 91 91 91 91",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "Blas",
+      "PRENOM DU CLIENT": "Dams",
+      "NOM COMPLET DU CLIENT": "BLAS Dams",
+      "INTERPHONE/CODE": "Aucun",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "Simon",
+      "DATE DE MISE A JOUR COMMANDE": "2025-06-19T16:26:46.000Z",
+      "DATE DE LA COMMANDE": "19/06/2025 - 18:26",
+      "DATE DE LA LIVRAISON": "30/06/2025",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": []
+    },
+    "createdTime": "2025-06-19T16:26:43.000Z"
+  },
+  {
+    "id": "recs2ZeUEEWdTxVs7",
+    "fields": {
+      "DATE DE LIVRAISON": "2024-10-25",
+      "NUMERO DE COMMANDE": "CMD1741463673329",
+      "OPTION EQUIPIER DE MANUTENTION": "0",
+      "CATEGORIE DE VEHICULE": "3M3",
+      "CRENEAU DE LIVRAISON": "07h-09h",
+      "DETAILS SUR LES ARTICLES": "\n",
+      "STATUT DE LA LIVRAISON (ENCART MYTRUCK)": [
+        "LIVREE"
+      ],
+      "RESERVE TRANSPORT": "NON",
+      "TARIF HT": 38,
+      "COMMENTAIRE MYTRUCK A L'ENLEVEMENT": [],
+      "NOMBRE TOTAL D'ARTICLES": 12,
+      "Clients": [
+        "recMZ346neeICObym"
+      ],
+      "Chauffeurs": [
+        "Yahya"
+      ],
+      "Magasins": [
+        "recc1nE9KB0WVIuF2"
+      ],
+      "DATE DE COMMANDE": "2024-10-23T10:29:13.000Z",
+      "STATUT DE LA COMMANDE": [
+        "Confirmée"
+      ],
+      "Renseignements prestations (livraisons)": [
+        "recxNVPLDuE075RRE"
+      ],
+      "ADRESSE DE LIVRAISON": "18 RUE ROBERT SCHUMAN 94350 VILLIERS SUR MARNE\n",
+      "STATUT DE LA LIVRAISON": [
+        "LIVREE"
+      ],
+      "TELEPHONE DU CLIENT": "+33759244273",
+      "TYPE D'ADRESSE": "Domicile",
+      "NOM DU CLIENT": "ALILAT",
+      "PRENOM DU CLIENT": "IRIS",
+      "NOM COMPLET DU CLIENT": "ALILAT IRIS",
+      "BÂTIMENT": "0",
+      "ASCENSEUR": "Non",
+      "ETAGE": "0",
+      "PRENOM DU VENDEUR/INTERLOCUTEUR": "RAPHAEL",
+      "DATE DE MISE A JOUR COMMANDE": "2025-03-08T00:50:08.000Z",
+      "DATE DE LA COMMANDE": "23/10/2024 - 12:29",
+      "DATE DE LA LIVRAISON": "25/10/2024",
+      "COMMENTAIRE MYTRUCK A LA LIVRAISON": [],
+      "CHAUFFEUR(S)": [
+        "recOJXIE0zjz0nqP9"
+      ]
+    },
+    "createdTime": "2024-10-23T10:29:13.000Z"
+  }
+]
