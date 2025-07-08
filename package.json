@@ -31,6 +31,7 @@
     "extract": "ts-node scripts/extract-airtable.ts extract",
     "migrate:data": "ts-node scripts/extract-airtable.ts migrate",
     "migrate:data:new": "ts-node scripts/migrate-from-airtable.ts",
+    "migrate:extensible": "ts-node scripts/production/extensible-migration-system.ts",
     "setup:dev": "npm run db:reset && npm run db:seed",
     "debug:airtable": "node scripts/debug-airtable.js",
     "debug:airtable:extended": "node scripts/debug-airtable-extended.js",

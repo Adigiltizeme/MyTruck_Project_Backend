@@ -16,23 +16,23 @@
           "id": "att77DHXVbSwlWBdW",
           "width": 507,
           "height": 270,
-          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/HOO9QErUM9ubb9Uc27eqaw/MbbWjwNdK7CUOKvT_kgfOlOAPI8KrqQtSSDBa1BYzBPsW34J8BO5jYx-E_ZQ1n9TNmAlI4_EoMbpqfrXYd_IVfFgk-RNtT1exvrLjWH30x1R87oqAvFd-rPYs54H3SyCNMdtHGs0YfMa7IS3wZANQw/TOuABMlIDJF63Q3cJCPPVYHORBxcr0JePOrCw_1rgkk",
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/m4QaQMJUqRxjkY4KELGn7w/Qm_LX-L7eTItPllauOcbsvvFx14NgrizBSPnAqJ8_wETKMKGa3DMpCU1tioipXvN7jF27CsQsT2K53sSJlzKCtiM5OuUrs5ChWsc403kNUq6qHnAIp_KX_juJXxHWtvZBVi6XwJ_-5gK0LzIgchrlg/RsixspNXopIeAsJ0P84hXohXyfVkuxoa7kdf_468l5A",
           "filename": "myTruck2.jpg",
           "size": 26367,
           "type": "image/jpeg",
           "thumbnails": {
             "small": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/0puDVVOCiwhHn2I7GPt-ow/xUDgmGC4MP9TCf7jlYNeHN7jOjnsCjWM8kXsWKG0ZcCAtZERzxVa2a95YGQARa_9YhXK8uKaWob0uOmQLHo_5Tm46rdVkL7eNbX3LGhKzz5UheB9__4LmZHGdNsPvTOKxtsgRIhhyW2Q_LCfKX1B2Q/UsmKQkoPzr2qxLtoTID_J2aIHcbu7GIIuhqexwWtP3Y",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/v5GOhQRAb71Odmi8XYSR7g/wpc2l9Zxn5z2z9LSfDxkp7uA-pyXcUP9m08FKZYkT4A3GemFvrF1okvwXMP-MU3o5s4U5T1rurkqX4D0Z8R5afVexXOAAm9Bow6Znd9bSoMmmdcxuNK48Sd5BQM5LTjwCMLxAdjV3eC4kJ8_HACumQ/ldOP7CHoqdzOPs0hMMopaOIaJbgBKdJt0aQABOBQ8Ec",
               "width": 68,
               "height": 36
             },
             "large": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/x8lPaAMe8wmqdtRzS3P8kA/u506dMevxu5hbb39z24wtyQ7WzOcyGGMQH-KE31VdxIsk8nJDGLf5tdvkeDHIixH1aQnRFSd548nDguDn5pvrPOPtZDd0hRyp_l69rgzypvIqbFS2E7d-hSSXzmvq59i5zcFy_tocNJDOQfK8fSHTA/6Kv-pyI0oxJcyEUfZ4TarsCOfU-BxDXPFAzG4hT-xBw",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/-vHw-U1ruCWzcmrjxeSolw/hTdDXkT_-8yyKJXNAcZRZ9DE8uXtWQdh2EcwNMu26Z4wkLLomKnpuGoe6yOq0hmECndbmGBCQyGqDe-LkFptiFEJKU3oWk9B6q5i5FV7j4xjg9WO7YDoCbSg1LDCgzRu479LwdFYo5Juo5ovkRpzZw/BX07h1WaX9T3A0W1KvKXn51aq8NFuhJUH9Ze3d_t17w",
               "width": 507,
               "height": 270
             },
             "full": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/NbPwnRqa6WIFIl52CxfeIA/WotWVso2dosQPnZ7jbjrdu93bkkPZvlNpuzaY-8Nj0GlbxFiaG_rqm9DBcB370LhIgPHx4klGL8a4VD-TW06Ak-DK7_2w28EvGwTuSoktWH8WEp-dZ76WGrfrn0LimnuxOUwCsQb4P_gUSdltzSxJA/1uPISwYDjHdw17pJOXzRu9g79RB8ogMeohgs0L5nTPk",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/7D3AB47AlYQsB6Fg37oAZw/dzE3l6Ztwv6qU5EYY1DeKvq-jcMv48ARlkup0TN36XkwYughe9maD1hHYEDVDBygqb8V_KtqUdl5WDHrv3kpxuvH_DYdPBqzKRJs42gJ63ckrhA7ntS4BoTx7r_rmQVSI8HBeqOmFeqPRwvMab-ikA/wnPE-fT7g8hDwUZgLdd3-sepbrGa332RF_GkCn6Jpn0",
               "width": 507,
               "height": 270
             }
@@ -76,6 +76,14 @@
     "createdTime": "2025-06-18T21:51:22.000Z"
   },
   {
+    "id": "rec633sa1cRmHW2RH",
+    "fields": {
+      "NOM DU MAGASIN": "mag_demo8",
+      "ADRESSE DU MAGASIN": "Adresse non renseignée"
+    },
+    "createdTime": "2025-07-04T22:57:24.000Z"
+  },
+  {
     "id": "recBN0zhysFhX9tCN",
     "fields": {
       "NOM DU MAGASIN": "Truffaut Boulogne",
@@ -95,23 +103,23 @@
           "id": "attWOe3aMwd7mOFyc",
           "width": 5620,
           "height": 3747,
-          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/UjoQaC9LhPmNF48HhxGA6A/6bGn54XT5PgU8y4uV39Avm_QBLXHfPdJ5DUdi6xrggHzwLV9oHIKKpBMHaA4L2_eT40DZhzOYi6HfrfNfjwsPr5AFyuZRLX5umPSZfbS6gvHfw0T6T-g5Sr1F8TgRI06q7XjqIhICPZnRAXSq7zRwukFD_33D0y4dtXCh28mnMWfxZuhoAQE7RDpIMqEdNzZ/3G-TxbiqvkzazEszFM3kGCXuyaKqog4UR2uNJET3GMQ",
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/fhB2SUblWoi_25Wz7MFsvw/uIiZWWSTpdvAuKDk3QuCriJL0hOSil_Fk4PWtpfx107gnWJ7ExTfFI-mi7I73E0fIiGGE8BAQxFCkfCCDN-oyWwjtAmbC8poPoC8LM13KD4mXAUgce1krTUQVoV8sn7k5pmkbiHRdjOWh5BjwT76k_sCTX7AmNB_vVGaMh-mZ9YUkJQxfJWV5VnLLcK31Y2C/3QOFZafgDSYxviw0u1MMeY74Q1CeWQfGl8mfS3qQ4fg",
           "filename": "ACT-Saison-jardinage-1.jpeg",
           "size": 9223132,
           "type": "image/jpeg",
           "thumbnails": {
             "small": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/VZTcz0op2uTdb978K9lmeQ/x7GrputIATYAqnWIStgsT25wDjFiS3TzgOrEfU19m8nufCPcc-eqA0UutOdpffIenQ_cq6v7qx1TXCxJbnJT7O3ymsahrlvQegL0bMaUIubcHSS-yRDdOVkF28eFxXqxCrFnpX0cg-DgW-5b3O260Q/pB-1J09Nj-wLJa7qy8S8rueS5CXa4EZl9aeGrCSfF-s",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/a66CaqgFUIpBN_79RHZKPw/KgniqKvNjRyfncEpZqCgjhL0lnGbiejVrd0LvAH7X8nlN7i5C-6NckURPoWN92MVzxec7vFS5Wh4NCh30vQtcAwTQogRxiKCa8p-Ej2Z-FINJTZYq5o4d1BnVMEjHsiw2Eq5zAEdiM6GIYcP2Ogj4g/deZ8V5EAXe8_y0G8cOfDIkwZSdNzMkO6dexB6MLanC8",
               "width": 54,
               "height": 36
             },
             "large": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/mQKRleSsT9RwAItqBqZUBw/sRaLo6Z-iPUZmY8Evk5oDiynn8f-k8jjxpKo-la5NGZzF7vSNw93KPCpIZsK0HaAgx78x7QLXh-njDkmBhpggalT5efNYb8zG_WcBVMaU0tpDvSqrRG_rwWsZoqhz4rHsO8_HbdqRyW_RhG1Odej8Q/zI842xTsqFtlt8giFXu1RoCPOH6-EN1F9Z4T7sRmX84",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/x8jY88PRflLrEsEQlcC63g/sJGrIQe8_DDFeeY6rAWR28v9M0nmY7pkgpfeTubYZmslU4pznzFysJgDM_dWRakG2yfws2d0VDsFSH2aNUquLMvlDUdyyzsuBF9qxcStY2_SgSDPfJD_kFKm4uIEHajRzs4AOfigNiLejncFla5WBA/ruLVdeoSB4at-Q3zXyhlJtGTuJMaHnnGR7BDGrqIk6k",
               "width": 768,
               "height": 512
             },
             "full": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/sc89WM1ypuEYE1vXtylQVg/FeSK4IIVRMLKZdA67qgxx5hwLx2g9brod6PDei1p4ueypOCj7Nu8F9kr4kIUmnRdWE7IPxQbDJwTwqrLVLhhUA008lQOIW0ydqF13g7d-kmRKQ5Zh_D8mpP4bFNHUdHGtmAc_ME2viqxYVqBr01fMQ/buqsDpNt--mzQJm3LCWjuU01tXhHCMua5BXZXPIn-fk",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/EHvxfnoUxzdi2l7iQE9hSQ/B0XCCDpjQUpG5q4TkhjYBfUvV56uJXDARi_igq8KCEIJ1Xdw-9R2InuxKjRDbD-pL08_GVdEHkAvAJHbff4kbpllAnAUQ46YTHZhXNTgCQdYXhVR2xKVAiRXZa8_eW4PdLNEjqL2X0RQbewYgKxOxw/lYv7MGB-AyfSXBs1i5WwJx5w7xTZPUzeryy-GVMVWDA",
               "width": 3000,
               "height": 2000
             }
@@ -177,23 +185,23 @@
           "id": "attO2swqcpvwVQB1u",
           "width": 225,
           "height": 224,
-          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/HTf3KvNuKEY6Uvhw2JqJ_g/zYINoEiCYq9ERYPX7aKqFO4kfy-A5DJ5v0tIoH33QOhwUwLz6fXWeWW7SFD4D8uxXuCavMhEd_q798_QGOBBk-tSKxa3lkT8Z_yzKL5YOaKCcWrQ9dO5B70Yy5H_q3JaQrUWigsyrNJppGn_aeWg34gwDS4aA_3mrkH038zCSxw/2q7IML56kOdyRNcgOCOG4ZxEc8aqDPHvJ2i-tSJJoUU",
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/_9nxeBdTEzNcC2hdPFfzDA/CvtCevC_ns-KpIOD2pZ3q00One_yiWhxnl3_BG4RJiPX2zmgpQr-Yq9-VAvyKE87P5VbS6yO0Dx2A8CArN5And2YgHhSJMMyZgAfX-Fgz8ofV0Sb6E_9_ex6bm8X5_esdVoiNvkIjeBK4dnKyeB-RIbCQ1-3mI0ZyxbT-p6LBtA/V7mJ8Zcu5bGNo189f-rwQ-YV5Mbwkoa-y90BefGCaYg",
           "filename": "truffaut_bry-s-marne.jpeg",
           "size": 13877,
           "type": "image/jpeg",
           "thumbnails": {
             "small": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/W-2CWAMFkb6LvVYZXfcxQg/A2pVp0dcTU2fB2kY-mhZB7nUPUNqJm50008BJ69gLYXq_rsssp7DfJYhB3uGQ5V7zJ3sulicIZH8paWuJxiakV6Q9-MvXfYoBAYP-BDpTtwoIeP3rQGwl-XZ3aTUYDuDHCcLRiTd7x5UT0TJERtjhw/Ww5NkxHh6Bc35e2vc0OwQJ46keSQwL3qH5cirXuxU6Y",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/7N8TNw1e3-ZtJzkOItycYw/_JevQ2BQm3JS7QkTGYwO_z54sq0yp6aPxf5jxg4Q_e3suaOh3NKhMe3miwwaFqDog1nuWS2uTjp0FyUsq2R1m3YDlm4Ve76GkXUx4TZX7gDvKCU1EiGDrG4g9CK33gtmBp2S_R51wDDiBpNONootHg/VtHyRjiuVmGoLZQvecGwqvgtGQ4tkMO4nxcCP8rXxNM",
               "width": 36,
               "height": 36
             },
             "large": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/U4_zefSbUM6eLXDCD0zAvQ/tA_0UZjIHIuyU6Xxp6yIi0nRk3ULdJau9KOFW2Wz1p2GfF0XtUyiLExgpZsgviesQ77yxRMBthYV5hF51WXJg07tk4hFvjpeHe3zBPX3vvT6rBvOPHrohAxS7vezm8qTd99RdUgrqOz2uQsWo0hVSQ/L4oOgtj2Q2ydcrvxwD0vXP7N-V-PEAxN0KuDi2KJAzQ",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/y_x2wuitCnKLvNv2-ylLIQ/F6anRWmJkbH6cgsUxKmSTxf0KYU6IvohkveFiFiXZfUrc3bVEECSDtqy3dqOBkfoNmAcanNRgPkPyJ4Qbh1pX3iNatysRYsTJmpEYWsZLoATALOl8RHGUeUYPyS2pAFQM1lZX03fhspnXCiXBvQYoQ/xeqCG7Y0wTQ2iQlI7lm2VdYOvQhCy7oSb6M-2KIF1Gs",
               "width": 225,
               "height": 224
             },
             "full": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/NiR9EhgRoMWomqRjDdUJ6w/ElUI607Tmg6apOF7LDNFkDpW5gs-US_pPmHuvsMZ6Jit652cPt2sWzopKJ5r_skI1cvIIwQGRvvRXsEUuzXHlEWKPDoae9FzdCp7knELMJd6F35Wzf2fuuyxzT08a9miNXSxM2F6UXIpjOFzIq9IEw/Xs80sUnyYNfL_6BC6s8vMGSVVbl5Ik-87YeBoMIS7W4",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/exkGArVXgwM--SCC6c4HdQ/6CQwo8CU_Yamye4S5u_qY5DSoCvBR1PpQaGv3GsjVXHP3ueOifqu0HCiVsHuhYX2bQesuOSUt3QAV3pP1Ue7_jV_1LR47nFfleePuzbfn0sGAEcJQJ4o6G6OoBB4EmqhX73INOcnLV5mEqj9q2k_hw/Hj0G725idSEohGjP_c8ROHZNXB0LMNaINnFbn78ZTgU",
               "width": 225,
               "height": 224
             }
@@ -218,6 +226,14 @@
       ]
     },
     "createdTime": "2024-10-08T12:08:23.000Z"
+  },
+  {
+    "id": "recen8Libr0qMv6kx",
+    "fields": {
+      "NOM DU MAGASIN": "mag_demo4",
+      "ADRESSE DU MAGASIN": "Adresse non renseignée"
+    },
+    "createdTime": "2025-07-04T22:57:27.000Z"
   },
   {
     "id": "reci8VL1IE4KULzyr",
@@ -245,23 +261,23 @@
           "id": "attNH5t51zby0cdKj",
           "width": 943,
           "height": 473,
-          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/5jC1TKDiE_97Np6cHFgmHg/cdot_yvnvA5fhkIxUH-iRvuiwSl6OIv5GUSNgJ6SHtvDJZAuQha9T3sytGhq2djn9ZGlPHO05OU2ISV2hKIzgF0xVa95y8uywBlND3AwpTkcVu7qTycAJu4YgfdMSkKDEpI4eykiZIBxFlRr-6-OjlmtxTpqDTQ_a_dkoTxc66k/jj_BzZEPF16IlFrsNp-DjZvOthBTc8913lYkwXrZD-k",
+          "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/ARJdi9278ELNsTU7N-P3Zw/-0QXUS0XM0IHC93bA6nzVyAp8syIY4fzC8o6DV3RVj34zaxTj7PjFQQBJhmd7volZIULg--x4OglBw4dfqhlL7Jm24ASHnmMp9z5jt442CdKCQnbaJ0XKttXhZAZCrSSbyvRRqv-q6mPRT7FbE7_LtMZQpq9i3NV-pmQHp1VfLE/C6cmJ1vd7J400PNRWvRc6c9HAzdHZcy4lP4sJO4Gzjk",
           "filename": "truffaut_facade_mag_2021_2.jpg",
           "size": 193568,
           "type": "image/jpeg",
           "thumbnails": {
             "small": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/O19j6UoAdLNI4IgPjxsWNQ/OGSxO9kQVcEkKV8Wo_tX8DqhdGqAJ10G4KdR27RVpDVNO02UbOEwaN0qGaUkFhMZh_fdQWB_OTYXoiNM66N1-YQvuOnQJ-RktdZ8Uzj3_aPVZmk3C5Yy7OE_qtw1gAWYfEuiw2F2swhOEXmDBHKygA/KULUxq0Gy0buRZZwG9hjjw-ntrtUO50wJ3OaWaSwO04",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/e9bYD20aViDwSbZHmfhU0A/U607pYyy4Ok_NDYqAdWwuiqTlbC2VEuHcaRFhLFx3aNWqfPrduYPjvbfduQ33-ewiRvxXcTN65PMUkdYBTEL8PLb9x3cdYGaOVxSP9IBjuH3_GDsEtV7LQlIm-CuMizqJDO7rkXv2mc5nexZwAmPig/qJT6-sQqMOoJdGpf0QGT9mRHbQN265-ySqcu-S1JPi0",
               "width": 71,
               "height": 36
             },
             "large": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/TtbXJPW-g_-zidVMx9euMg/FPzcmzWD_qlwgRxtW43MSDTJnhB0SmZzMBeso8E_Nuy5a3ubv1ZgJFsTH2NBNPtsXnAYiL4LrVMBvISzEphxw15ZaF5DAqgENo5ObFrgVIfI7xgweiR-De9LsDA7KZE89s5SPlMwcMfz2pBtbU1ijQ/v7Re2xbsUDkKIqrLP2mFS9ch-OkRD3DBfsqXsn0qZeQ",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/GUP2z5dh8qL4tvv7FGOx_w/PvAx8jGlELNEkRk35dlAeOTw0tzZFctwbNyGq9mpxQBnUjyegee5G2A--LGdszckWZl-5XJHCS70w6dG0YYoabFFQmWEze5j6LTHbjrsRxLloH9u1FCc0LTIaovD1irpJVI96cSZUyZSnLQ94mmbMg/eWEpFACrD83GkbZMknr7VFjl1BhpvtCr06Iz9DEd4R4",
               "width": 943,
               "height": 473
             },
             "full": {
-              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1750550400000/zmGgwzuPLtl3P-HJLQQlcg/bCl-P0y6DtVwMN8AtS0umlc8qtZiB8uS0Uv--HNd2ZaQPzi7PX8Pq1wVZqfx5uYbZWxVID-_Aw36csBOAoYaP3Sa0hznnrG1zTCXL9iARzFSacVHxYA6DIXVpWf-ek3QurPV3OkhYrH__INewJk4Qw/9IR0LJvMilzyv0Iu4ct66r6Y24f3vM9KxizPNrZ3JJo",
+              "url": "https://v5.airtableusercontent.com/v3/u/42/42/1751853600000/Vu1fOKLN1zxqojBYS0ZcsQ/ZU81rqMVVlHJIvBmZyfbZl8k8eP7tS0la5JjMaTcpDL4mOHrK94cVuQzu_rHnQBhl9F7bszD43oG94Z1hQO1aS4gFurdRroYmanGhyMFhzSHGzslPiN3H-BhDVtPSkjIDf010W_QfOLtJC2NY6EadA/AzixkHMbfqpzkbjQVfVM_vwexQQOwg_Gy3x-RXJNniI",
               "width": 943,
               "height": 473
             }
@@ -274,11 +290,6 @@
       "Renseignements prestations (livraisons)": [
         "recdi572jV06hQu5T",
         "reclnKV5mEi9gQb7I"
-      ],
-      "Copie de Factures": [
-        "recuPcAVcO2Cme4gX",
-        "rec3emGEuv6adm0uG",
-        "recX3rgS7JiffMpLU"
       ]
     },
     "createdTime": "2024-01-11T15:10:24.000Z"

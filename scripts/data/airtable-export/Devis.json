@@ -4,9 +4,7 @@
     "fields": {
       "NUMÉRO DE DEVIS": 2,
       "STATUT": "Validé",
-      "MAGASIN": [
-        "reci8VL1IE4KULzyr"
-      ],
+      "MAGASIN": "Truffaut Ivry",
       "DATE DE DEVIS": "2024-01-17",
       "Date de création": "2024-01-17T21:29:03.000Z"
     },
@@ -17,9 +15,7 @@
     "fields": {
       "NUMÉRO DE DEVIS": 3,
       "STATUT": "Annulé",
-      "MAGASIN": [
-        "reci8VL1IE4KULzyr"
-      ],
+      "MAGASIN": "Truffaut Ivry",
       "DATE DE DEVIS": "2024-01-17",
       "Date de création": "2024-01-17T21:34:47.000Z"
     },
@@ -30,9 +26,7 @@
     "fields": {
       "NUMÉRO DE DEVIS": 1,
       "STATUT": "Validé",
-      "MAGASIN": [
-        "reci8VL1IE4KULzyr"
-      ],
+      "MAGASIN": "Truffaut Ivry",
       "DATE DE DEVIS": "2024-01-17",
       "Date de création": "2024-01-17T20:42:16.000Z"
     },
