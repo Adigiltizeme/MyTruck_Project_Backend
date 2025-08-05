@@ -32,6 +32,7 @@ model Magasin {
   adresse             String
   telephone           String?
   email               String?
+  manager             String?
   status              String                @default("Actif")
   categories          String[]
   airtableId          String?               @unique
@@ -55,6 +56,7 @@ model Chauffeur {
   telephone          String?
   email              String?
   status             String                 @default("Actif")
+  role               String                 @default("Chauffeur")
   longitude          Float?
   latitude           Float?
   notes              Int?
@@ -187,6 +189,8 @@ model Article {
   nombre     Int
   details    String?
   categories String[]
+  dimensions  Json?
+  canBeTilted Boolean  @default(false)
   commandeId String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -203,7 +207,8 @@ model Photo {
   type       PhotoType
   commandeId String
   createdAt  DateTime  @default(now())
-  commande   Commande  @relation(fields: [commandeId], references: [id])
+  updatedAt   DateTime @updatedAt
+  commande   Commande  @relation(fields: [commandeId], references: [id], onDelete: Cascade)
 
   @@map("photos")
 }

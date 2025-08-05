@@ -104,6 +104,52 @@ export class CreateClientDto {
     typeAdresse?: TypeAdresse;
 }
 
+export class ArticleDimensionDto {
+    @ApiProperty({ example: 'art-123' })
+    @IsOptional()
+    @IsString()
+    id?: string;
+
+    @ApiProperty({ example: 'Palmier Kentia' })
+    @IsString()
+    nom: string;
+
+    @ApiProperty({ example: 150, required: false })
+    @IsOptional()
+    @IsNumber()
+    longueur?: number;
+
+    @ApiProperty({ example: 60, required: false })
+    @IsOptional()
+    @IsNumber()
+    largeur?: number;
+
+    @ApiProperty({ example: 180, required: false })
+    @IsOptional()
+    @IsNumber()
+    hauteur?: number;
+
+    @ApiProperty({ example: 15.5, required: false })
+    @IsOptional()
+    @IsNumber()
+    poids?: number;
+
+    @ApiProperty({ example: 1 })
+    @IsNumber()
+    @Min(1)
+    quantite: number;
+}
+
+export class ArticlePhotoDto {
+    @ApiProperty({ example: 'https://res.cloudinary.com/...' })
+    @IsString()
+    url: string;
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    file?: any; // File object (ignoré côté Backend)
+}
+
 export class CreateArticleDto {
     @ApiProperty({ example: 5, description: 'Nombre d\'articles' })
     @IsNumber()
@@ -128,6 +174,46 @@ export class CreateArticleDto {
     @IsArray()
     @IsString({ each: true })
     categories?: string[];
+
+    @ApiProperty({
+        type: [ArticleDimensionDto],
+        required: false,
+        description: 'Dimensions détaillées des articles'
+    })
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ArticleDimensionDto)
+    dimensions?: ArticleDimensionDto[];
+
+    @ApiProperty({
+        type: [ArticlePhotoDto],
+        required: false,
+        description: 'Photos des articles'
+    })
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ArticlePhotoDto)
+    photos?: ArticlePhotoDto[];
+
+    @ApiProperty({
+        type: [ArticlePhotoDto],
+        required: false,
+        description: 'Nouvelles photos à uploader'
+    })
+    @IsOptional()
+    @IsArray()
+    newPhotos?: ArticlePhotoDto[];
+
+    @ApiProperty({
+        example: false,
+        required: false,
+        description: 'L\'article peut-il être incliné'
+    })
+    @IsOptional()
+    @IsBoolean()
+    canBeTilted?: boolean;
 }
 
 export class CreateCommandeDto {
@@ -252,6 +338,53 @@ export class UpdateCommandeDto extends PartialType(CreateCommandeDto) {
     @IsOptional()
     @IsEnum(StatutLivraison)
     statutLivraison?: StatutLivraison;
+
+    @ApiProperty({
+        example: ['uuid-chauffeur-1', 'uuid-chauffeur-2'],
+        required: false,
+        description: 'IDs des chauffeurs à assigner (via PATCH /commandes/:id)'
+    })
+    @IsOptional()
+    @IsArray()
+    @IsUUID(4, { each: true })
+    chauffeurIds?: string[];
+}
+
+export class AssignChauffeursDto {
+    @ApiProperty({
+        example: ['uuid-chauffeur-1', 'uuid-chauffeur-2'],
+        description: 'IDs des chauffeurs à assigner'
+    })
+    @IsArray()
+    @IsUUID(4, { each: true })
+    chauffeurIds: string[];
+
+    @ApiProperty({
+        example: false,
+        required: false,
+        description: 'Remplacer tous les chauffeurs existants'
+    })
+    @IsOptional()
+    @IsBoolean()
+    replaceAll?: boolean;
+
+    @ApiProperty({
+        example: 'Confirmée',
+        required: false,
+        description: 'Nouveau statut de commande'
+    })
+    @IsOptional()
+    @IsString()
+    statutCommande?: string;
+
+    @ApiProperty({
+        example: 'CONFIRMEE',
+        required: false,
+        description: 'Nouveau statut de livraison'
+    })
+    @IsOptional()
+    @IsString()
+    statutLivraison?: string;
 }
 
 export class CommandeFiltersDto {

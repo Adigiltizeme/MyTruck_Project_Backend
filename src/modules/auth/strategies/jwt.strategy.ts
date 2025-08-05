@@ -58,6 +58,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       secretOrKey: process.env.JWT_SECRET || 'your-secret-key',
+      clockTolerance: 30, // 30 secondes de tolérance
     });
   }
 
@@ -73,6 +74,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         },
       },
     });
+
+    const now = Math.floor(Date.now() / 1000);
+    const exp = payload.exp;
+    const timeDiff = exp - now;
+
+    console.log(`🕐 JWT Validation - Time diff: ${timeDiff}s (exp: ${new Date(exp * 1000).toISOString()})`);
+
+    if (timeDiff < -30) { // Plus de 30s de retard
+      console.error(`❌ Token vraiment expiré: ${-timeDiff}s de retard`);
+      throw new UnauthorizedException('Token expiré');
+    }
 
     if (!user) {
       throw new UnauthorizedException('Utilisateur non trouvé');

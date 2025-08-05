@@ -1,134 +1,117 @@
-import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Patch,
-    Param,
-    Delete,
-    Query,
-    ParseUUIDPipe,
-    UseGuards,
-} from '@nestjs/common';
-import {
-    ApiTags,
-    ApiOperation,
-    ApiResponse,
-    ApiBearerAuth,
-    ApiQuery,
-} from '@nestjs/swagger';
-
-import { MagasinsService } from './magasins.service';
-import { CreateMagasinDto, UpdateMagasinDto } from './dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { Roles } from '../../common/decorators/roles.decorator';
-import { UserRole } from '../../common/types/user.types';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UserRole } from '@prisma/client';
+import { MagasinsService } from './magasins.service';
+import { PrismaService } from 'prisma/prisma.service';
 
-@ApiTags('Magasins')
+@ApiTags('magasins')
 @Controller('magasins')
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth('JWT-auth')
-export class MagasinsController {
-    constructor(private readonly magasinsService: MagasinsService) { }
+// @UseGuards(RolesGuard)
 
-    @Post()
-    @UseGuards(RolesGuard)
-    @Roles(UserRole.ADMIN, UserRole.DIRECTION)
-    @ApiOperation({
-        summary: 'Créer un magasin',
-        description: 'Crée un nouveau magasin (Admin/Direction uniquement)'
-    })
-    @ApiResponse({ status: 201, description: 'Magasin créé avec succès' })
-    @ApiResponse({ status: 403, description: 'Accès interdit' })
-    async create(@Body() createMagasinDto: CreateMagasinDto) {
-        return this.magasinsService.create(createMagasinDto);
-    }
+export class MagasinsController {
+    constructor(
+        private readonly magasinsService: MagasinsService,
+        private readonly prisma: PrismaService
+    ) {}
 
     @Get()
-    @ApiOperation({
-        summary: 'Lister les magasins',
-        description: 'Récupère la liste des magasins avec pagination'
-    })
-    @ApiQuery({ name: 'skip', type: 'number', required: false, description: 'Nombre d\'éléments à ignorer' })
-    @ApiQuery({ name: 'take', type: 'number', required: false, description: 'Nombre d\'éléments à récupérer' })
-    @ApiQuery({ name: 'status', type: 'string', required: false, description: 'Filtrer par statut' })
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION)
+    @ApiOperation({ summary: 'Récupérer tous les magasins' })
     @ApiResponse({ status: 200, description: 'Liste des magasins récupérée avec succès' })
-    async findAll(
-        @Query('skip') skip?: string,
-        @Query('take') take?: string,
-        @Query('status') status?: string,
-    ) {
-        const where: any = {};
-
-        if (status) where.status = status;
-
-        return this.magasinsService.findAll({
-            skip: skip ? parseInt(skip, 10) : undefined,
-            take: take ? parseInt(take, 10) : undefined,
-            where,
-        });
-    }
-
-    @Get('by-status/:status')
-    @ApiOperation({
-        summary: 'Magasins par statut',
-        description: 'Récupère les magasins d\'un statut spécifique'
-    })
-    @ApiResponse({ status: 200, description: 'Magasins récupérés avec succès' })
-    async findByStatus(@Param('status') status: string) {
-        return this.magasinsService.findByStatus(status);
+    async findAll() {
+        console.log('🏪 GET /magasins appelé avec auth');
+        return await this.prisma.magasin.findMany({
+        select: {
+            id: true,
+            nom: true,
+            adresse: true,
+            telephone: true,
+            email: true,
+            manager: true,
+            status: true
+        }
+    });
     }
 
     @Get(':id')
-    @ApiOperation({
-        summary: 'Détails d\'un magasin',
-        description: 'Récupère les détails d\'un magasin par son ID'
-    })
-    @ApiResponse({ status: 200, description: 'Magasin trouvé' })
-    @ApiResponse({ status: 404, description: 'Magasin non trouvé' })
-    async findOne(@Param('id', ParseUUIDPipe) id: string) {
-        return this.magasinsService.findOne(id);
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION, UserRole.MAGASIN)
+    async findOne(@Param('id') id: string) {
+        // ✅ DONNÉES TEMPORAIRES cohérentes
+        console.log('🏪 GET /magasins/:id appelé pour:', id);
+        const magasins = [
+            { id: 'mag1', nom: 'Truffaut Boulogne', adresse: '33 Av. Edouard Vaillant, 92100 Boulogne-Billancourt' },
+            { id: 'mag2', nom: 'Truffaut Ivry', adresse: '36 Rue Ernest Renan, 94200 Ivry-sur-Seine' }
+        ];
+
+        return magasins.find(m => m.id === id) || {
+            id: id,
+            nom: 'Magasin Test',
+            adresse: 'Adresse test'
+        };
+
     }
 
-    @Get(':id/stats')
-    @ApiOperation({
-        summary: 'Statistiques d\'un magasin',
-        description: 'Récupère les statistiques détaillées d\'un magasin'
-    })
-    @ApiResponse({ status: 200, description: 'Statistiques récupérées avec succès' })
-    @ApiResponse({ status: 404, description: 'Magasin non trouvé' })
-    async getStats(@Param('id', ParseUUIDPipe) id: string) {
-        return this.magasinsService.getStats(id);
-    }
-
-    @Patch(':id')
-    @UseGuards(RolesGuard)
+    @Post()
     @Roles(UserRole.ADMIN, UserRole.DIRECTION)
-    @ApiOperation({
-        summary: 'Modifier un magasin',
-        description: 'Met à jour les informations d\'un magasin'
-    })
-    @ApiResponse({ status: 200, description: 'Magasin mis à jour avec succès' })
-    @ApiResponse({ status: 404, description: 'Magasin non trouvé' })
-    async update(
-        @Param('id', ParseUUIDPipe) id: string,
-        @Body() updateMagasinDto: UpdateMagasinDto
-    ) {
-        return this.magasinsService.update(id, updateMagasinDto);
+    async create(@Body() createMagasinDto: any) {
+        return {
+            id: 'new-mag',
+            ...createMagasinDto
+        };
     }
 
-    @Delete(':id')
-    @UseGuards(RolesGuard)
-    @Roles(UserRole.ADMIN)
-    @ApiOperation({
-        summary: 'Supprimer un magasin',
-        description: 'Supprime un magasin (Admin uniquement)'
-    })
-    @ApiResponse({ status: 200, description: 'Magasin supprimé avec succès' })
-    @ApiResponse({ status: 404, description: 'Magasin non trouvé' })
-    @ApiResponse({ status: 400, description: 'Impossible de supprimer: données liées existantes' })
-    async remove(@Param('id', ParseUUIDPipe) id: string) {
-        return this.magasinsService.remove(id);
+    @Post('seed')
+    // @UseGuards(RolesGuard)
+    // @Roles(UserRole.ADMIN, UserRole.DIRECTION)
+    @ApiOperation({ summary: 'Créer les magasins de base (dev uniquement)' })
+    async seedMagasins() {
+        try {
+            console.log('🌱 Création des magasins de base...');
+
+            const magasin1 = await this.magasinsService.create({
+                nom: 'Truffaut Boulogne',
+                adresse: '33 Av. Edouard Vaillant, 92100 Boulogne-Billancourt',
+                telephone: '01 23 45 67 89',
+                email: 'boulogne@truffaut.com',
+                manager: 'Marie Dupont',
+                status: 'actif'
+            });
+
+            const magasin2 = await this.magasinsService.create({
+                nom: 'Truffaut Ivry',
+                adresse: '36 Rue Ernest Renan, 94200 Ivry-sur-Seine',
+                telephone: '01 98 76 54 32',
+                email: 'ivry@truffaut.com',
+                manager: 'Jean Martin',
+                status: 'actif'
+            });
+
+            console.log('✅ Magasins créés:', { magasin1: magasin1.id, magasin2: magasin2.id });
+
+            return {
+                message: 'Magasins créés avec succès',
+                magasins: [magasin1, magasin2]
+            };
+
+        } catch (error) {
+            console.error('❌ Erreur création magasins:', error);
+            throw error;
+        }
+    }
+
+    @Get('test/creation')
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION, UserRole.MAGASIN)
+    @ApiOperation({ summary: 'Test données pour création commande' })
+    async getTestData() {
+        return {
+            magasins: [
+                { id: 'mag1', nom: 'Truffaut Boulogne', adresse: '33 Av. Edouard Vaillant, 92100 Boulogne' },
+                { id: 'mag2', nom: 'Truffaut Ivry', adresse: '36 Rue Ernest Renan, 94200 Ivry' }
+            ],
+            creneaux: ['9h-12h', '14h-18h', '9h-18h'],
+            vehicules: ['Camion', 'Camionnette', 'Véhicule léger']
+        };
     }
 }

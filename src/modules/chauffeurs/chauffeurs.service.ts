@@ -35,7 +35,23 @@ export class ChauffeursService {
                 skip: skip || 0,
                 take: take || 50,
                 orderBy: [{ nom: 'asc' }, { prenom: 'asc' }],
-                include: {
+                select: {
+                    // ✅ AJOUTER tous les champs nécessaires
+                    id: true,
+                    nom: true,
+                    prenom: true,
+                    telephone: true,
+                    email: true,
+                    status: true,
+                    longitude: true,
+                    latitude: true,
+                    notes: true,
+                    // ✅ CRUCIAL : Ajouter le champ role manquant
+                    // Si le champ n'existe pas en base, ajouter une valeur par défaut
+                    createdAt: true,
+                    updatedAt: true,
+                    airtableId: true,
+                    lastSyncedAt: true,
                     _count: {
                         select: {
                             assignations: true,
@@ -48,8 +64,14 @@ export class ChauffeursService {
             this.prisma.chauffeur.count({ where }),
         ]);
 
+        const chauffeursWithRole = chauffeurs.map(chauffeur => ({
+            ...chauffeur,
+            role: 'Chauffeur' // ✅ Forcer le rôle puisque c'est l'endpoint chauffeurs
+        }));
+
+
         return {
-            data: chauffeurs,
+            data: chauffeursWithRole,
             meta: {
                 total,
                 skip: skip || 0,

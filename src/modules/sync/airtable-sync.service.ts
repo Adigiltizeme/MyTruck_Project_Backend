@@ -776,19 +776,23 @@ export class AirtableSyncService {
 
     @Cron('*/5 * * * *') // Toutes les 5 minutes
     async syncCriticalTables(): Promise<void> {
-        const criticalTables = Object.entries(this.syncConfig)
-            .filter(([_, config]) => config.critical && config.direction !== SyncDirection.READ_ONLY)
-            .map(([tableName]) => tableName);
+        console.log('🚫 Sync Airtable désactivée pendant migration');
+        return;
+        // const criticalTables = Object.entries(this.syncConfig)
+        //     .filter(([_, config]) => config.critical && config.direction !== SyncDirection.READ_ONLY)
+        //     .map(([tableName]) => tableName);
 
-        this.logger.log(`🔄 Synchronisation automatique: ${criticalTables.join(', ')}`);
+        // this.logger.log(`🔄 Synchronisation automatique: ${criticalTables.join(', ')}`);
 
-        for (const tableName of criticalTables) {
-            await this.syncToAirtable(tableName);
-        }
+        // for (const tableName of criticalTables) {
+        //     await this.syncToAirtable(tableName);
+        // }
     }
 
     @Cron('*/15 * * * *') // Toutes les 15 minutes
     async syncBidirectionalTables(): Promise<void> {
+        // console.log('🚫 Sync Airtable désactivée pendant migration');
+        // return;
         const bidirectionalTables = Object.entries(this.syncConfig)
             .filter(([_, config]) => config.direction === SyncDirection.BIDIRECTIONAL)
             .map(([tableName]) => tableName);
