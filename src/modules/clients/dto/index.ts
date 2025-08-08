@@ -52,24 +52,6 @@ export class CreateClientDto {
     adresseLigne1: string;
 
     @ApiProperty({
-        example: '75001',
-        description: 'Code postal',
-        required: false
-    })
-    @IsOptional()
-    @IsString()
-    codePostal?: string;
-
-    @ApiProperty({
-        example: 'Paris',
-        description: 'Ville',
-        required: false
-    })
-    @IsOptional()
-    @IsString()
-    ville?: string;
-
-    @ApiProperty({
         example: 'Bâtiment A',
         description: 'Nom du bâtiment',
         required: false

@@ -33,10 +33,10 @@ export enum StatutLivraison {
 }
 
 export enum CategorieVehicule {
-    UTILITAIRE_3M3 = '3M3 (Utilitaire 150kg, 180x125x180cm)',
-    CAMIONNETTE_6M3 = '6M3 (Camionnette 300kg, 240x169x138cm)',
-    CAMIONNETTE_10M3 = '10M3 (Camionnette 1000kg, 308x207x176cm)',
-    CAMION_20M3 = '20M3 (Avec hayon 1000kg, 420, 207, 230cm)'
+    UTILITAIRE_1M3 = '1M3 (Utilitaire 150kg, 100x100x100cm)',
+    CAMIONNETTE_6M3 = '6M3 (Camionnette 300kg, 260x160x125cm)',
+    CAMIONNETTE_10M3 = '10M3 (Camionnette 800kg, 310x178x190cm)',
+    CAMION_20M3 = '20M3 (Avec hayon 750kg, 410, 200, 210cm)'
 }
 
 export enum TypeAdresse {
@@ -68,35 +68,22 @@ export class CreateClientDto {
     @IsString()
     adresseLigne1: string;
 
-    @ApiProperty({ example: '75001', required: false })
-    @IsOptional()
-    @IsString()
-    codePostal?: string;
-
-    @ApiProperty({ example: 'Paris', required: false })
-    @IsOptional()
-    @IsString()
-    ville?: string;
-
     @ApiProperty({ example: 'Bâtiment A', required: false })
     @IsOptional()
     @IsString()
     batiment?: string;
 
-    @ApiProperty({ example: '3ème étage', required: false })
-    @IsOptional()
+    @ApiProperty({ example: '3ème étage' })
     @IsString()
-    etage?: string;
+    etage: string;
 
-    @ApiProperty({ example: '1234A', required: false })
-    @IsOptional()
+    @ApiProperty({ example: '1234A' })
     @IsString()
-    interphone?: string;
+    interphone: string;
 
-    @ApiProperty({ example: true, required: false })
-    @IsOptional()
+    @ApiProperty({ example: true })
     @IsBoolean()
-    ascenseur?: boolean;
+    ascenseur: boolean;
 
     @ApiProperty({ example: TypeAdresse.DOMICILE, enum: TypeAdresse, required: false })
     @IsOptional()
@@ -308,6 +295,16 @@ export class CreateCommandeDto {
     @IsUUID(4, { each: true })
     chauffeurIds?: string[];
 
+    // Remarques
+    @ApiProperty({
+        example: 'Livraison à l\'étage',
+        required: false,
+        description: 'Remarques supplémentaires sur la commande'
+    })
+    @IsOptional()
+    @IsString()
+    remarques?: string;
+
     @ApiProperty({
         example: 'Jean Martin',
         required: false,
@@ -316,6 +313,85 @@ export class CreateCommandeDto {
     @IsOptional()
     @IsString()
     prenomVendeur?: string;
+
+    @ApiProperty({ example: 'Konaté' })
+    @IsString()
+    clientNom: string;
+
+    @ApiProperty({ example: 'Keïta', required: false })
+    @IsOptional()
+    @IsString()
+    clientPrenom?: string;
+
+    @ApiProperty({ example: '+33650545253' })
+    @IsString()
+    clientTelephone: string;
+
+    @ApiProperty({ example: '+33723212524', required: false })
+    @IsOptional()
+    @IsString()
+    clientTelephoneSecondaire?: string;
+
+    @ApiProperty({ example: '9 Rue des Bergeries 93230 Romainville' })
+    @IsString()
+    clientAdresseLigne1: string;
+
+    @ApiProperty({ example: 'Tour 9', required: false })
+    @IsOptional()
+    @IsString()
+    clientBatiment?: string;
+
+    @ApiProperty({ example: '10', required: false })
+    @IsString()
+    clientEtage: string;
+
+    @ApiProperty({ example: 'KK', required: false })
+    @IsString()
+    clientInterphone: string;
+
+    @ApiProperty({ example: true, required: false })
+    @IsBoolean()
+    clientAscenseur: boolean;
+
+    @ApiProperty({ example: 'Domicile', required: false })
+    @IsOptional()
+    @IsString()
+    clientTypeAdresse?: string;
+
+    @ApiProperty({ example: 5 })
+    @IsNumber()
+    @Min(1)
+    nombreArticles: number;
+
+    @ApiProperty({ example: 'Spécial', required: false })
+    @IsOptional()
+    @IsString()
+    detailsArticles?: string;
+
+    @ApiProperty({ example: ['Plantes'], required: false })
+    @IsOptional()
+    @IsArray()
+    categoriesArticles?: string[];
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsArray()
+    dimensionsArticles?: any[];
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsArray()
+    photosArticles?: any[];
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsArray()
+    newPhotosArticles?: any[];
+
+    @ApiProperty({ example: false, required: false })
+    @IsOptional()
+    @IsBoolean()
+    canBeTilted?: boolean;
 }
 
 export class UpdateCommandeDto extends PartialType(CreateCommandeDto) {

@@ -31,6 +31,7 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { UserRole } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
+import { CreateRapportDto, TypeRapport, UpdateRapportDto } from './dto/rapport.dto';
 
 @ApiTags('Commandes')
 @Controller('commandes')
@@ -69,26 +70,31 @@ export class CommandesController {
     @ApiResponse({ status: 400, description: 'Données invalides' })
     @ApiResponse({ status: 403, description: 'Accès interdit' })
     @Post()
-    async create(@Body() createCommandeDto: any) { // ✅ Laisser en 'any' pour debug
+    async create(@Body() createCommandeDto: any) {
+        console.log('🚀 ===== CONTROLLER POST /commandes REÇU =====');
         console.log('📝 ===== CRÉATION COMMANDE DEBUG =====');
         console.log('📝 clientNom reçu:', createCommandeDto.clientNom);
         console.log('📝 clientPrenom reçu:', createCommandeDto.clientPrenom);
+        console.log('📝 clientEtage reçu:', createCommandeDto.clientEtage);
+        console.log('📝 clientInterphone reçu:', createCommandeDto.clientInterphone);
+        console.log('📝 clientAscenseur reçu:', createCommandeDto.clientAscenseur);
         console.log('📝 magasinId reçu:', createCommandeDto.magasinId);
         console.log('📝 Structure complète:', Object.keys(createCommandeDto));
 
-        // ✅ VALIDATION: Vérifier que le magasin existe
-        const magasin = await this.prisma.magasin.findUnique({
-            where: { id: createCommandeDto.magasinId }
-        });
-
-        if (!magasin) {
-            console.error('❌ Magasin non trouvé:', createCommandeDto.magasinId);
-            throw new BadRequestException(`Magasin ${createCommandeDto.magasinId} non trouvé`);
-        }
-
-        console.log('✅ Magasin trouvé:', magasin.nom);
-
         try {
+            // ✅ VALIDATION: Vérifier que le magasin existe
+            const magasin = await this.prisma.magasin.findUnique({
+                where: { id: createCommandeDto.magasinId }
+            });
+
+            if (!magasin) {
+                console.error('❌ Magasin non trouvé:', createCommandeDto.magasinId);
+                throw new BadRequestException(`Magasin ${createCommandeDto.magasinId} non trouvé`);
+            }
+
+            console.log('✅ Magasin trouvé:', magasin.nom);
+            console.log('🚀 Appel service create...');
+
             const result = await this.commandesService.create(createCommandeDto);
             console.log('✅ Commande créée avec succès:', result.id);
             return result;
@@ -178,7 +184,13 @@ export class CommandesController {
                         nom: { type: 'string' },
                         prenom: { type: 'string' },
                         telephone: { type: 'string' },
-                        adresseLigne1: { type: 'string' }
+                        telephoneSecondaire: { type: 'string' },
+                        adresseLigne1: { type: 'string' },
+                        typeAdresse: { type: 'string' },
+                        batiment: { type: 'string' },
+                        etage: { type: 'string' },
+                        interphone: { type: 'string' },
+                        ascenseur: { type: 'boolean' }
                     }
                 },
                 magasin: { type: 'object' },
@@ -210,11 +222,15 @@ export class CommandesController {
     @ApiResponse({ status: 400, description: 'Données invalides' })
     async update(
         @Param('id', ParseUUIDPipe) id: string,
-        @Body() updateCommandeDto: UpdateCommandeDto
+        @Body() updateCommandeDto: any
     ) {
         console.log('🔍 ===== PATCH /commandes/:id REÇU =====');
         console.log('🔍 ID commande:', id);
         console.log('🔍 Body complet:', JSON.stringify(updateCommandeDto, null, 2));
+        console.log('🔍 Body type détecté:', typeof updateCommandeDto);
+        console.log('🔍 Body keys:', Object.keys(updateCommandeDto));
+        console.log('🔍 Est format flat?', !!(updateCommandeDto.clientNom || updateCommandeDto.nombreArticles));
+        console.log('🔍 Est format nested?', !!(updateCommandeDto.client || updateCommandeDto.articles));
 
         // ✅ VÉRIFICATION : Le champ chauffeurIds est-il présent ?
         if (updateCommandeDto.chauffeurIds) {
@@ -409,4 +425,130 @@ export class CommandesController {
         }
         // Admin/Direction peuvent tout modifier
     }
+
+    @Post(':id/rapports')
+    @UseGuards(RolesGuard)
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION, UserRole.CHAUFFEUR)
+    @ApiOperation({
+        summary: 'Créer un rapport d\'enlèvement ou de livraison',
+        description: 'Permet aux chauffeurs et à la direction de créer des rapports avec photos'
+    })
+    @ApiResponse({ status: 201, description: 'Rapport créé avec succès' })
+    @ApiResponse({ status: 403, description: 'Seuls les chauffeurs et la direction peuvent créer des rapports' })
+    async createRapport(
+        @Param('id', ParseUUIDPipe) commandeId: string,
+        @Body() createRapportDto: CreateRapportDto,
+        @CurrentUser() user: any
+    ) {
+        console.log('📝 ===== ENDPOINT CRÉATION RAPPORT =====');
+        console.log('📝 Commande ID:', commandeId);
+        console.log('📝 Type rapport:', createRapportDto.type);
+        console.log('📝 Utilisateur:', user?.id, user?.role);
+
+        return this.commandesService.createRapport(
+            commandeId,
+            createRapportDto,
+            user?.id
+        );
+    }
+
+    @Get(':id/rapports')
+    @UseGuards(RolesGuard)
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION, UserRole.MAGASIN, UserRole.CHAUFFEUR)
+    @ApiOperation({
+        summary: 'Récupérer les rapports d\'une commande',
+        description: 'Récupère tous les rapports d\'enlèvement et de livraison'
+    })
+    @ApiResponse({ status: 200, description: 'Rapports récupérés avec succès' })
+    async getRapportsCommande(
+        @Param('id', ParseUUIDPipe) commandeId: string,
+        @CurrentUser() user: any
+    ) {
+        console.log('📝 Récupération rapports commande:', commandeId);
+
+        return this.commandesService.getRapportsCommande(commandeId);
+    }
+
+    @Get(':id/rapports/obligatoire')
+    @UseGuards(RolesGuard)
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION, UserRole.MAGASIN, UserRole.CHAUFFEUR)
+    @ApiOperation({
+        summary: 'Vérifier si un rapport est obligatoire',
+        description: 'Vérifie si un rapport est obligatoire selon le statut'
+    })
+    async isRapportObligatoire(
+        @Param('id', ParseUUIDPipe) commandeId: string,
+        @Query('type') type: 'ENLEVEMENT' | 'LIVRAISON'
+    ) {
+        const isObligatoire = await this.commandesService.isRapportObligatoire(commandeId, type as any);
+        return { obligatoire: isObligatoire };
+    }
+
+    @Patch(':id/rapports/:type')
+    @UseGuards(RolesGuard)
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION, UserRole.CHAUFFEUR)
+    @ApiOperation({
+        summary: 'Mettre à jour un rapport existant',
+        description: 'Modifie le message ou les photos d\'un rapport'
+    })
+    async updateRapport(
+        @Param('id', ParseUUIDPipe) commandeId: string,
+        @Param('type') type: 'ENLEVEMENT' | 'LIVRAISON',
+        @Body() updateRapportDto: UpdateRapportDto,
+        @CurrentUser() user: any
+    ) {
+        console.log('📝 ===== ENDPOINT MISE À JOUR RAPPORT =====');
+        console.log('📝 Commande ID:', commandeId);
+        console.log('📝 Type:', type);
+
+        return this.commandesService.updateRapport(
+            commandeId,
+            type as TypeRapport,
+            updateRapportDto,
+            user?.id
+        );
+    }
+
+    @Delete(':id/rapports/:type')
+    @UseGuards(RolesGuard)
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION, UserRole.CHAUFFEUR)
+    @ApiOperation({
+        summary: 'Supprimer un rapport',
+        description: 'Supprime complètement un rapport et ses photos'
+    })
+    async deleteRapport(
+        @Param('id', ParseUUIDPipe) commandeId: string,
+        @Param('type') type: 'ENLEVEMENT' | 'LIVRAISON',
+        @CurrentUser() user: any
+    ) {
+        console.log('📝 ===== ENDPOINT SUPPRESSION RAPPORT =====');
+
+        await this.commandesService.deleteRapport(
+            commandeId,
+            type as TypeRapport,
+            user?.id
+        );
+
+        return { message: 'Rapport supprimé avec succès' };
+    }
+
+    @Post('test')
+    async testCreate(@Body() body: any, @Req() request: any) {
+        console.log('🧪 ===== TEST ENDPOINT =====');
+        console.log('🧪 Body reçu:', body);
+        console.log('🧪 Headers:', request?.headers);
+
+        return {
+            success: true,
+            received: body,
+            timestamp: new Date().toISOString()
+        };
+    }
+}
+
+function Req(): (target: CommandesController, propertyKey: "testCreate", parameterIndex: 1) => void {
+    return (target, propertyKey, parameterIndex) => {
+        // Ajout de la métadonnée pour le décorateur
+        Reflect.defineMetadata('req', true, target, propertyKey);
+    };
 }

@@ -3,6 +3,7 @@ import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateCommandeDto, UpdateCommandeDto, CommandeFiltersDto } from './dto';
 import { UpdateStatutsDto, StatutCommande, StatutLivraison } from './dto/statuts.dto';
 import { Prisma } from '@prisma/client';
+import { CreateRapportDto, TypeRapport, UpdateRapportDto } from './dto/rapport.dto';
 // import { TrackingService } from '../tracking/tracking.service';
 // import { TrackingEventType } from '@prisma/client';
 
@@ -65,9 +66,13 @@ export class CommandesService {
                             nom: true,
                             prenom: true,
                             telephone: true,
+                            telephoneSecondaire: true,
                             adresseLigne1: true,
-                            ville: true,
                             typeAdresse: true,
+                            batiment: true,
+                            etage: true,
+                            interphone: true,
+                            ascenseur: true,
                         },
                     },
                     magasin: {
@@ -75,6 +80,8 @@ export class CommandesService {
                             id: true,
                             nom: true,
                             telephone: true,
+                            email: true,
+                            adresse: true,
                         },
                     },
                     chauffeurs: {
@@ -90,7 +97,16 @@ export class CommandesService {
                             },
                         },
                     },
-                    articles: true,
+                    articles: {
+                        select: {
+                            id: true,
+                            nombre: true,
+                            details: true,
+                            categories: true,
+                            dimensions: true,
+                            canBeTilted: true,
+                        },
+                    },
                     photos: true,
                     _count: {
                         select: {
@@ -120,7 +136,23 @@ export class CommandesService {
         const commande = await this.prisma.commande.findUnique({
             where: { id },
             include: {
-                client: true,
+                client: {
+                    select: {
+                        id: true,
+                        nom: true,
+                        prenom: true,
+                        telephone: true,
+                        telephoneSecondaire: true,
+                        adresseLigne1: true,
+                        codePostal: true,
+                        ville: true,
+                        typeAdresse: true,
+                        batiment: true,
+                        etage: true,
+                        interphone: true,
+                        ascenseur: true,
+                    }
+                },
                 magasin: {
                     select: {
                         id: true,
@@ -145,8 +177,17 @@ export class CommandesService {
                         },
                     },
                 },
-                articles: true,
-                photos: {                    // ✅ AJOUTER : Include photos
+                articles: {
+                    select: {
+                        id: true,
+                        nombre: true,
+                        details: true,
+                        categories: true,
+                        dimensions: true,
+                        canBeTilted: true,
+                    },
+                },
+                photos: {
                     orderBy: { createdAt: 'desc' },
                 },
                 commentaires: {
@@ -211,132 +252,156 @@ export class CommandesService {
         return commande;
     }
 
-    async create(createCommandeDto: CreateCommandeDto) {
+    async create(createCommandeDto: any) {
+        console.log('🔥 ===== SERVICE CREATE APPELÉ =====');
+        console.log('🔥 DTO reçu type:', typeof createCommandeDto);
+        console.log('🔥 DTO keys:', Object.keys(createCommandeDto));
+        console.log('🔥 clientNom:', createCommandeDto.clientNom);
+        console.log('🔥 nombreArticles:', createCommandeDto.nombreArticles);
+        console.log('🔥 dimensionsArticles:', createCommandeDto.dimensionsArticles);
         // ✅ CORRECTION : Adapter pour les champs plats
         console.log('🔍 CreateCommandeDto reçu:', JSON.stringify(createCommandeDto, null, 2));
 
-        // ✅ CONSTRUCTION de l'objet client à partir de l'objet imbriqué
-        const clientData = {
-            nom: createCommandeDto.client?.nom,
-            prenom: createCommandeDto.client?.prenom,
-            telephone: createCommandeDto.client?.telephone,
-            telephoneSecondaire: createCommandeDto.client?.telephoneSecondaire,
-            adresseLigne1: createCommandeDto.client?.adresseLigne1,
-            batiment: createCommandeDto.client?.batiment,
-            etage: createCommandeDto.client?.etage,
-            interphone: createCommandeDto.client?.interphone,
-            ascenseur: createCommandeDto.client?.ascenseur || false,
-            typeAdresse: createCommandeDto.client?.typeAdresse || 'Domicile'
-        };
+        try {
+            // ✅ CLIENTS (structure flat qui fonctionne)
+            const clientData = {
+                nom: createCommandeDto.clientNom,
+                prenom: createCommandeDto.clientPrenom || '',
+                telephone: createCommandeDto.clientTelephone,
+                telephoneSecondaire: createCommandeDto.clientTelephoneSecondaire || '',
+                typeAdresse: createCommandeDto.clientTypeAdresse || 'Domicile',
+                adresseLigne1: createCommandeDto.clientAdresseLigne1,
+                batiment: createCommandeDto.clientBatiment || '',
+                etage: createCommandeDto.clientEtage || '',
+                interphone: createCommandeDto.clientInterphone || '',
+                ascenseur: createCommandeDto.clientAscenseur || false,
+            };
 
-        console.log('🔍 ClientData construit:', clientData);
+            console.log('🔍 ClientData construit:', clientData);
 
+            // ✅ ARTICLES (structure flat)
+            const articlesData = {
+                nombre: createCommandeDto.nombreArticles || 1,
+                details: createCommandeDto.detailsArticles || '',
+                categories: createCommandeDto.categoriesArticles || [],
+                dimensions: createCommandeDto.dimensionsArticles || [],
+                canBeTilted: createCommandeDto.canBeTilted || false
+            };
 
-        // ✅ CONSTRUCTION de l'objet articles à partir de l'objet imbriqué
-        const articlesData = {
-            nombre: createCommandeDto.articles?.nombre || 1,
-            details: createCommandeDto.articles?.details || '',
-            categories: createCommandeDto.articles?.categories || [],
-            dimensions: createCommandeDto.articles?.dimensions || [],
-            canBeTilted: createCommandeDto.articles?.canBeTilted || false
-        };
+            const allPhotos = [
+                ...(createCommandeDto.photosArticles || []),
+                ...(createCommandeDto.newPhotosArticles || [])
+            ].filter(photo => photo && photo.url);
 
-        const allPhotos = [
-            ...(createCommandeDto.articles?.photos || []),
-            ...(createCommandeDto.articles?.newPhotos || [])
-        ].filter(photo => photo.url);
+            console.log('🔍 ClientData construit:', clientData);
+            console.log('🔍 ArticlesData construit:', articlesData);
+            console.log('🔍 Dimensions:', articlesData.dimensions.length);
+            console.log('🔍 Photos totales à traiter:', allPhotos.length);
 
-        console.log('🔍 ClientData construit:', clientData);
-        console.log('🔍 ArticlesData construit:', articlesData);
-        console.log('🔍 Dimensions:', articlesData.dimensions.length);
-        console.log('🔍 Photos totales à traiter:', allPhotos.length);
+            if (!clientData.nom || !clientData.prenom) {
+                console.error('❌ Données client manquantes:', clientData);
+                throw new BadRequestException('Nom et prénom client requis');
+            }
 
-        if (!clientData.nom || !clientData.prenom) {
-            console.error('❌ Données client manquantes:', clientData);
-            throw new BadRequestException('Nom et prénom client requis');
-        }
+            // ✅ Extraire les autres champs
+            const { client, articles, ...commandeData } = createCommandeDto;
 
-        // ✅ Extraire les autres champs
-        const { client, articles, ...commandeData } = createCommandeDto;
+            this.logger.log(`🆕 Création d'une nouvelle commande pour ${clientData.nom} ${clientData.prenom}`);
 
-        this.logger.log(`🆕 Création d'une nouvelle commande pour ${clientData.nom} ${clientData.prenom}`);
-
-        // Vérifier que le magasin existe
-        const magasin = await this.prisma.magasin.findUnique({
-            where: { id: createCommandeDto.magasinId },
-            select: {
-                id: true,
-                nom: true,
-                telephone: true,
-                adresse: true,
-                email: true,
-            },
-        });
-
-        if (!magasin) {
-            throw new BadRequestException(`Magasin avec l'ID ${createCommandeDto.magasinId} non trouvé`);
-        }
-
-        this.logger.log(`🆕 Création commande pour ${clientData.nom} ${clientData.prenom} - ${articlesData.nombre} articles, ${articlesData.dimensions.length} dimensions, ${allPhotos.length} photos`);
-
-        // ✅ Continuer avec la logique existante
-        const commandeId = await this.prisma.$transaction(async (tx) => {
-            // 1. Client
-            const client = await this.findOrCreateClient(tx, clientData);
-
-            // 2. Numéro commande
-            const numeroCommande = await this.generateNumeroCommande(tx);
-
-            // 3. Créer la commande
-            const commande = await tx.commande.create({
-                data: {
-                    numeroCommande,
-                    dateLivraison: new Date(createCommandeDto.dateLivraison),
-                    creneauLivraison: createCommandeDto.creneauLivraison,
-                    categorieVehicule: createCommandeDto.categorieVehicule,
-                    optionEquipier: createCommandeDto.optionEquipier || 0,
-                    tarifHT: createCommandeDto.tarifHT || 0,
-                    reserveTransport: createCommandeDto.reserveTransport || false,
-                    prenomVendeur: createCommandeDto.prenomVendeur,
-                    clientId: client.id,
-                    magasinId: createCommandeDto.magasinId,
-                }
+            // Vérifier que le magasin existe
+            const magasin = await this.prisma.magasin.findUnique({
+                where: { id: createCommandeDto.magasinId },
+                select: {
+                    id: true,
+                    nom: true,
+                    telephone: true,
+                    adresse: true,
+                    email: true,
+                },
             });
 
-            // 4. Créer l'article avec dimensions
-            if (articlesData) {
-                await tx.article.create({
-                    data: {
-                        nombre: articlesData.nombre,
-                        details: articlesData.details,
-                        categories: articlesData.categories,
-                        dimensions: JSON.stringify(articlesData.dimensions), // JSON
-                        canBeTilted: articlesData.canBeTilted,
-                        commandeId: commande.id,
-                    },
-                });
+            if (!magasin) {
+                throw new BadRequestException(`Magasin avec l'ID ${createCommandeDto.magasinId} non trouvé`);
             }
 
-            // 5. Créer les photos
-            if (allPhotos.length > 0) {
-                await tx.photo.createMany({
-                    data: allPhotos.map(photo => ({
+            this.logger.log(`🆕 Création commande pour ${clientData.nom} ${clientData.prenom} - ${articlesData.nombre} articles, ${articlesData.dimensions.length} dimensions, ${allPhotos.length} photos`);
+
+            // ✅ Continuer avec la logique existante
+            const commandeId = await this.prisma.$transaction(async (tx) => {
+                // 1. Client
+                const client = await this.findOrCreateClient(tx, clientData);
+
+                // 2. Numéro commande
+                const numeroCommande = await this.generateNumeroCommande(tx);
+
+                // 3. Créer la commande
+                const commande = await tx.commande.create({
+                    data: {
+                        numeroCommande,
+                        dateLivraison: new Date(createCommandeDto.dateLivraison),
+                        creneauLivraison: createCommandeDto.creneauLivraison,
+                        categorieVehicule: createCommandeDto.categorieVehicule,
+                        optionEquipier: createCommandeDto.optionEquipier || 0,
+                        tarifHT: createCommandeDto.tarifHT || 0,
+                        reserveTransport: createCommandeDto.reserveTransport || false,
+                        prenomVendeur: createCommandeDto.prenomVendeur,
+                        remarques: createCommandeDto.remarques || '',
+                        clientId: client.id,
+                        magasinId: createCommandeDto.magasinId,
+                    }
+                });
+
+                // 4. Créer l'article avec dimensions
+                if (articlesData) {
+                    await tx.article.create({
+                        data: {
+                            nombre: articlesData.nombre,
+                            details: articlesData.details,
+                            categories: articlesData.categories,
+                            dimensions: JSON.stringify(articlesData.dimensions), // JSON
+                            canBeTilted: articlesData.canBeTilted,
+                            commandeId: commande.id,
+                        },
+                    });
+                }
+
+                // 5. Créer les photos
+                if (allPhotos.length > 0) {
+                    console.log('📸 Création de', allPhotos.length, 'photos');
+
+                    const photosToCreate = allPhotos.map(photo => ({
                         url: photo.url,
                         commandeId: commande.id,
-                        type: 'ARTICLE',
+                        type: 'ARTICLE' as any, // Fix: use enum if imported, otherwise cast
                         filename: photo.url.split('/').pop() || 'image'
-                    }))
-                });
-            }
+                    }));
 
-            this.logger.log(`✅ Commande créée: ${commande.numeroCommande} avec ${articlesData.nombre} articles, ${articlesData.dimensions.length} dimensions, ${allPhotos.length} photos`);
+                    console.log('📸 Données photos à créer:', photosToCreate);
 
-            // ✅ RETOURNER L'ID pour utilisation hors transaction
-            return commande.id;
-        });
+                    await tx.photo.createMany({
+                        data: photosToCreate
+                    });
 
-        // ✅ CORRECTION : findOne() HORS de la transaction avec l'ID correct
-        return this.findOne(commandeId);
+                    console.log('✅ Photos créées avec succès');
+                } else {
+                    console.log('⚠️ PROBLÈME: Aucune photo à créer - vérifier extraction');
+                }
+
+                this.logger.log(`✅ Commande créée: ${commande.numeroCommande} avec ${articlesData.nombre} articles, ${articlesData.dimensions.length} dimensions, ${allPhotos.length} photos`);
+
+                // ✅ RETOURNER L'ID pour utilisation hors transaction
+                return commande.id;
+            });
+
+            // ✅ CORRECTION : findOne() HORS de la transaction avec l'ID correct
+            return this.findOne(commandeId);
+
+        } catch (error) {
+            console.error('❌ ERREUR SERVICE CREATE:', error);
+            console.error('❌ Error message:', error.message);
+            console.error('❌ Error stack:', error.stack);
+            throw error;
+        }
     }
 
     async update(id: string, updateCommandeDto: UpdateCommandeDto) {
@@ -350,6 +415,93 @@ export class CommandesService {
 
         // Vérifier que la commande existe
         const existingCommande = await this.findOne(id);
+
+        // ✅ DÉTECTION AUTOMATIQUE du format
+        const isNestedFormat = !!(updateCommandeDto.client || updateCommandeDto.articles);
+        const isFlatFormat = !!(updateCommandeDto.clientNom || updateCommandeDto.nombreArticles);
+
+        console.log('📝 Format détecté:', { isNestedFormat, isFlatFormat });
+
+        // ✅ GESTION CLIENT selon le format
+        if (isNestedFormat && updateCommandeDto.client) {
+            console.log('📝 Mise à jour client NESTED');
+            await this.prisma.client.update({
+                where: { id: existingCommande.clientId },
+                data: {
+                    nom: updateCommandeDto.client.nom,
+                    prenom: updateCommandeDto.client.prenom,
+                    telephone: updateCommandeDto.client.telephone,
+                    telephoneSecondaire: updateCommandeDto.client.telephoneSecondaire,
+                    adresseLigne1: updateCommandeDto.client.adresseLigne1,
+                    batiment: updateCommandeDto.client.batiment,
+                    etage: updateCommandeDto.client.etage,
+                    interphone: updateCommandeDto.client.interphone,
+                    ascenseur: updateCommandeDto.client.ascenseur,
+                    typeAdresse: updateCommandeDto.client.typeAdresse
+                }
+            });
+        } else if (isFlatFormat && updateCommandeDto.clientNom) {
+            console.log('📝 Mise à jour client FLAT');
+            await this.prisma.client.update({
+                where: { id: existingCommande.clientId },
+                data: {
+                    nom: updateCommandeDto.clientNom,
+                    prenom: updateCommandeDto.clientPrenom,
+                    telephone: updateCommandeDto.clientTelephone,
+                    telephoneSecondaire: updateCommandeDto.clientTelephoneSecondaire,
+                    adresseLigne1: updateCommandeDto.clientAdresseLigne1,
+                    batiment: updateCommandeDto.clientBatiment,
+                    etage: updateCommandeDto.clientEtage,
+                    interphone: updateCommandeDto.clientInterphone,
+                    ascenseur: updateCommandeDto.clientAscenseur,
+                    typeAdresse: updateCommandeDto.clientTypeAdresse
+                }
+            });
+        }
+        // ✅ GESTION ARTICLES selon le format détecté
+        if (isNestedFormat && updateCommandeDto.articles) {
+            console.log('📝 ===== MISE À JOUR ARTICLES NESTED =====');
+            const existingArticle = await this.prisma.article.findFirst({
+                where: { commandeId: id }
+            });
+
+            if (existingArticle) {
+                await this.prisma.article.update({
+                    where: { id: existingArticle.id },
+                    data: {
+                        nombre: updateCommandeDto.articles.nombre,
+                        details: updateCommandeDto.articles.details,
+                        categories: updateCommandeDto.articles.categories,
+                        dimensions: updateCommandeDto.articles.dimensions
+                            ? JSON.stringify(updateCommandeDto.articles.dimensions)
+                            : existingArticle.dimensions,
+                        canBeTilted: updateCommandeDto.articles.canBeTilted !== undefined ?
+                            updateCommandeDto.articles.canBeTilted : existingArticle.canBeTilted
+                    }
+                });
+            }
+        } else if (isFlatFormat && updateCommandeDto.nombreArticles) {
+            console.log('📝 ===== MISE À JOUR ARTICLES FLAT =====');
+            const existingArticle = await this.prisma.article.findFirst({
+                where: { commandeId: id }
+            });
+
+            if (existingArticle) {
+                await this.prisma.article.update({
+                    where: { id: existingArticle.id },
+                    data: {
+                        nombre: updateCommandeDto.nombreArticles,
+                        details: updateCommandeDto.detailsArticles,
+                        categories: updateCommandeDto.categoriesArticles,
+                        dimensions: updateCommandeDto.dimensionsArticles
+                            ? JSON.stringify(updateCommandeDto.dimensionsArticles)
+                            : existingArticle.dimensions,
+                        canBeTilted: updateCommandeDto.canBeTilted !== undefined ?
+                            updateCommandeDto.canBeTilted : existingArticle.canBeTilted
+                    }
+                });
+            }
+        }
 
         this.logger.log(`📝 Mise à jour de la commande ${existingCommande.numeroCommande}`);
 
@@ -398,6 +550,9 @@ export class CommandesService {
                 console.log('📊 Auto-confirmation commande déclenchée');
             }
         }
+        if (updateCommandeDto.remarques !== undefined) {
+            updateData.remarques = updateCommandeDto.remarques;
+        }
         if (updateCommandeDto.prenomVendeur !== undefined) {
             updateData.prenomVendeur = updateCommandeDto.prenomVendeur;
         }
@@ -408,6 +563,7 @@ export class CommandesService {
                 where: { id },
                 data: updateData,
             });
+            console.log('📝 Champs commande mis à jour:', Object.keys(updateData));
         } else {
             console.log('📝 Aucune donnée à mettre à jour pour cette commande');
             this.logger.log(`📝 Aucune donnée à mettre à jour pour cette commande: ${existingCommande.numeroCommande}`);
@@ -609,17 +765,15 @@ export class CommandesService {
             client = await tx.client.create({
                 data: {
                     nom: clientData.nom,
-                    prenom: clientData.prenom,
+                    prenom: clientData.prenom || '',
                     telephone: clientData.telephone,
-                    telephoneSecondaire: clientData.telephoneSecondaire,
+                    telephoneSecondaire: clientData.telephoneSecondaire || '',
                     adresseLigne1: clientData.adresseLigne1,
-                    codePostal: clientData.codePostal,
-                    ville: clientData.ville,
-                    batiment: clientData.batiment,
+                    batiment: clientData.batiment || '',
                     etage: clientData.etage,
                     interphone: clientData.interphone,
                     ascenseur: clientData.ascenseur || false,
-                    typeAdresse: clientData.typeAdresse,
+                    typeAdresse: clientData.typeAdresse || 'Domicile',
                 },
             });
         } else {
@@ -630,8 +784,6 @@ export class CommandesService {
                     prenom: clientData.prenom || client.prenom,
                     telephoneSecondaire: clientData.telephoneSecondaire || client.telephoneSecondaire,
                     adresseLigne1: clientData.adresseLigne1,
-                    codePostal: clientData.codePostal || client.codePostal,
-                    ville: clientData.ville || client.ville,
                     batiment: clientData.batiment || client.batiment,
                     etage: clientData.etage || client.etage,
                     interphone: clientData.interphone || client.interphone,
@@ -906,6 +1058,342 @@ export class CommandesService {
         console.log(`🔍 Validation transition: ${currentCommande} → ${targetCommande} = ${isValid}`);
 
         return isValid;
+    }
+
+    /**
+ * Créer un rapport d'enlèvement ou de livraison (1 seul par type)
+ */
+    async createRapport(
+        commandeId: string,
+        rapportData: CreateRapportDto,
+        userId?: string
+    ): Promise<any> {
+        console.log(`📝 ===== CRÉATION RAPPORT SANS IMPACT STATUT =====`);
+        console.log(`📝 Commande: ${commandeId}`);
+        console.log(`📝 Type: ${rapportData.type}`);
+
+        const existingCommande = await this.findOne(commandeId);
+
+        return this.prisma.$transaction(async (tx) => {
+            // ✅ CONTRAINTE : Vérifier qu'il n'y a pas déjà un rapport de ce type
+            if (rapportData.type === TypeRapport.ENLEVEMENT) {
+                const existingRapport = await tx.rapportEnlevement.findFirst({
+                    where: { commandeId }
+                });
+                if (existingRapport) {
+                    throw new BadRequestException('Un rapport d\'enlèvement existe déjà pour cette commande');
+                }
+            } else {
+                const existingRapport = await tx.rapportLivraison.findFirst({
+                    where: { commandeId }
+                });
+                if (existingRapport) {
+                    throw new BadRequestException('Un rapport de livraison existe déjà pour cette commande');
+                }
+            }
+
+            let rapport;
+
+            if (rapportData.type === TypeRapport.ENLEVEMENT) {
+                // Créer rapport d'enlèvement
+                rapport = await tx.rapportEnlevement.create({
+                    data: {
+                        message: rapportData.message,
+                        chauffeurId: rapportData.chauffeurId,
+                        commandeId: commandeId
+                    },
+                    include: {
+                        chauffeur: {
+                            select: {
+                                id: true,
+                                nom: true,
+                                prenom: true,
+                                telephone: true
+                            }
+                        }
+                    }
+                });
+            } else {
+                // Créer rapport de livraison
+                rapport = await tx.rapportLivraison.create({
+                    data: {
+                        message: rapportData.message,
+                        chauffeurId: rapportData.chauffeurId,
+                        commandeId: commandeId
+                    },
+                    include: {
+                        chauffeur: {
+                            select: {
+                                id: true,
+                                nom: true,
+                                prenom: true,
+                                telephone: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            await tx.commande.update({
+                where: { id: commandeId },
+                data: {
+                    reserveTransport: true
+                }
+            });
+
+            // ✅ AJOUTER PHOTOS
+            if (rapportData.photos && rapportData.photos.length > 0) {
+                await tx.photo.createMany({
+                    data: rapportData.photos.map(photo => ({
+                        url: photo.url,
+                        filename: photo.filename || photo.url.split('/').pop() || 'image',
+                        commandeId: commandeId,
+                        type: rapportData.type
+                    }))
+                });
+            }
+
+            console.log(`✅ Rapport ${rapportData.type} créé - Réserve activée - Statut inchangé`);
+            this.logger.log(`📝 Rapport ${rapportData.type} créé pour commande ${existingCommande.numeroCommande} - Statut livraison préservé`);
+
+            return rapport;
+        });
+    }
+
+    /**
+     * Vérifier si un rapport est obligatoire
+     */
+    async isRapportObligatoire(commandeId: string, type: TypeRapport): Promise<boolean> {
+        const commande = await this.findOne(commandeId);
+
+        if (type === TypeRapport.LIVRAISON) {
+            // ✅ Obligatoire si statut ECHEC
+            return commande.statutLivraison === 'ECHEC';
+        }
+
+        if (type === TypeRapport.ENLEVEMENT) {
+            // ✅ OBLIGATOIRE si problème d'enlèvement mais statut ECHEC
+            return commande.statutLivraison === 'ECHEC' &&
+                !await this.hasRapportEnlevement(commandeId);
+        }
+
+        return false;
+    }
+
+    /**
+ * Vérifier si un rapport d'enlèvement existe
+ */
+    private async hasRapportEnlevement(commandeId: string): Promise<boolean> {
+        const rapport = await this.prisma.rapportEnlevement.findFirst({
+            where: { commandeId }
+        });
+        return !!rapport;
+    }
+
+    /**
+     * Récupérer tous les rapports d'une commande
+     */
+    async getRapportsCommande(commandeId: string): Promise<any> {
+        const [rapportsEnlevement, rapportsLivraison, photos] = await Promise.all([
+            this.prisma.rapportEnlevement.findMany({
+                where: { commandeId },
+                include: {
+                    chauffeur: {
+                        select: {
+                            id: true,
+                            nom: true,
+                            prenom: true,
+                            telephone: true
+                        }
+                    }
+                },
+                orderBy: { createdAt: 'desc' }
+            }),
+            this.prisma.rapportLivraison.findMany({
+                where: { commandeId },
+                include: {
+                    chauffeur: {
+                        select: {
+                            id: true,
+                            nom: true,
+                            prenom: true,
+                            telephone: true
+                        }
+                    }
+                },
+                orderBy: { createdAt: 'desc' }
+            }),
+            // ✅ Récupérer les photos des commentaires
+            this.prisma.photo.findMany({
+                where: {
+                    commandeId,
+                    type: { in: ['ENLEVEMENT', 'LIVRAISON'] }
+                },
+                orderBy: { createdAt: 'desc' }
+            })
+        ]);
+
+        return {
+            enlevement: rapportsEnlevement,
+            livraison: rapportsLivraison,
+            photos: {
+                enlevement: photos.filter(p => p.type === 'ENLEVEMENT'),
+                livraison: photos.filter(p => p.type === 'LIVRAISON')
+            }
+        };
+    }
+
+    /**
+ * Mettre à jour un rapport existant
+ */
+    async updateRapport(
+        commandeId: string,
+        rapportType: TypeRapport,
+        updateData: UpdateRapportDto,
+        userId?: string
+    ): Promise<any> {
+        console.log(`📝 ===== MISE À JOUR RAPPORT =====`);
+        console.log(`📝 Commande: ${commandeId}`);
+        console.log(`📝 Type: ${rapportType}`);
+
+        return this.prisma.$transaction(async (tx) => {
+            let rapport;
+
+            // ✅ Trouver le rapport existant
+            if (rapportType === TypeRapport.ENLEVEMENT) {
+                rapport = await tx.rapportEnlevement.findFirst({
+                    where: { commandeId }
+                });
+                if (!rapport) {
+                    throw new NotFoundException('Rapport d\'enlèvement non trouvé');
+                }
+
+                // Mettre à jour le message si fourni
+                if (updateData.message) {
+                    rapport = await tx.rapportEnlevement.update({
+                        where: { id: rapport.id },
+                        data: { message: updateData.message },
+                        include: {
+                            chauffeur: {
+                                select: {
+                                    id: true,
+                                    nom: true,
+                                    prenom: true,
+                                    telephone: true
+                                }
+                            }
+                        }
+                    });
+                }
+            } else {
+                rapport = await tx.rapportLivraison.findFirst({
+                    where: { commandeId }
+                });
+                if (!rapport) {
+                    throw new NotFoundException('Rapport de livraison non trouvé');
+                }
+
+                // Mettre à jour le message si fourni
+                if (updateData.message) {
+                    rapport = await tx.rapportLivraison.update({
+                        where: { id: rapport.id },
+                        data: { message: updateData.message },
+                        include: {
+                            chauffeur: {
+                                select: {
+                                    id: true,
+                                    nom: true,
+                                    prenom: true,
+                                    telephone: true
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // ✅ SUPPRIMER les photos demandées
+            if (updateData.photosToRemove && updateData.photosToRemove.length > 0) {
+                await tx.photo.deleteMany({
+                    where: {
+                        commandeId,
+                        type: rapportType,
+                        url: { in: updateData.photosToRemove }
+                    }
+                });
+            }
+
+            // ✅ AJOUTER les nouvelles photos
+            if (updateData.newPhotos && updateData.newPhotos.length > 0) {
+                await tx.photo.createMany({
+                    data: updateData.newPhotos.map(photo => ({
+                        url: photo.url,
+                        filename: photo.filename || photo.url.split('/').pop() || 'image',
+                        commandeId: commandeId,
+                        type: rapportType
+                    }))
+                });
+            }
+
+            console.log(`✅ Rapport ${rapportType} mis à jour`);
+
+            return rapport;
+        });
+    }
+
+    async deleteRapport(
+        commandeId: string,
+        rapportType: TypeRapport,
+        userId?: string
+    ): Promise<void> {
+        console.log(`📝 ===== SUPPRESSION RAPPORT + VÉRIF RÉSERVE =====`);
+
+        return this.prisma.$transaction(async (tx) => {
+            // ✅ VÉRIFIER s'il reste d'autres rapports après suppression
+            const [autresRapportsEnlevement, autresRapportsLivraison] = await Promise.all([
+                rapportType === TypeRapport.ENLEVEMENT
+                    ? Promise.resolve([]) // On supprime celui-ci, donc 0
+                    : tx.rapportEnlevement.findMany({ where: { commandeId } }),
+
+                rapportType === TypeRapport.LIVRAISON
+                    ? Promise.resolve([]) // On supprime celui-ci, donc 0
+                    : tx.rapportLivraison.findMany({ where: { commandeId } })
+            ]);
+
+            const hasRemainingReports = autresRapportsEnlevement.length > 0 || autresRapportsLivraison.length > 0;
+
+            // Supprimer les photos associées
+            await tx.photo.deleteMany({
+                where: {
+                    commandeId,
+                    type: rapportType
+                }
+            });
+
+            // Supprimer le rapport
+            if (rapportType === TypeRapport.ENLEVEMENT) {
+                await tx.rapportEnlevement.deleteMany({
+                    where: { commandeId }
+                });
+            } else {
+                await tx.rapportLivraison.deleteMany({
+                    where: { commandeId }
+                });
+            }
+
+            // ✅ RÉSERVE : Si plus aucun rapport, remettre à false
+            if (!hasRemainingReports) {
+                await tx.commande.update({
+                    where: { id: commandeId },
+                    data: { reserveTransport: false }
+                });
+                console.log('✅ Plus de rapports → Réserve My Truck désactivée');
+            } else {
+                console.log('✅ Rapports restants → Réserve My Truck maintenue');
+            }
+
+            console.log(`✅ Rapport ${rapportType} supprimé`);
+        });
     }
 
     /**
