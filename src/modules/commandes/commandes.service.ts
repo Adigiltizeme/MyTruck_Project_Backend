@@ -4,6 +4,7 @@ import { CreateCommandeDto, UpdateCommandeDto, CommandeFiltersDto } from './dto'
 import { UpdateStatutsDto, StatutCommande, StatutLivraison } from './dto/statuts.dto';
 import { Prisma } from '@prisma/client';
 import { CreateRapportDto, TypeRapport, UpdateRapportDto } from './dto/rapport.dto';
+import { SlotsService } from '../slots/slots.service';
 // import { TrackingService } from '../tracking/tracking.service';
 // import { TrackingEventType } from '@prisma/client';
 
@@ -13,6 +14,7 @@ export class CommandesService {
 
     constructor(
         private readonly prisma: PrismaService,
+        private readonly slotsService: SlotsService,
         // private readonly trackingService: TrackingService
     ) { }
 
@@ -116,6 +118,16 @@ export class CommandesService {
                             rapportsLivraison: true,
                         },
                     },
+                    documents: true,
+                    timeSlot: {
+                        select: {
+                            id: true,
+                            startTime: true,
+                            endTime: true,
+                            isActive: true,
+                            maxCapacity: true,
+                        },
+                    },
                 },
             }),
             this.prisma.commande.count({ where }),
@@ -144,8 +156,6 @@ export class CommandesService {
                         telephone: true,
                         telephoneSecondaire: true,
                         adresseLigne1: true,
-                        codePostal: true,
-                        ville: true,
                         typeAdresse: true,
                         batiment: true,
                         etage: true,
@@ -229,6 +239,24 @@ export class CommandesService {
                         numeroDevis: true,
                         dateDevis: true,
                         statut: true,
+                    },
+                },
+                documents: true,
+                // documents: {
+                //     select: {
+                //         id: true,
+                //         type: true,
+                //         url: true,
+                //         createdAt: true,
+                //     },
+                // },
+                timeSlot: {
+                    select: {
+                        id: true,
+                        startTime: true,
+                        endTime: true,
+                        isActive: true,
+                        maxCapacity: true,
                     },
                 },
             },
@@ -324,7 +352,47 @@ export class CommandesService {
                 throw new BadRequestException(`Magasin avec l'ID ${createCommandeDto.magasinId} non trouvé`);
             }
 
+            // 🆕 GÉRER LE CRÉNEAU LORS DE LA CRÉATION
+            let timeSlotId: string | null = null;
+
+            if (createCommandeDto.creneauLivraison) {
+                // Trouver le créneau correspondant au displayName
+                const timeSlot = await this.prisma.timeSlot.findFirst({
+                    where: {
+                        displayName: createCommandeDto.creneauLivraison,
+                        isActive: true
+                    }
+                });
+
+                if (timeSlot) {
+                    // Vérifier la disponibilité
+                    const date = new Date(createCommandeDto.dateLivraison).toISOString().split('T')[0];
+                    const availability = await this.slotsService.getAvailabilityForDate(date);
+                    const slotAvailability = availability.find(a => a.slot.id === timeSlot.id);
+
+                    if (!slotAvailability?.isAvailable) {
+                        throw new BadRequestException('Créneau non disponible pour cette date');
+                    }
+
+                    timeSlotId = timeSlot.id;
+                }
+            }
+
             this.logger.log(`🆕 Création commande pour ${clientData.nom} ${clientData.prenom} - ${articlesData.nombre} articles, ${articlesData.dimensions.length} dimensions, ${allPhotos.length} photos`);
+
+            const deliveryConditions = {
+                rueInaccessible: createCommandeDto.rueInaccessible || false,
+                paletteComplete: createCommandeDto.paletteComplete || false,
+                parkingDistance: createCommandeDto.parkingDistance || 0,
+                hasStairs: createCommandeDto.hasStairs || false,
+                stairCount: createCommandeDto.stairCount || 0,
+                needsAssembly: createCommandeDto.needsAssembly || false,
+                isDuplex: createCommandeDto.isDuplex || false,
+                deliveryToUpperFloor: createCommandeDto.deliveryToUpperFloor || false
+            };
+
+            const articlesEquipiers = createCommandeDto.dimensionsArticles || [];
+            const validation = this.calculateDeliveryValidation(articlesEquipiers, deliveryConditions, createCommandeDto);
 
             // ✅ Continuer avec la logique existante
             const commandeId = await this.prisma.$transaction(async (tx) => {
@@ -348,7 +416,20 @@ export class CommandesService {
                         remarques: createCommandeDto.remarques || '',
                         clientId: client.id,
                         magasinId: createCommandeDto.magasinId,
-                    }
+                        timeSlotId,
+                        ...deliveryConditions,
+                        requiredCrewSize: createCommandeDto.requiredCrewSize,
+                        heaviestArticleWeight: createCommandeDto.heaviestArticleWeight,
+                        needsQuote: createCommandeDto.needsQuote,
+                        validationDetails: JSON.stringify(validation.details),
+                        lastValidationAt: new Date(),
+                    },
+                });
+
+                console.log('✅ Commande créée avec conditions de livraison:', {
+                    id: commande.id,
+                    conditions: deliveryConditions,
+                    requiredCrew: validation.requiredCrewSize
                 });
 
                 // 4. Créer l'article avec dimensions
@@ -408,6 +489,7 @@ export class CommandesService {
         console.log('📝 ===== SERVICE UPDATE APPELÉ =====');
         console.log('📝 ID:', id);
         console.log('📝 DTO reçu:', updateCommandeDto);
+        console.log('🚚 Conditions livraison reçues:', updateCommandeDto.deliveryConditions);
 
         if (!id) {
             throw new BadRequestException('ID de commande requis pour la mise à jour');
@@ -557,22 +639,192 @@ export class CommandesService {
             updateData.prenomVendeur = updateCommandeDto.prenomVendeur;
         }
 
+        if (updateCommandeDto.deliveryConditions) {
+            console.log('🚚 Mise à jour conditions livraison:', updateCommandeDto.deliveryConditions);
+
+            const conditions = updateCommandeDto.deliveryConditions;
+
+            // Mettre à jour champs individuels
+            if (conditions.rueInaccessible !== undefined) {
+                updateData.rueInaccessible = conditions.rueInaccessible;
+            }
+            if (conditions.paletteComplete !== undefined) {
+                updateData.paletteComplete = conditions.paletteComplete;
+            }
+            if (conditions.parkingDistance !== undefined) {
+                updateData.parkingDistance = conditions.parkingDistance;
+            }
+            if (conditions.hasStairs !== undefined) {
+                updateData.hasStairs = conditions.hasStairs;
+            }
+            if (conditions.stairCount !== undefined) {
+                updateData.stairCount = conditions.stairCount;
+            }
+            if (conditions.needsAssembly !== undefined) {
+                updateData.needsAssembly = conditions.needsAssembly;
+            }
+            if (conditions.isDuplex !== undefined) {
+                updateData.isDuplex = conditions.isDuplex;
+            }
+            if (conditions.deliveryToUpperFloor !== undefined) {
+                updateData.deliveryToUpperFloor = conditions.deliveryToUpperFloor;
+            }
+
+            console.log('✅ Conditions mises à jour dans updateData:', {
+                rueInaccessible: updateData.rueInaccessible,
+                paletteComplete: updateData.paletteComplete,
+                parkingDistance: updateData.parkingDistance,
+                hasStairs: updateData.hasStairs,
+                stairCount: updateData.stairCount,
+                needsAssembly: updateData.needsAssembly,
+                isDuplex: updateData.isDuplex,
+                deliveryToUpperFloor: updateData.deliveryToUpperFloor
+            });
+        }
+
+        // ✅ RECALCUL VALIDATION avec nouvelles conditions
+        if (updateCommandeDto.deliveryConditions || updateCommandeDto.articles?.dimensions) {
+            const articlesEquipiers = updateCommandeDto.articles?.dimensions || [];
+            const deliveryConditions = {
+                hasElevator: updateCommandeDto.client?.ascenseur || existingCommande.client?.ascenseur || false,
+                totalItemCount: articlesEquipiers.reduce((sum, article) => sum + (article.quantite || 1), 0),
+                rueInaccessible: updateData.rueInaccessible ?? existingCommande.rueInaccessible ?? false,
+                paletteComplete: updateData.paletteComplete ?? existingCommande.paletteComplete ?? false,
+                parkingDistance: updateData.parkingDistance ?? existingCommande.parkingDistance ?? 0,
+                hasStairs: updateData.hasStairs ?? existingCommande.hasStairs ?? false,
+                stairCount: updateData.stairCount ?? existingCommande.stairCount ?? 0,
+                needsAssembly: updateData.needsAssembly ?? existingCommande.needsAssembly ?? false,
+                isDuplex: updateData.isDuplex ?? existingCommande.isDuplex ?? false,
+                deliveryToUpperFloor: updateData.deliveryToUpperFloor ?? existingCommande.deliveryToUpperFloor ?? false,
+                floor: parseInt(updateCommandeDto.client?.etage || existingCommande.client?.etage || '0')
+            };
+
+            const validation = this.calculateDeliveryValidation(articlesEquipiers, deliveryConditions, updateCommandeDto);
+
+            updateData.requiredCrewSize = validation.requiredCrewSize;
+            updateData.heaviestArticleWeight = validation.heaviestArticleWeight;
+            updateData.needsQuote = validation.needsQuote;
+            updateData.validationDetails = JSON.stringify(validation.details);
+            updateData.lastValidationAt = new Date();
+
+            console.log('🔄 Validation recalculée:', {
+                requiredCrewSize: validation.requiredCrewSize,
+                needsQuote: validation.needsQuote
+            });
+        }
+
         // Mettre à jour seulement si il y a des données à modifier
         if (Object.keys(updateData).length > 0) {
             await this.prisma.commande.update({
                 where: { id },
                 data: updateData,
             });
+
+            console.log('✅ Commande mise à jour avec conditions:', {
+                id: id,
+                updatedFields: Object.keys(updateData)
+            });
+
             console.log('📝 Champs commande mis à jour:', Object.keys(updateData));
         } else {
             console.log('📝 Aucune donnée à mettre à jour pour cette commande');
             this.logger.log(`📝 Aucune donnée à mettre à jour pour cette commande: ${existingCommande.numeroCommande}`);
         }
 
+        // 🆕 GÉRER LA MISE À JOUR DU CRÉNEAU
+        let timeSlotId: string | undefined = undefined;
+
+        if (updateCommandeDto.creneauLivraison !== undefined) {
+            if (updateCommandeDto.creneauLivraison) {
+                // Trouver le nouveau créneau
+                const timeSlot = await this.prisma.timeSlot.findFirst({
+                    where: {
+                        displayName: updateCommandeDto.creneauLivraison,
+                        isActive: true
+                    }
+                });
+
+                if (timeSlot) {
+                    // Vérifier la disponibilité (en excluant cette commande)
+                    const date = updateCommandeDto.dateLivraison ?
+                        new Date(updateCommandeDto.dateLivraison).toISOString().split('T')[0] :
+                        (await this.findOne(id)).dateLivraison.toISOString().split('T')[0];
+
+                    const availability = await this.slotsService.getAvailabilityForDate(date);
+                    const slotAvailability = availability.find(a => a.slot.id === timeSlot.id);
+
+                    // Pour la mise à jour, on permet si le créneau n'est pas complet
+                    // (il faut tenir compte que cette commande pourrait libérer une place)
+                    if (slotAvailability && slotAvailability.bookingsCount < slotAvailability.maxCapacity) {
+                        timeSlotId = timeSlot.id;
+                    } else {
+                        throw new BadRequestException('Créneau complet pour cette date');
+                    }
+                } else {
+                    timeSlotId = null; // Créneau supprimé
+                }
+            } else {
+                timeSlotId = null; // Créneau effacé
+            }
+            // Inclure dans les données de mise à jour si défini
+
+            updateData.creneauLivraison = timeSlotId;
+        }
+
         this.logger.log(`✅ Commande mise à jour: ${existingCommande.numeroCommande}`);
 
         // Retourner la commande mise à jour
         return this.findOne(id);
+    }
+
+    private calculateDeliveryValidation(
+        articles: any[],
+        deliveryConditions: any,
+        commandeDto: any
+    ) {
+        const heaviestWeight = articles.length > 0 ?
+            Math.max(...articles.map(a => a.poids || 0)) : 0;
+
+        const totalWeight = articles.reduce((sum, article) =>
+            sum + ((article.poids || 0) * (article.quantite || 1)), 0
+        );
+
+        const totalItems = articles.reduce((sum, article) =>
+            sum + (article.quantite || 1), 0
+        );
+
+        // Calcul équipiers requis (même logique que frontend)
+        let requiredCrewSize = 0;
+
+        if (heaviestWeight >= 30) requiredCrewSize++;
+        if (commandeDto.clientAscenseur && totalWeight > 300) requiredCrewSize++;
+        if (!commandeDto.clientAscenseur && totalWeight > 200) requiredCrewSize++;
+        if (totalItems > 20) requiredCrewSize++;
+        if (deliveryConditions.rueInaccessible) requiredCrewSize++;
+        if (deliveryConditions.paletteComplete) requiredCrewSize++;
+        if ((deliveryConditions.parkingDistance || 0) > 50) requiredCrewSize++;
+
+        const effectiveFloor = parseInt(commandeDto.clientEtage || '0') +
+            (deliveryConditions.isDuplex && deliveryConditions.deliveryToUpperFloor ? 1 : 0);
+
+        if (effectiveFloor > 2 && !commandeDto.clientAscenseur) requiredCrewSize++;
+        if (deliveryConditions.hasStairs && (deliveryConditions.stairCount || 0) > 20) requiredCrewSize++;
+        if (deliveryConditions.needsAssembly) requiredCrewSize++;
+
+        const needsQuote = requiredCrewSize >= 3 || totalWeight > 800;
+
+        return {
+            requiredCrewSize,
+            heaviestArticleWeight: heaviestWeight,
+            needsQuote,
+            details: {
+                totalWeight,
+                totalItems,
+                effectiveFloor,
+                conditions: deliveryConditions,
+                calculatedAt: new Date().toISOString()
+            }
+        };
     }
 
     async updatePhotos(commandeId: string, photos: Array<{ url: string; filename?: string }>) {

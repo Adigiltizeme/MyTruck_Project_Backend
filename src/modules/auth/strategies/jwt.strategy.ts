@@ -63,18 +63,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: payload.sub },
-      include: {
-        magasin: {
-          select: {
-            id: true,
-            nom: true,
-          },
-        },
-      },
-    });
-
     const now = Math.floor(Date.now() / 1000);
     const exp = payload.exp;
     const timeDiff = exp - now;
@@ -86,16 +74,99 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException('Token expiré');
     }
 
-    if (!user) {
-      throw new UnauthorizedException('Utilisateur non trouvé');
-    }
+    let entity = null;
 
-    return {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-      magasinId: user.magasinId,
-      magasin: user.magasin,
-    };
+    // Valider selon le type d'entité
+    if (payload.entityType === 'magasin') {
+      entity = await this.prisma.magasin.findUnique({
+        where: { id: payload.sub },
+        select: {
+          id: true,
+          email: true,
+          nom: true,
+          status: true,
+          hasAccount: true,
+          accountStatus: true,
+        },
+      });
+
+      if (!entity || !entity.hasAccount || entity.accountStatus !== 'active') {
+        throw new UnauthorizedException('Compte magasin inactif ou non configuré');
+      }
+
+      return {
+        id: entity.id,
+        email: entity.email,
+        nom: entity.nom,
+        role: payload.role,
+        entityType: 'magasin',
+        sub: payload.sub,
+        magasin: {
+          id: entity.id,
+          nom: entity.nom,
+        },
+      };
+    } else if (payload.entityType === 'chauffeur') {
+      entity = await this.prisma.chauffeur.findUnique({
+        where: { id: payload.sub },
+        select: {
+          id: true,
+          email: true,
+          nom: true,
+          prenom: true,
+          status: true,
+          hasAccount: true,
+          accountStatus: true,
+        },
+      });
+
+      if (!entity || !entity.hasAccount || entity.accountStatus !== 'active') {
+        throw new UnauthorizedException('Compte chauffeur inactif ou non configuré');
+      }
+
+      return {
+        id: entity.id,
+        email: entity.email,
+        nom: entity.nom,
+        prenom: entity.prenom,
+        role: payload.role,
+        entityType: 'chauffeur',
+        sub: payload.sub,
+        chauffeur: {
+          id: entity.id,
+          nom: entity.nom,
+          prenom: entity.prenom,
+        },
+      };
+    } else {
+      // Utilisateur système
+      entity = await this.prisma.user.findUnique({
+        where: { id: payload.sub },
+        include: {
+          magasin: {
+            select: {
+              id: true,
+              nom: true,
+            },
+          },
+        },
+      });
+
+      if (!entity || entity.status !== 'Actif') {
+        throw new UnauthorizedException('Compte utilisateur inactif');
+      }
+
+      return {
+        id: entity.id,
+        email: entity.email,
+        nom: entity.nom,
+        prenom: entity.prenom,
+        role: entity.role,
+        entityType: 'user',
+        sub: payload.sub,
+        magasinId: entity.magasinId,
+        magasin: entity.magasin,
+      };
+    }
   }
 }

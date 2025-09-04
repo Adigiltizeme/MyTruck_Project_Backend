@@ -1,34 +1,40 @@
 import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateClientDto, UpdateClientDto, ClientFiltersDto } from './dto';
+import { ClientsListResponseDto } from './dto/client-response.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ClientsService {
   private readonly logger = new Logger(ClientsService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
-  async findAll(filters: ClientFiltersDto) {
+  async findAll(filters: ClientFiltersDto, userRole: string = 'MAGASIN', magasinId?: string) {
+    console.log('🏪 Service findAll appelé avec role:', userRole);
+
     const { skip, take, nom, ville, typeAdresse } = filters;
 
-    // Construction du filtre where
-    const where: Prisma.ClientWhereInput = {};
-    
+    const where: Prisma.ClientWhereInput = {
+      deletionRequested: false,
+      dataRetentionUntil: { gte: new Date() }
+    };
+
+    if (userRole === 'MAGASIN' && magasinId) {
+      where.commandes = {
+        some: {
+          magasinId: magasinId
+        }
+      };
+    }
+
     if (nom) {
       where.nom = {
         contains: nom,
         mode: 'insensitive',
       };
     }
-    
-    if (ville) {
-      where.ville = {
-        contains: ville,
-        mode: 'insensitive',
-      };
-    }
-    
+
     if (typeAdresse) {
       where.typeAdresse = typeAdresse;
     }
@@ -50,14 +56,37 @@ export class ClientsService {
       this.prisma.client.count({ where }),
     ]);
 
+    // Pseudonymiser selon les droits utilisateur
+    const processedClients = userRole === 'MAGASIN'
+      ? clients.map(client => {
+        console.log('🔒 Pseudonymisation client:', client.nom);
+        return this.pseudonymizeClientData(client);
+      })
+      : clients.map(client => {
+        console.log('✅ Client complet affiché:', client.nom);
+        return client;
+      });
+
     return {
-      data: clients,
+      data: processedClients,
       meta: {
         total,
         skip: skip || 0,
         take: take || 50,
         hasMore: (skip || 0) + (take || 50) < total,
       },
+    };
+  }
+
+  private pseudonymizeClientData(client: any) {
+    return {
+      ...client,
+      nom: client.nom.substring(0, 2) + '***',
+      prenom: client.prenom ? client.prenom.substring(0, 2) + '***' : null,
+      telephone: client.telephone ? client.telephone.substring(0, 4) + '***' + client.telephone.slice(-2) : null,
+      telephoneSecondaire: client.telephoneSecondaire ? client.telephoneSecondaire.substring(0, 4) + '***' + client.telephoneSecondaire.slice(-2) : null,
+      adresseLigne1: 'Adresse masquée',
+      pseudonymized: true
     };
   }
 
@@ -191,12 +220,6 @@ export class ClientsService {
               contains: searchTerm,
             },
           },
-          {
-            ville: {
-              contains: searchTerm,
-              mode: 'insensitive',
-            },
-          },
         ],
       },
       take: 20,
@@ -223,14 +246,14 @@ export class ClientsService {
       this.prisma.commande.count({
         where: { clientId: id },
       }),
-      
+
       // Commandes par statut
       this.prisma.commande.groupBy({
         by: ['statutCommande'],
         where: { clientId: id },
         _count: { statutCommande: true },
       }),
-      
+
       // Dernière commande
       this.prisma.commande.findFirst({
         where: { clientId: id },
@@ -242,7 +265,7 @@ export class ClientsService {
           statutLivraison: true,
         },
       }),
-      
+
       // Chiffre d'affaire total
       this.prisma.commande.aggregate({
         where: { clientId: id },

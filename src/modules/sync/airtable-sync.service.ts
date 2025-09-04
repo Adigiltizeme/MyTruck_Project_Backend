@@ -277,7 +277,7 @@ export class AirtableSyncService {
             }
 
             // Convertir et envoyer vers Airtable
-            const airtableRecords = this.transformToAirtable(modifiedRecords, config);
+            const airtableRecords = this.oAirtable(modifiedRecords, config);
             const results = await this.batchUpdateAirtable(config.airtableTableId, airtableRecords);
 
             // Mettre à jour le timestamp de sync
@@ -331,7 +331,7 @@ export class AirtableSyncService {
     // TRANSFORMATION DES DONNÉES
     // ========================
 
-    private transformToAirtable(records: any[], config: SyncConfig[string]): AirtableRecord[] {
+    private oAirtable(records: any[], config: SyncConfig[string]): AirtableRecord[] {
         return records.map(record => {
             const fields: Record<string, any> = {};
 
@@ -899,7 +899,7 @@ export class AirtableSyncService {
 
     public async testTransform(tableName: string, records: any[]) {
         const config = this.syncConfig[tableName];
-        return this.transformToAirtable(records, config);
+        return this.oAirtable(records, config);
     }
 
     public async testAirtableConnection() {

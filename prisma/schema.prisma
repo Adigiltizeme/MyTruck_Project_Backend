@@ -23,6 +23,8 @@ model User {
   lastSyncedAt DateTime?
   magasin      Magasin?  @relation(fields: [magasinId], references: [id])
 
+  slotRestrictions SlotRestriction[] @relation("UserSlotRestrictions")
+
   @@map("users")
 }
 
@@ -32,6 +34,10 @@ model Magasin {
   adresse             String
   telephone           String?
   email               String?
+  password            String? // Hash du mot de passe
+  hasAccount          Boolean               @default(false)
+  lastLoginAt         DateTime?
+  accountStatus       String                @default("inactive") // "active", "inactive", "pending"
   manager             String?
   status              String                @default("Actif")
   categories          String[]
@@ -55,6 +61,10 @@ model Chauffeur {
   prenom             String?
   telephone          String?
   email              String?
+  password           String? // Hash du mot de passe
+  hasAccount         Boolean                @default(false)
+  lastLoginAt        DateTime?
+  accountStatus      String                 @default("inactive")
   status             String                 @default("Actif")
   role               String                 @default("Chauffeur")
   longitude          Float?
@@ -88,75 +98,109 @@ model Client {
   updatedAt           DateTime   @updatedAt
   lastSyncedAt        DateTime?
   commandes           Commande[]
+  // Conformité RGPD
+  consentGiven        Boolean    @default(false)
+  consentDate         DateTime?
+  consentWithdrawn    Boolean    @default(false)
+  consentWithdrawnAt  DateTime?
+  dataRetentionUntil  DateTime? // Calcul automatique selon la dernière activité
+  lastActivityAt      DateTime   @default(now())
+  isMinor             Boolean    @default(false)
+  legalBasis          String? // 'contract', 'consent', 'legitimate_interest'
+  pseudonymized       Boolean    @default(false)
+  deletionRequested   Boolean    @default(false)
+  deletionRequestedAt DateTime?
 
   @@map("clients")
 }
 
 model Commande {
-  id                 String                 @id @default(uuid())
-  numeroCommande     String                 @unique
-  dateCommande       DateTime               @default(now())
-  dateLivraison      DateTime
-  creneauLivraison   String?
-  statutCommande     String                 @default("En attente")
-  statutLivraison    String                 @default("EN ATTENTE")
-  tarifHT            Decimal                @default(0)
-  reserveTransport   Boolean                @default(false)
-  categorieVehicule  String?
-  optionEquipier     Int                    @default(0)
-  clientId           String
-  magasinId          String
-  prenomVendeur      String?
-  remarques          String?
-  airtableId         String?                @unique
-  createdAt          DateTime               @default(now())
-  updatedAt          DateTime               @updatedAt
-  lastSyncedAt       DateTime?
-  articles           Article[]
-  chauffeurs         ChauffeurSurCommande[]
-  client             Client                 @relation(fields: [clientId], references: [id])
-  magasin            Magasin                @relation(fields: [magasinId], references: [id])
-  commentaires       Commentaire[]
-  devis              Devis[]
-  factures           Facture[]
-  photos             Photo[]
-  rapportsEnlevement RapportEnlevement[]
-  rapportsLivraison  RapportLivraison[]
-  statusHistory     StatusHistory[]
-  estimatedDelivery DateTime?
-  actualDelivery    DateTime?
-  trackingEvents    TrackingEvent[]
+  id                       String                 @id @default(uuid())
+  numeroCommande           String                 @unique
+  dateCommande             DateTime               @default(now())
+  dateLivraison            DateTime
+  creneauLivraison         String?
+  statutCommande           String                 @default("En attente")
+  statutLivraison          String                 @default("EN ATTENTE")
+  tarifHT                  Decimal                @default(0)
+  reserveTransport         Boolean                @default(false)
+  categorieVehicule        String?
+  optionEquipier           Int                    @default(0)
+  clientId                 String
+  magasinId                String
+  prenomVendeur            String?
+  remarques                String?
+  airtableId               String?                @unique
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime               @updatedAt
+  lastSyncedAt             DateTime?
+  articles                 Article[]
+  chauffeurs               ChauffeurSurCommande[]
+  client                   Client                 @relation(fields: [clientId], references: [id])
+  magasin                  Magasin                @relation(fields: [magasinId], references: [id])
+  commentaires             Commentaire[]
+  devis                    Devis[]
+  factures                 Facture[]
+  photos                   Photo[]
+  rapportsEnlevement       RapportEnlevement[]
+  rapportsLivraison        RapportLivraison[]
+  statusHistory            StatusHistory[]
+  estimatedDelivery        DateTime?
+  actualDelivery           DateTime?
+  trackingEvents           TrackingEvent[]
+  documents                Document[]
+  cessions                 CessionInterMagasin[]  @relation(name: "CommandeCessions")
+  // Règles métier appliquées
+  devisObligatoire         Boolean                @default(false)
+  reasonDevis              String? // Raison obligation (distance/équipiers/spécifique)
+  timeSlotId               String?
+  timeSlot                 TimeSlot?              @relation("CommandeSlot", fields: [timeSlotId], references: [id])
+  rueInaccessible          Boolean                @default(false)
+  paletteComplete          Boolean                @default(false)
+  parkingDistance          Int? // Distance en mètres
+  hasStairs                Boolean                @default(false)
+  stairCount               Int? // Nombre de marches
+  needsAssembly            Boolean                @default(false)
+  isDuplex                 Boolean                @default(false)
+  deliveryToUpperFloor     Boolean                @default(false)
+  // 🆕 CALCULS AUTOMATIQUES (pour éviter recalculs constants)
+  requiredCrewSize         Int? // Nombre d'équipiers calculé
+  heaviestArticleWeight    Float? // Poids de l'article le plus lourd
+  largestArticleDimensions String? // JSON des dimensions du plus grand article
+  // 🆕 MÉTADONNÉES DE VALIDATION
+  needsQuote               Boolean                @default(false)
+  validationDetails        String? // JSON des détails de validation
+  lastValidationAt         DateTime? // Dernière validation
 
   @@index([statutLivraison, dateLivraison])
   @@index([magasinId, statutCommande])
   @@index([clientId])
-  
   @@map("commandes")
 }
 
 model StatusHistory {
-  id          String   @id @default(uuid())
-  commandeId  String
-  oldStatus   String
-  newStatus   String
-  reason      String?
-  changedBy   String
-  changedAt   DateTime @default(now())
-  commande    Commande @relation(fields: [commandeId], references: [id])
-  
+  id         String   @id @default(uuid())
+  commandeId String
+  oldStatus  String
+  newStatus  String
+  reason     String?
+  changedBy  String
+  changedAt  DateTime @default(now())
+  commande   Commande @relation(fields: [commandeId], references: [id])
+
   @@map("status_history")
 }
 
 model TrackingEvent {
-  id          String   @id @default(uuid())
-  commandeId  String
-  eventType   TrackingEventType
-  latitude    Float?
-  longitude   Float?
-  timestamp   DateTime @default(now())
-  metadata    Json?
-  commande    Commande @relation(fields: [commandeId], references: [id])
-  
+  id         String            @id @default(uuid())
+  commandeId String
+  eventType  TrackingEventType
+  latitude   Float?
+  longitude  Float?
+  timestamp  DateTime          @default(now())
+  metadata   Json?
+  commande   Commande          @relation(fields: [commandeId], references: [id])
+
   @@map("tracking_events")
 }
 
@@ -183,16 +227,16 @@ model ChauffeurSurCommande {
 }
 
 model Article {
-  id         String   @id @default(uuid())
-  nombre     Int
-  details    String?
-  categories String[]
+  id          String   @id @default(uuid())
+  nombre      Int
+  details     String?
+  categories  String[]
   dimensions  Json?
   canBeTilted Boolean  @default(false)
-  commandeId String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  commande   Commande @relation(fields: [commandeId], references: [id])
+  commandeId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  commande    Commande @relation(fields: [commandeId], references: [id])
 
   @@map("articles")
 }
@@ -205,7 +249,7 @@ model Photo {
   type       PhotoType
   commandeId String
   createdAt  DateTime  @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt  DateTime  @updatedAt
   commande   Commande  @relation(fields: [commandeId], references: [id], onDelete: Cascade)
 
   @@map("photos")
@@ -279,31 +323,83 @@ model Devis {
 }
 
 model CessionInterMagasin {
-  id                   String    @id @default(uuid())
-  numeroCession        String    @unique
-  dateCession          DateTime  @default(now())
+  id                   String     @id @default(uuid())
+  numeroCession        String     @unique
+  dateCession          DateTime   @default(now())
   dateLivraison        DateTime
   creneauLivraison     String?
-  statutCession        String    @default("En attente")
-  statutLivraison      String    @default("EN ATTENTE")
+  statutCession        String     @default("En attente")
+  statutLivraison      String     @default("EN ATTENTE")
   categorieVehicule    String?
-  optionEquipier       Int       @default(0)
-  tarifHT              Decimal   @default(0)
-  reserveTransport     Boolean   @default(false)
-  nombreArticles       Int       @default(0)
+  optionEquipier       Int        @default(0)
+  tarifHT              Decimal    @default(0)
+  reserveTransport     Boolean    @default(false)
+  nombreArticles       Int        @default(0)
   categoriesArticles   String[]
   detailsArticles      String?
   remarques            String?
   magasinOrigineId     String
   magasinDestinationId String
-  airtableId           String?   @unique
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
+  airtableId           String?    @unique
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
   lastSyncedAt         DateTime?
-  magasinDestination   Magasin   @relation("MagasinDestination", fields: [magasinDestinationId], references: [id])
-  magasinOrigine       Magasin   @relation("MagasinOrigine", fields: [magasinOrigineId], references: [id])
+  magasinDestination   Magasin    @relation("MagasinDestination", fields: [magasinDestinationId], references: [id])
+  magasinOrigine       Magasin    @relation("MagasinOrigine", fields: [magasinOrigineId], references: [id])
+  commandeId           String
+  commande             Commande   @relation(name: "CommandeCessions", fields: [commandeId], references: [id])
+  documents            Document[]
 
   @@map("cessions_inter_magasin")
+}
+
+model Document {
+  id             String         @id @default(uuid())
+  type           DocumentType
+  numeroDocument String         @unique
+  dateDocument   DateTime       @default(now())
+  dateEcheance   DateTime?
+  dateValidite   DateTime? // Pour devis
+  montantHT      Decimal?
+  montantTTC     Decimal?
+  tva            Decimal?       @default(20)
+  statut         DocumentStatus @default(EN_ATTENTE)
+  url            String? // URL Cloudinary
+  downloadUrl    String?
+  cloudinaryId   String? // ID pour suppression
+  fileName       String?
+  fileSize       Int?
+
+  // Relations flexibles
+  commandeId String?
+  cessionId  String? // ✅ NOUVEAU pour cessions
+  commande   Commande?            @relation(fields: [commandeId], references: [id])
+  cession    CessionInterMagasin? @relation(fields: [cessionId], references: [id])
+
+  // Workflow
+  createdBy   String // User ID
+  validatedBy String? // User ID validateur
+  validatedAt DateTime?
+  sentAt      DateTime?
+  sentTo      String? // Email destinataire
+
+  // Métadonnées
+  templateUsed   String? // Template utilisé
+  generationData Json? // Données de génération
+  signature      Json? // Signature électronique
+
+  // Versioning
+  version  Int        @default(1)
+  parentId String? // Pour versioning
+  parent   Document?  @relation("DocumentVersions", fields: [parentId], references: [id])
+  versions Document[] @relation("DocumentVersions")
+
+  // Timestamps
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  DocumentAction DocumentAction[]
+
+  @@map("documents")
 }
 
 model SyncLog {
@@ -317,6 +413,107 @@ model SyncLog {
   updatedAt DateTime @updatedAt
 
   @@map("sync_logs")
+}
+
+model RegleMetier {
+  id          String    @id @default(uuid())
+  nom         String    @unique
+  description String?
+  type        RegleType
+  conditions  Json // Conditions déclenchement
+  actions     Json // Actions à effectuer
+  active      Boolean   @default(true)
+  priorite    Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("regles_metier")
+}
+
+// ===============================
+// TEMPLATES DOCUMENTS
+// ===============================
+
+model DocumentTemplate {
+  id      String       @id @default(uuid())
+  nom     String       @unique
+  type    DocumentType
+  version String       @default("1.0")
+
+  // Template
+  htmlTemplate String // Template HTML
+  cssStyles    String? // Styles CSS
+  jsLogic      String? // Logique JS optionnelle
+
+  // Configuration
+  variables Json // Variables dynamiques
+  sections  Json // Sections configurables
+
+  // Métadonnées
+  isDefault Boolean @default(false)
+  isActive  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("document_templates")
+}
+
+// ===============================
+// HISTORIQUE ACTIONS DOCUMENTS
+// ===============================
+
+model DocumentAction {
+  id         String   @id @default(uuid())
+  documentId String
+  document   Document @relation(fields: [documentId], references: [id])
+
+  action    DocumentActionType
+  userId    String // Qui a fait l'action
+  details   Json? // Détails de l'action
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@map("document_actions")
+}
+
+model TimeSlot {
+  id          String   @id @default(cuid())
+  startTime   String // "07h"
+  endTime     String // "09h"
+  displayName String // "07h-09h"
+  isActive    Boolean  @default(true)
+  maxCapacity Int      @default(10)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  restrictions SlotRestriction[]
+  commandes    Commande[]        @relation("CommandeSlot")
+
+  @@map("time_slots")
+}
+
+model SlotRestriction {
+  id             String    @id @default(cuid())
+  date           String // YYYY-MM-DD
+  slotId         String
+  isBlocked      Boolean   @default(true)
+  reason         String?
+  blockedBy      String // ID de l'admin
+  blockedAt      DateTime  @default(now())
+  temporaryUntil DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // Relations
+  slot          TimeSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
+  blockedByUser User     @relation("UserSlotRestrictions", fields: [blockedBy], references: [id])
+
+  @@unique([date, slotId])
+  @@map("slot_restrictions")
 }
 
 enum UserRole {
@@ -337,4 +534,52 @@ enum CommentaireType {
   GENERAL
   ENLEVEMENT
   LIVRAISON
+}
+
+enum DocumentType {
+  BON_COMMANDE
+  BON_CESSION // Nouveau : Inter-magasins
+  DEVIS
+  FACTURE
+  AVOIR // Remboursements
+  RAPPORT_LIVRAISON // Optionnel
+}
+
+enum DocumentStatus {
+  EN_ATTENTE // Créé, pas validé
+  VALIDE // Validé par direction
+  ENVOYE // Envoyé au client
+  ACCEPTE // Devis accepté
+  REFUSE // Devis refusé
+  PAYE // Facture payée
+  ANNULE // Annulé
+  EXPIRE // Devis expiré
+}
+
+enum RegleType {
+  DEVIS_OBLIGATOIRE // équipiers > 2 || distance > 50km || demande spécifique
+  FACTURE_AUTO // Auto-génération après livraison
+  VALIDATION_REQUIRED // Documents nécessitent validation
+  EMAIL_AUTO // Envoi automatique emails
+  ARCHIVAGE_AUTO // Purge automatique anciens docs
+}
+
+enum DocumentActionType {
+  CREATION
+  MODIFICATION
+  VALIDATION
+  ENVOI
+  TELECHARGEMENT
+  SIGNATURE
+  ACCEPTATION
+  REFUS
+  ANNULATION
+  ARCHIVAGE
+}
+
+enum CessionStatus {
+  EN_ATTENTE
+  VALIDEE
+  REFUSEE
+  TRANSFEREE
 }

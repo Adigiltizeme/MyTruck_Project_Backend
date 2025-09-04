@@ -34,12 +34,10 @@ export class CreateChauffeurDto {
 
     @ApiProperty({
         example: 'jean.dupont@mytruck.com',
-        description: 'Adresse email du chauffeur',
-        required: false
+        description: 'Adresse email du chauffeur (généré automatiquement si non fourni)'
     })
-    @IsOptional()
     @IsEmail()
-    email?: string;
+    email: string;
 
     @ApiProperty({
         example: 'Actif',
@@ -81,9 +79,37 @@ export class CreateChauffeurDto {
     @Min(1)
     @Max(5)
     notes?: number;
+
+    @ApiProperty({
+        example: 'motdepasse123',
+        description: 'Mot de passe pour la connexion (optionnel, généré automatiquement si non fourni)',
+        required: false
+    })
+    @IsOptional()
+    @IsString()
+    password?: string;
 }
 
 export class UpdateChauffeurDto extends PartialType(CreateChauffeurDto) { }
+
+export class UpdateChauffeurPasswordDto {
+    @ApiProperty({
+        example: 'nouveaumotdepasse123',
+        description: 'Nouveau mot de passe'
+    })
+    @IsString()
+    password: string;
+}
+
+export class GeneratePasswordDto {
+    @ApiProperty({
+        example: true,
+        description: 'Générer un nouveau mot de passe automatiquement',
+        required: false
+    })
+    @IsOptional()
+    generateRandom?: boolean;
+}
 
 export class ChauffeurFiltersDto {
     @ApiProperty({ required: false, description: 'Filtrer par statut' })

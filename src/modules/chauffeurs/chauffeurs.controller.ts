@@ -9,6 +9,8 @@ import {
     Query,
     ParseUUIDPipe,
     UseGuards,
+    Request,
+    UnauthorizedException,
 } from '@nestjs/common';
 import {
     ApiTags,
@@ -19,7 +21,7 @@ import {
 } from '@nestjs/swagger';
 
 import { ChauffeursService } from './chauffeurs.service';
-import { CreateChauffeurDto, UpdateChauffeurDto, ChauffeurFiltersDto } from './dto';
+import { CreateChauffeurDto, UpdateChauffeurDto, ChauffeurFiltersDto, UpdateChauffeurPasswordDto, GeneratePasswordDto } from './dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
@@ -145,6 +147,20 @@ export class ChauffeursController {
         return this.chauffeursService.findOne(id);
     }
 
+    @Get(':id/dependencies')
+    @UseGuards(RolesGuard)
+    @Roles(UserRole.ADMIN, UserRole.DIRECTION)
+    @ApiOperation({
+        summary: 'Voir les dépendances d\'un chauffeur',
+        description: 'Affiche la liste détaillée des éléments liés à un chauffeur avant suppression'
+    })
+    @ApiResponse({ status: 200, description: 'Dépendances récupérées avec succès' })
+    @ApiResponse({ status: 404, description: 'Chauffeur non trouvé' })
+    async getDependencies(@Param('id', ParseUUIDPipe) id: string) {
+        console.log('🔍 GET /chauffeurs/:id/dependencies pour:', id);
+        return this.chauffeursService.getDependencies(id);
+    }
+
     @Get(':id/stats')
     @ApiOperation({
         summary: 'Statistiques d\'un chauffeur',
@@ -195,14 +211,75 @@ export class ChauffeursController {
     @Delete(':id')
     @UseGuards(RolesGuard)
     @Roles(UserRole.ADMIN)
-    @ApiOperation({
-        summary: 'Supprimer un chauffeur',
-        description: 'Supprime un chauffeur (Admin uniquement)'
-    })
+    @ApiOperation({ summary: 'Supprimer un chauffeur' })
     @ApiResponse({ status: 200, description: 'Chauffeur supprimé avec succès' })
     @ApiResponse({ status: 404, description: 'Chauffeur non trouvé' })
     @ApiResponse({ status: 400, description: 'Impossible de supprimer: assignations actives' })
-    async remove(@Param('id', ParseUUIDPipe) id: string) {
-        return this.chauffeursService.remove(id);
+    async remove(
+        @Param('id', ParseUUIDPipe) id: string,
+        @Query('force') force?: string
+    ) {
+        console.log('🚛 DELETE /chauffeurs/:id - Suppression chauffeur:', id);
+        console.log('🔥 Force delete:', force === 'true');
+
+        const forceDelete = force === 'true';
+        return this.chauffeursService.remove(id, forceDelete);
+    }
+
+    @Patch(':id/profile')
+    @UseGuards(JwtAuthGuard)
+    async updateProfile(
+        @Param('id', ParseUUIDPipe) id: string,
+        @Body() updateData: {
+            nom?: string;
+            prenom?: string;
+            email?: string;
+            telephone?: string;
+        },
+        @Request() req
+    ) {
+        if (req.user.chauffeurId !== id && req.user.role !== 'ADMIN') {
+            throw new UnauthorizedException('Accès non autorisé à ce profil');
+        }
+
+        return this.chauffeursService.updateProfile(id, updateData);
+    }
+
+    @Patch(':id/password')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    @ApiOperation({ summary: 'Mettre à jour le mot de passe d\'un chauffeur' })
+    @ApiResponse({ status: 200, description: 'Mot de passe mis à jour avec succès' })
+    @ApiResponse({ status: 404, description: 'Chauffeur non trouvé' })
+    async updatePassword(
+        @Param('id', ParseUUIDPipe) id: string,
+        @Body() updatePasswordDto: UpdateChauffeurPasswordDto
+    ) {
+        return this.chauffeursService.updatePassword(id, updatePasswordDto);
+    }
+
+    @Post(':id/generate-password')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    @ApiOperation({ summary: 'Générer un nouveau mot de passe pour un chauffeur' })
+    @ApiResponse({ status: 200, description: 'Nouveau mot de passe généré avec succès' })
+    @ApiResponse({ status: 404, description: 'Chauffeur non trouvé' })
+    async generatePassword(
+        @Param('id', ParseUUIDPipe) id: string,
+        @Body() options?: GeneratePasswordDto
+    ) {
+        return this.chauffeursService.generateNewPassword(id, options);
+    }
+
+    @Post(':id/sync-profile')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    @ApiOperation({ summary: 'Synchroniser le profil utilisateur avec les données chauffeur' })
+    @ApiResponse({ status: 200, description: 'Profil utilisateur synchronisé avec succès' })
+    @ApiResponse({ status: 404, description: 'Chauffeur non trouvé' })
+    async syncUserProfile(
+        @Param('id', ParseUUIDPipe) id: string
+    ) {
+        return this.chauffeursService.syncUserProfile(id);
     }
 }

@@ -32,6 +32,7 @@ import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { UserRole } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateRapportDto, TypeRapport, UpdateRapportDto } from './dto/rapport.dto';
+import { VehicleValidationBackendService } from './services/vehicle-validation-backend.service';
 
 @ApiTags('Commandes')
 @Controller('commandes')
@@ -39,7 +40,8 @@ import { CreateRapportDto, TypeRapport, UpdateRapportDto } from './dto/rapport.d
 export class CommandesController {
     constructor(
         private readonly commandesService: CommandesService,
-        private readonly prisma: PrismaService
+        private readonly prisma: PrismaService,
+        private readonly vehicleValidationService: VehicleValidationBackendService
     ) { }
 
     @Post()
@@ -95,7 +97,20 @@ export class CommandesController {
             console.log('✅ Magasin trouvé:', magasin.nom);
             console.log('🚀 Appel service create...');
 
-            const result = await this.commandesService.create(createCommandeDto);
+            // 🔥 VALIDATION AUTOMATIQUE AVANT CRÉATION
+            const validation = this.vehicleValidationService.validateCommande(createCommandeDto);
+
+            // Enrichir les données avec les calculs
+            const enrichedData = {
+                ...createCommandeDto,
+                requiredCrewSize: validation.requiredCrewSize,
+                heaviestArticleWeight: validation.heaviestArticle,
+                needsQuote: validation.needsQuote,
+                validationDetails: JSON.stringify(validation.validationDetails),
+                lastValidationAt: new Date()
+            };
+
+            const result = await this.commandesService.create(enrichedData);
             console.log('✅ Commande créée avec succès:', result.id);
             return result;
         } catch (error) {
@@ -240,7 +255,18 @@ export class CommandesController {
             console.log('❌ → Champs présents:', Object.keys(updateCommandeDto));
         }
 
-        return this.commandesService.update(id, updateCommandeDto);
+        const validation = this.vehicleValidationService.validateCommande(updateCommandeDto);
+
+        const enrichedData = {
+            ...updateCommandeDto,
+            requiredCrewSize: validation.requiredCrewSize,
+            heaviestArticleWeight: validation.heaviestArticle,
+            needsQuote: validation.needsQuote,
+            validationDetails: JSON.stringify(validation.validationDetails),
+            lastValidationAt: new Date()
+        };
+
+        return this.commandesService.update(id, enrichedData);
     }
 
     @Delete(':id')
@@ -530,6 +556,11 @@ export class CommandesController {
         );
 
         return { message: 'Rapport supprimé avec succès' };
+    }
+
+    @Post('validate')
+    async validateDelivery(@Body() validationData: any) {
+        return this.vehicleValidationService.validateCommande(validationData);
     }
 
     @Post('test')

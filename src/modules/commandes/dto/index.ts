@@ -10,7 +10,8 @@ import {
     IsUUID,
     ValidateNested,
     Min,
-    Max
+    Max,
+    IsObject
 } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
 
@@ -392,6 +393,59 @@ export class CreateCommandeDto {
     @IsOptional()
     @IsBoolean()
     canBeTilted?: boolean;
+
+    // 🆕 CONDITIONS DE LIVRAISON
+    @IsOptional()
+    @IsBoolean()
+    rueInaccessible?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    paletteComplete?: boolean;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    parkingDistance?: number;
+
+    @IsOptional()
+    @IsBoolean()
+    hasStairs?: boolean;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    stairCount?: number;
+
+    @IsOptional()
+    @IsBoolean()
+    needsAssembly?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    isDuplex?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    deliveryToUpperFloor?: boolean;
+
+    //requiredCrewSize
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    requiredCrewSize?: number;
+
+    @IsOptional()
+    @IsNumber()
+    heaviestArticleWeight?: number;
+
+    @IsOptional()
+    @IsBoolean()
+    needsQuote?: boolean;
+
+    @IsOptional()
+    @IsString()
+    validationDetails?: string;
 }
 
 export class UpdateCommandeDto extends PartialType(CreateCommandeDto) {
@@ -424,6 +478,36 @@ export class UpdateCommandeDto extends PartialType(CreateCommandeDto) {
     @IsArray()
     @IsUUID(4, { each: true })
     chauffeurIds?: string[];
+
+    //canBeTilted
+    @ApiProperty({
+        example: false,
+        required: false,
+        description: 'Indique si le véhicule peut être incliné'
+    })
+    @IsOptional()
+    @IsBoolean()
+    canBeTilted?: boolean;
+
+    @ApiProperty({
+        required: false,
+        description: 'Conditions spéciales de livraison'
+    })
+    @IsOptional()
+    deliveryConditions?: {
+        rueInaccessible?: boolean;
+        paletteComplete?: boolean;
+        parkingDistance?: number;
+        hasStairs?: boolean;
+        stairCount?: number;
+        needsAssembly?: boolean;
+        isDuplex?: boolean;
+        deliveryToUpperFloor?: boolean;
+        requiredCrewSize?: number;
+        heaviestArticleWeight?: number;
+        needsQuote?: boolean;
+        validationDetails?: string;
+    };
 }
 
 export class AssignChauffeursDto {

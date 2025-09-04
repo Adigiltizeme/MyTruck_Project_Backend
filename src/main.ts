@@ -10,18 +10,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
-  // Configuration CORS
+  // Configuration CORS - Autoriser toutes les origines pour ngrok
   app.enableCors({
-    origin: ['CORS_ORIGIN',
-      'http://localhost:3001',   // Frontend dev
-      'http://localhost:3000',   // Au cas où
-      'http://localhost:5173',   // Vite parfois utilise ce port
-      'http://127.0.0.1:3001',
-      'http://127.0.0.1:5173'
-    ],
-    credentials: configService.get('CORS_CREDENTIALS', true),
+    origin: true, // Autoriser toutes les origines (développement uniquement)
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'ngrok-skip-browser-warning', 'X-Requested-With'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204
   });
 
   // Préfixe global pour l'API
@@ -57,6 +53,7 @@ async function bootstrap() {
       },
       'JWT-auth',
     )
+    .addTag('slots', 'Gestion des créneaux de livraison')
     .addServer(`http://localhost:${configService.get('PORT', 3000)}`, 'Local server')
     .build();
 
@@ -69,7 +66,7 @@ async function bootstrap() {
 
   // Démarrage du serveur
   const port = configService.get('PORT', 3000);
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
   logger.log(`🚀 Application démarrée sur http://localhost:${port}`);
   logger.log(`📚 Documentation Swagger disponible sur http://localhost:${port}/${apiPrefix}/docs`);

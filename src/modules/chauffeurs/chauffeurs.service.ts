@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException, Logger } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
-import { CreateChauffeurDto, UpdateChauffeurDto, ChauffeurFiltersDto } from './dto';
+import { CreateChauffeurDto, UpdateChauffeurDto, ChauffeurFiltersDto, UpdateChauffeurPasswordDto, GeneratePasswordDto } from './dto';
 import { Prisma } from '@prisma/client';
 import { TrackingService } from '../tracking/tracking.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class ChauffeursService {
@@ -99,7 +100,6 @@ export class ChauffeursService {
                                     select: {
                                         nom: true,
                                         prenom: true,
-                                        ville: true,
                                     },
                                 },
                                 magasin: {
@@ -153,8 +153,24 @@ export class ChauffeursService {
     }
 
     async create(createChauffeurDto: CreateChauffeurDto) {
+        const { password, ...chauffeurData } = createChauffeurDto;
+        
+        // Si pas d'email fourni, générer un email par défaut
+        if (!chauffeurData.email) {
+            chauffeurData.email = `${chauffeurData.prenom?.toLowerCase()}.${chauffeurData.nom?.toLowerCase()}@mytruck.com`;
+        }
+        
+        // Générer un mot de passe par défaut si pas fourni
+        const defaultPassword = password || this.generateRandomPassword();
+        const hashedPassword = await bcrypt.hash(defaultPassword, 10);
+
         const chauffeur = await this.prisma.chauffeur.create({
-            data: createChauffeurDto,
+            data: {
+                ...chauffeurData,
+                password: hashedPassword,
+                hasAccount: true,
+                accountStatus: 'active',
+            },
             include: {
                 _count: {
                     select: {
@@ -166,8 +182,24 @@ export class ChauffeursService {
             },
         });
 
-        this.logger.log(`✅ Chauffeur créé: ${chauffeur.nom} ${chauffeur.prenom} (${chauffeur.id})`);
-        return chauffeur;
+        this.logger.log(`✅ Chauffeur et utilisateur créés: ${chauffeur.nom} ${chauffeur.prenom} (${chauffeur.id})`);
+        if (!password) {
+            this.logger.log(`🔑 Mot de passe généré: ${defaultPassword}`);
+        }
+        
+        return {
+            ...chauffeur,
+            temporaryPassword: !password ? defaultPassword : undefined,
+        };
+    }
+
+    private generateRandomPassword(): string {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let password = '';
+        for (let i = 0; i < 8; i++) {
+            password += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return password;
     }
 
     async update(id: string, updateChauffeurDto: UpdateChauffeurDto) {
@@ -192,32 +224,65 @@ export class ChauffeursService {
         return chauffeur;
     }
 
-    async remove(id: string) {
+    async remove(id: string, forceDelete: boolean = false) {
         const existingChauffeur = await this.findOne(id);
 
-        // Vérifier qu'il n'y a pas d'assignations actives
-        const assignationsActives = await this.prisma.chauffeurSurCommande.count({
-            where: {
-                chauffeurId: id,
-                commande: {
-                    statutLivraison: {
-                        notIn: ['LIVREE', 'ANNULEE'],
+        if (!forceDelete) {
+            // Vérifier qu'il n'y a pas d'assignations actives (logique existante)
+            const assignationsActives = await this.prisma.chauffeurSurCommande.count({
+                where: {
+                    chauffeurId: id,
+                    commande: {
+                        statutLivraison: {
+                            notIn: ['LIVREE', 'ANNULEE'],
+                        },
                     },
                 },
-            },
-        });
+            });
 
-        if (assignationsActives > 0) {
-            throw new Error(
-                `Impossible de supprimer le chauffeur car il a ${assignationsActives} assignation(s) active(s)`
-            );
+            if (assignationsActives > 0) {
+                throw new BadRequestException(
+                    `Impossible de supprimer le chauffeur car il a ${assignationsActives} assignation(s) active(s)`
+                );
+            }
+        } else {
+            // SUPPRESSION FORCÉE - Nettoyer les dépendances
+            this.logger.warn(`🚨 SUPPRESSION FORCÉE du chauffeur: ${existingChauffeur.nom} ${existingChauffeur.prenom}`);
+
+            await this.prisma.$transaction(async (tx) => {
+                // 1. Supprimer toutes les assignations
+                await tx.chauffeurSurCommande.deleteMany({
+                    where: { chauffeurId: id }
+                });
+
+                // 2. Supprimer les rapports d'enlèvement
+                await tx.rapportEnlevement.deleteMany({
+                    where: { chauffeurId: id }
+                });
+
+                // 3. Supprimer les rapports de livraison
+                await tx.rapportLivraison.deleteMany({
+                    where: { chauffeurId: id }
+                });
+
+                // 4. Supprimer le chauffeur
+                await tx.chauffeur.delete({
+                    where: { id }
+                });
+            });
+
+            this.logger.log(`✅ Chauffeur supprimé avec nettoyage: ${existingChauffeur.nom} ${existingChauffeur.prenom}`);
+            return {
+                message: 'Chauffeur supprimé avec succès (avec nettoyage des dépendances)',
+                cleaned: true
+            };
         }
 
         await this.prisma.chauffeur.delete({
             where: { id },
         });
 
-        this.logger.log(`🗑️ Chauffeur supprimé: ${existingChauffeur.nom} ${existingChauffeur.prenom}`);
+        this.logger.log(`✅ Chauffeur supprimé: ${existingChauffeur.nom} ${existingChauffeur.prenom}`);
         return { message: 'Chauffeur supprimé avec succès' };
     }
 
@@ -312,7 +377,6 @@ export class ChauffeursService {
                             client: {
                                 select: {
                                     nom: true,
-                                    ville: true,
                                 },
                             },
                         },
@@ -360,6 +424,20 @@ export class ChauffeursService {
         return chauffeur;
     }
 
+    async updateProfile(id: string, updateData: any) {
+        await this.findOne(id); // Vérifier que le chauffeur existe
+
+        return this.prisma.chauffeur.update({
+            where: { id },
+            data: {
+                nom: updateData.nom,
+                prenom: updateData.prenom,
+                email: updateData.email,
+                telephone: updateData.telephone,
+            },
+        });
+    }
+
     async findByStatus(status: string) {
         return this.prisma.chauffeur.findMany({
             where: { status },
@@ -375,5 +453,176 @@ export class ChauffeursService {
                 { nom: 'asc' },
             ],
         });
+    }
+
+    async getDependencies(id: string) {
+        const chauffeur = await this.findOne(id);
+
+        const [assignations, rapportsEnlevement, rapportsLivraison] = await Promise.all([
+            // Assignations du chauffeur (commandes)
+            this.prisma.chauffeurSurCommande.findMany({
+                where: { chauffeurId: id },
+                include: {
+                    commande: {
+                        select: {
+                            id: true,
+                            numeroCommande: true,
+                            dateCommande: true,
+                            dateLivraison: true,
+                            statutCommande: true,
+                            statutLivraison: true,
+                            tarifHT: true,
+                            client: {
+                                select: {
+                                    nom: true,
+                                    prenom: true
+                                }
+                            },
+                            magasin: {
+                                select: {
+                                    nom: true
+                                }
+                            }
+                        }
+                    }
+                },
+                take: 20,
+                orderBy: { assignedAt: 'desc' }
+            }),
+
+            // Rapports d'enlèvement
+            this.prisma.rapportEnlevement.findMany({
+                where: { chauffeurId: id },
+                include: {
+                    commande: {
+                        select: {
+                            numeroCommande: true,
+                            client: {
+                                select: {
+                                    nom: true,
+                                    prenom: true
+                                }
+                            }
+                        }
+                    }
+                },
+                take: 10,
+                orderBy: { createdAt: 'desc' }
+            }),
+
+            // Rapports de livraison
+            this.prisma.rapportLivraison.findMany({
+                where: { chauffeurId: id },
+                include: {
+                    commande: {
+                        select: {
+                            numeroCommande: true,
+                            client: {
+                                select: {
+                                    nom: true,
+                                    prenom: true
+                                }
+                            }
+                        }
+                    }
+                },
+                take: 10,
+                orderBy: { createdAt: 'desc' }
+            })
+        ]);
+
+        const result = {
+            chauffeur: {
+                id: chauffeur.id,
+                nom: chauffeur.nom,
+                prenom: chauffeur.prenom
+            },
+            dependencies: {
+                assignations: {
+                    count: assignations.length,
+                    items: assignations.map(assign => ({
+                        id: assign.id,
+                        assignedAt: assign.assignedAt,
+                        commande: assign.commande
+                    })),
+                    totalInDb: await this.prisma.chauffeurSurCommande.count({ where: { chauffeurId: id } })
+                },
+                rapportsEnlevement: {
+                    count: rapportsEnlevement.length,
+                    items: rapportsEnlevement.map(rapport => ({
+                        id: rapport.id,
+                        message: rapport.message,
+                        createdAt: rapport.createdAt,
+                        commande: rapport.commande
+                    }))
+                },
+                rapportsLivraison: {
+                    count: rapportsLivraison.length,
+                    items: rapportsLivraison.map(rapport => ({
+                        id: rapport.id,
+                        message: rapport.message,
+                        createdAt: rapport.createdAt,
+                        commande: rapport.commande
+                    }))
+                }
+            },
+            totaux: {
+                assignations: await this.prisma.chauffeurSurCommande.count({ where: { chauffeurId: id } }),
+                rapportsEnlevement: rapportsEnlevement.length,
+                rapportsLivraison: rapportsLivraison.length,
+                total: await this.prisma.chauffeurSurCommande.count({ where: { chauffeurId: id } }) +
+                    rapportsEnlevement.length +
+                    rapportsLivraison.length
+            }
+        };
+
+        this.logger.log(`✅ Dépendances calculées pour chauffeur ${chauffeur.nom} ${chauffeur.prenom}: ${result.totaux.total} éléments`);
+        return result;
+    }
+
+    async updatePassword(id: string, updatePasswordDto: UpdateChauffeurPasswordDto) {
+        const chauffeur = await this.findOne(id);
+        const hashedPassword = await bcrypt.hash(updatePasswordDto.password, 10);
+
+        await this.prisma.chauffeur.update({
+            where: { id },
+            data: { 
+                password: hashedPassword,
+                hasAccount: true,
+                accountStatus: 'active'
+            }
+        });
+
+        this.logger.log(`✅ Mot de passe mis à jour pour le chauffeur: ${chauffeur.nom} ${chauffeur.prenom}`);
+        return { message: 'Mot de passe mis à jour avec succès' };
+    }
+
+    async generateNewPassword(id: string, options?: GeneratePasswordDto) {
+        const chauffeur = await this.findOne(id);
+        const newPassword = this.generateRandomPassword();
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await this.prisma.chauffeur.update({
+            where: { id },
+            data: { 
+                password: hashedPassword,
+                hasAccount: true,
+                accountStatus: 'active'
+            }
+        });
+
+        this.logger.log(`✅ Nouveau mot de passe généré pour: ${chauffeur.nom} ${chauffeur.prenom}`);
+        return {
+            message: 'Nouveau mot de passe généré avec succès',
+            temporaryPassword: newPassword
+        };
+    }
+
+    async syncUserProfile(id: string) {
+        const chauffeur = await this.findOne(id);
+        
+        // Les données du chauffeur sont déjà dans le bon modèle, pas besoin de synchronisation séparée
+        this.logger.log(`✅ Profil chauffeur déjà synchronisé: ${chauffeur.nom} ${chauffeur.prenom}`);
+        return { message: 'Profil chauffeur déjà synchronisé' };
     }
 }

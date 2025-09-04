@@ -124,3 +124,5 @@ export class ClientFiltersDto {
     @IsOptional()
     take?: number;
 }
+
+export * from './client-response.dto';

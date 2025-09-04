@@ -9,6 +9,7 @@ import {
     Query,
     ParseUUIDPipe,
     UseGuards,
+    Request,
 } from '@nestjs/common';
 import {
     ApiTags,
@@ -46,13 +47,15 @@ export class ClientsController {
     }
 
     @Get()
-    @ApiOperation({
-        summary: 'Lister les clients',
-        description: 'Récupère la liste des clients avec filtres et pagination'
-    })
-    @ApiResponse({ status: 200, description: 'Liste des clients récupérée avec succès' })
-    async findAll(@Query() filters: ClientFiltersDto) {
-        return this.clientsService.findAll(filters);
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth('JWT-auth')
+    async findAll(@Query() filters: ClientFiltersDto, @Request() req: any) {
+        // LOGS DE DÉBOGAGE
+        console.log('🔑 Headers authorization:', req.headers.authorization);
+        console.log('👤 req.user:', req.user);
+        console.log('🎭 Role détecté:', req.user?.role);
+
+        return this.clientsService.findAll(filters, req.user?.role, req.user?.magasinId);
     }
 
     @Get('search')

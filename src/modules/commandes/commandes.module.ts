@@ -3,14 +3,17 @@ import { CommandesController } from './commandes.controller';
 import { CommandesService } from './commandes.service';
 import { ClientsModule } from '../clients/clients.module';
 import { TrackingModule } from '../tracking/tracking.module';
+import { SlotsModule } from '../slots/slots.module';
+import { VehicleValidationBackendService } from './services/vehicle-validation-backend.service';
 
 @Module({
   imports: [
     ClientsModule,
-    TrackingModule
+    TrackingModule,
+    SlotsModule,
   ],
   controllers: [CommandesController],
-  providers: [CommandesService],
+  providers: [CommandesService, VehicleValidationBackendService],
   exports: [CommandesService],
 })
 export class CommandesModule { }

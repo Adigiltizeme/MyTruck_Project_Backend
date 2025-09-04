@@ -299,7 +299,6 @@ class PostgresMigrator {
                         telephone: fields['TÉLÉPHONE'] || null,
                         telephoneSecondaire: fields['TÉLÉPHONE SECONDAIRE'] || null,
                         adresseLigne1: fields['ADRESSE DE LIVRAISON'] || 'Adresse non renseignée',
-                        ville: fields['VILLE'] || null,
                         batiment: fields['BATIMENT'] || null,
                         etage: fields['ÉTAGE'] || null,
                         interphone: fields['INTERPHONE'] || null,
@@ -314,7 +313,6 @@ class PostgresMigrator {
                         telephone: fields['TÉLÉPHONE'] || null,
                         telephoneSecondaire: fields['TÉLÉPHONE SECONDAIRE'] || null,
                         adresseLigne1: fields['ADRESSE DE LIVRAISON'] || 'Adresse non renseignée',
-                        ville: fields['VILLE'] || null,
                         batiment: fields['BATIMENT'] || null,
                         etage: fields['ÉTAGE'] || null,
                         interphone: fields['INTERPHONE'] || null,
@@ -325,7 +323,7 @@ class PostgresMigrator {
                 });
 
                 stats.imported++;
-                stats.details.push(`✅ ${client.nom} ${client.prenom || ''} - ${client.ville || 'Ville inconnue'}`);
+                stats.details.push(`✅ ${client.nom} ${client.prenom || ''} (${client.id})`);
 
             } catch (error) {
                 console.error(`❌ Erreur migration client ${record.id}:`, error.message);

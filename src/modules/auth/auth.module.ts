@@ -79,19 +79,40 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { PrismaModule } from '../../../prisma/prisma.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     PrismaModule,
     PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: {
-        expiresIn: '24h',
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        let jwtSecret = configService.get<string>('JWT_SECRET') || '';
+
+        console.log('🔍 JWT Secret brut longueur:', jwtSecret.length);
+        console.log('🔍 JWT Secret aperçu:', jwtSecret.substring(0, 20) + '...');
+
+        // ✅ NETTOYAGE COMPLET
+        jwtSecret = jwtSecret
+          .replace(/['"]/g, '')           // Enlever guillemets
+          .replace(/\r?\n/g, '')          // Enlever retours à la ligne
+          .replace(/\s+/g, '')            // Enlever espaces multiples
+          .trim();                        // Enlever espaces début/fin
+
+        console.log('🔍 JWT Secret nettoyé longueur:', jwtSecret.length);
+        console.log('🔍 JWT Secret nettoyé aperçu:', jwtSecret.substring(0, 20) + '...');
+
+        if (jwtSecret.length < 32) {
+          throw new Error(`JWT_SECRET trop court après nettoyage: ${jwtSecret.length} caractères`);
+        }
+
+        return {
+          secret: jwtSecret,
+          signOptions: { expiresIn: '24h' },
+        };
       },
-      verifyOptions: {
-        clockTolerance: 30, // 30 secondes de tolérance, // Assurez-vous que l'algorithme correspond à celui utilisé pour signer le JWT
-      },
+      inject: [ConfigService],
     }),
   ],
   controllers: [AuthController],

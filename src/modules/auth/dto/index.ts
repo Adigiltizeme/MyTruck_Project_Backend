@@ -70,3 +70,6 @@ export class RegisterDto {
     @IsUUID(4, { message: 'Format UUID invalide pour magasinId' })
     magasinId?: string;
 }
+
+export { UpdateProfileDto } from './update-profile.dto';
+export { UpdatePasswordDto } from './update-password.dto';
