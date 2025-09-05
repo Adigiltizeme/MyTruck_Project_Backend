@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateClientDto, UpdateClientDto, ClientFiltersDto } from './dto';
 import { ClientsListResponseDto } from './dto/client-response.dto';
-import { Prisma } from '@prisma/client';
+import { Prisma, Client as PrismaClientType } from '@prisma/client';
 
 @Injectable()
 export class ClientsService {
@@ -239,7 +239,7 @@ export class ClientsService {
     const [
       totalCommandes,
       commandesParStatut,
-      derniereMommande,
+      derniereCommande,
       chiffreAffaireTotal,
     ] = await Promise.all([
       // Total des commandes
@@ -283,7 +283,7 @@ export class ClientsService {
         commandes: totalCommandes,
         chiffreAffaireHT: chiffreAffaireTotal._sum.tarifHT || 0,
       },
-      derniereMommande,
+      derniereCommande,
       repartition: {
         parStatutCommande: commandesParStatut.map(stat => ({
           statut: stat.statutCommande,
