@@ -43,6 +43,8 @@ lerna-debug.log*
 .env.local
 .env.test
 .env.example
+.env.production
+.dockerignore
 
 # temp directory
 .temp
