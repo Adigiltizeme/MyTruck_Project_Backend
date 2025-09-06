@@ -31,12 +31,17 @@ RUN npx prisma generate
 
 # Debug: vérifier la configuration TypeScript
 RUN ls -la tsconfig*.json
+RUN cat tsconfig.json
 
-# Construire l'application avec verbose output
-RUN nest build --verbose
+# Debug: vérifier les sources avant build
+RUN ls -la src/
 
-# Vérifier le contenu complet du dossier dist après build
-RUN find dist/ -type f | head -20
+# Construire l'application
+RUN nest build
+
+# Debug: vérifier ce qui a été généré
+RUN ls -la dist/
+RUN find dist/ -type f -name "*.js" | head -10
 RUN ls -la dist/src/ || echo "No dist/src directory"
 
 # Nettoyer les dépendances de développement après le build
