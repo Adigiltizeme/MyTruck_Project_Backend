@@ -60,4 +60,4 @@ RUN npm prune --production --legacy-peer-deps
 EXPOSE $PORT
 
 # Commande de démarrage
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
+CMD ["sh", "-c", "npx prisma db push && npm run start:prod"]
