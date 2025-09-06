@@ -26,11 +26,11 @@ COPY . .
 # Générer Prisma Client après avoir tout le contexte
 RUN npx prisma generate
 
-# Construire l'application
+# Construire l'application (besoin des devDependencies pour @nestjs/cli)
 RUN npm run build
 
-# Nettoyer les dépendances de développement
-RUN npm prune --production --force
+# Nettoyer les dépendances de développement après le build
+RUN npm prune --production --legacy-peer-deps
 
 # Exposer le port
 EXPOSE $PORT
