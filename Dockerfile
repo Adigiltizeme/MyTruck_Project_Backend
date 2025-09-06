@@ -17,8 +17,8 @@ RUN echo "legacy-peer-deps=true" > .npmrc
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Installer TOUTES les dépendances (y compris devDependencies pour Prisma)
-RUN npm ci --legacy-peer-deps --no-audit --no-fund
+# Installer TOUTES les dépendances avec npm install (plus flexible que npm ci)
+RUN npm install --legacy-peer-deps
 
 # Copier le code source
 COPY . .
