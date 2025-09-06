@@ -18,7 +18,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Installer TOUTES les dépendances avec force
-RUN npm install --force --no-audit --no-fund
+RUN npm ci --legacy-peer-deps --no-audit --no-fund
 
 # Générer Prisma Client
 RUN npx prisma generate
