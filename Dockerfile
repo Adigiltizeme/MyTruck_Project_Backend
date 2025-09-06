@@ -20,14 +20,17 @@ COPY prisma ./prisma/
 # Installer TOUTES les dépendances avec npm install (plus flexible que npm ci)
 RUN npm install --legacy-peer-deps
 
+# Installer @nestjs/cli globalement pour la build
+RUN npm install -g @nestjs/cli
+
 # Copier le code source
 COPY . .
 
 # Générer Prisma Client après avoir tout le contexte
 RUN npx prisma generate
 
-# Construire l'application avec npx pour utiliser le CLI local
-RUN npx nest build
+# Construire l'application
+RUN nest build
 
 # Nettoyer les dépendances de développement après le build
 RUN npm prune --production --legacy-peer-deps
