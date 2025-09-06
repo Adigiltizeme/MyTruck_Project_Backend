@@ -20,14 +20,11 @@ COPY prisma ./prisma/
 # Installer TOUTES les dépendances (y compris devDependencies pour Prisma)
 RUN npm ci --legacy-peer-deps --no-audit --no-fund
 
-# Forcer l'installation de @prisma/client spécifiquement
-RUN npm install @prisma/client --legacy-peer-deps --save
-
-# Générer Prisma Client après installation explicite
-RUN npx prisma generate
-
 # Copier le code source
 COPY . .
+
+# Générer Prisma Client après avoir tout le contexte
+RUN npx prisma generate
 
 # Construire l'application
 RUN npm run build
