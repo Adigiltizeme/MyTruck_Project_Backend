@@ -17,14 +17,11 @@ RUN echo "legacy-peer-deps=true" > .npmrc
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Installer TOUTES les dépendances avec force
+# Installer TOUTES les dépendances (y compris devDependencies pour Prisma)
 RUN npm ci --legacy-peer-deps --no-audit --no-fund
 
-# Installer explicitement @prisma/client pour éviter les erreurs de génération
-RUN npm install @prisma/client --legacy-peer-deps
-
-# Générer Prisma Client
-RUN npx prisma generate
+# Générer Prisma Client (prisma est dans devDependencies)
+RUN npm run db:generate
 
 # Copier le code source
 COPY . .
