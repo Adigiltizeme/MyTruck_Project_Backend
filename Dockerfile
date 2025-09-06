@@ -59,5 +59,9 @@ RUN npm prune --production --legacy-peer-deps
 # Exposer le port
 EXPOSE $PORT
 
+# Copier le script de démarrage
+COPY start.sh ./
+RUN chmod +x start.sh
+
 # Commande de démarrage
-CMD ["sh", "-c", "npx prisma db push && npm run start:prod"]
+CMD ["./start.sh"]
