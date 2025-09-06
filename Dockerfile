@@ -26,8 +26,8 @@ COPY . .
 # Générer Prisma Client après avoir tout le contexte
 RUN npx prisma generate
 
-# Construire l'application (besoin des devDependencies pour @nestjs/cli)
-RUN npm run build
+# Construire l'application avec npx pour utiliser le CLI local
+RUN npx nest build
 
 # Nettoyer les dépendances de développement après le build
 RUN npm prune --production --legacy-peer-deps
