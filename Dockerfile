@@ -23,18 +23,19 @@ RUN npm install --legacy-peer-deps
 # Installer @nestjs/cli globalement pour la build
 RUN npm install -g @nestjs/cli
 
-# Copier le code source
-COPY . .
+# Copier les fichiers de configuration explicitement
+COPY tsconfig.json ./
+COPY tsconfig.build.json ./
+COPY nest-cli.json ./
 
-# Debug: vérifier tous les fichiers copiés
-RUN ls -la
-RUN wc -l tsconfig.json
+# Copier le code source explicitement
+COPY src ./src
+COPY scripts ./scripts
+
+# Debug: vérifier la copie
 RUN head -5 tsconfig.json
-RUN tail -5 tsconfig.json
-
-# Debug: vérifier les sources après copie
-RUN ls -la src/ | head -10
-RUN ls -la src/modules/ || echo "No modules directory"
+RUN ls -la src/
+RUN ls -la src/modules/
 
 # Générer Prisma Client après avoir tout le contexte
 RUN npx prisma generate
