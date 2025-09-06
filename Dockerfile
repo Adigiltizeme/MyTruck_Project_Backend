@@ -59,9 +59,5 @@ RUN npm prune --production --legacy-peer-deps
 # Exposer le port
 EXPOSE $PORT
 
-# Copier le script de démarrage
-COPY start.sh ./
-RUN chmod +x start.sh
-
 # Commande de démarrage
-CMD ["./start.sh"]
+CMD ["npm", "run", "start:prod"]
