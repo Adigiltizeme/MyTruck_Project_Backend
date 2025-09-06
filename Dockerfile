@@ -29,17 +29,21 @@ COPY . .
 # Générer Prisma Client après avoir tout le contexte
 RUN npx prisma generate
 
-# Construire l'application
-RUN nest build
+# Debug: vérifier la configuration TypeScript
+RUN ls -la tsconfig*.json
+
+# Construire l'application avec verbose output
+RUN nest build --verbose
+
+# Vérifier le contenu complet du dossier dist après build
+RUN find dist/ -type f | head -20
+RUN ls -la dist/src/ || echo "No dist/src directory"
 
 # Nettoyer les dépendances de développement après le build
 RUN npm prune --production --legacy-peer-deps
 
 # Exposer le port
 EXPOSE $PORT
-
-# Vérifier que le build existe
-RUN ls -la dist/
 
 # Commande de démarrage
 CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
