@@ -40,13 +40,18 @@ RUN ls -la src/modules/
 # Générer Prisma Client après avoir tout le contexte
 RUN npx prisma generate
 
-# Construire l'application
-RUN nest build
+# Debug: vérifier les fichiers essentiels avant build
+RUN ls -la src/main.ts
+RUN ls -la src/app.module.ts
+
+# Construire l'application avec sortie complète
+RUN nest build 2>&1
 
 # Debug: vérifier ce qui a été généré
 RUN ls -la dist/
-RUN find dist/ -type f -name "*.js" | head -10
 RUN ls -la dist/src/ || echo "No dist/src directory"
+RUN find dist/src/ -name "*.js" | head -10 || echo "No JS files in dist/src"
+RUN ls -la dist/src/main.js || echo "No main.js file"
 
 # Nettoyer les dépendances de développement après le build
 RUN npm prune --production --legacy-peer-deps
