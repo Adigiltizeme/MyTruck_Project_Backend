@@ -26,15 +26,18 @@ RUN npm install -g @nestjs/cli
 # Copier le code source
 COPY . .
 
+# Debug: vérifier tous les fichiers copiés
+RUN ls -la
+RUN wc -l tsconfig.json
+RUN head -5 tsconfig.json
+RUN tail -5 tsconfig.json
+
+# Debug: vérifier les sources après copie
+RUN ls -la src/ | head -10
+RUN ls -la src/modules/ || echo "No modules directory"
+
 # Générer Prisma Client après avoir tout le contexte
 RUN npx prisma generate
-
-# Debug: vérifier la configuration TypeScript
-RUN ls -la tsconfig*.json
-RUN cat tsconfig.json
-
-# Debug: vérifier les sources avant build
-RUN ls -la src/
 
 # Construire l'application
 RUN nest build
