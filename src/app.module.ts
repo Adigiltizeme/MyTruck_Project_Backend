@@ -28,6 +28,7 @@ import { ChauffeursModule } from './modules/chauffeurs/chauffeurs.module';
 import { TrackingModule } from './modules/tracking/tracking.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { WebSocketModule } from './modules/websocket/websocket.module';
+import { SetupModule } from './setup/setup.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { WebSocketModule } from './modules/websocket/websocket.module';
 
     // Modules utilitaires
     HealthModule,
+    SetupModule,
 
     CommandesModule,
 
