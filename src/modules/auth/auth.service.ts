@@ -276,6 +276,9 @@ export class AuthService {
       if (updateData.name) updateFields.nom = updateData.name;
       if (updateData.email) updateFields.email = updateData.email;
       if (updateData.phone) updateFields.telephone = updateData.phone;
+      if (updateData.address) updateFields.adresse = updateData.address;
+      if (updateData.manager) updateFields.manager = updateData.manager;
+      if (updateData.statut) updateFields.status = updateData.statut;
 
       await this.prisma.magasin.update({
         where: { id: userId },
@@ -290,6 +293,7 @@ export class AuthService {
       }
       if (updateData.email) updateFields.email = updateData.email;
       if (updateData.phone) updateFields.telephone = updateData.phone;
+      if (updateData.statut) updateFields.status = updateData.statut;
 
       await this.prisma.chauffeur.update({
         where: { id: userId },
@@ -303,6 +307,8 @@ export class AuthService {
         updateFields.nom = nameParts.slice(1).join(' ') || nameParts[0] || '';
       }
       if (updateData.email) updateFields.email = updateData.email;
+      // Pour les Users (admin), on ignore address, manager et statut car les champs n'existent pas
+      // Ces champs seront simplement ignorés silencieusement
 
       await this.prisma.user.update({
         where: { id: userId },

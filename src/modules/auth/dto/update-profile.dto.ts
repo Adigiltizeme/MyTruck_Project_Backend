@@ -16,4 +16,19 @@ export class UpdateProfileDto {
     @IsOptional()
     @IsString()
     phone?: string;
+
+    @ApiProperty({ example: '123 Rue de la Paix, 75000 Paris' })
+    @IsOptional()
+    @IsString()
+    address?: string;
+
+    @ApiProperty({ example: 'Marie Martin' })
+    @IsOptional()
+    @IsString()
+    manager?: string;
+
+    @ApiProperty({ example: 'Actif' })
+    @IsOptional()
+    @IsString()
+    statut?: string;
 }
