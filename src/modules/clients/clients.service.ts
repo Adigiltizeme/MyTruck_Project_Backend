@@ -11,7 +11,7 @@ export class ClientsService {
   constructor(private readonly prisma: PrismaService) { }
 
   async findAll(filters: ClientFiltersDto, userRole: string = 'MAGASIN', magasinId?: string) {
-    console.log('🏪 Service findAll appelé avec role:', userRole);
+    console.log('🏪 Service findAll appelé avec role:', userRole, 'magasinId:', magasinId);
 
     const { skip, take, nom, ville, typeAdresse } = filters;
 
@@ -20,12 +20,16 @@ export class ClientsService {
       dataRetentionUntil: { gte: new Date() }
     };
 
+    // Filtrage par magasin : seulement pour les magasins, les admins voient tout
     if (userRole === 'MAGASIN' && magasinId) {
+      console.log('🏪 Filtrage par magasin:', magasinId);
       where.commandes = {
         some: {
           magasinId: magasinId
         }
       };
+    } else {
+      console.log('👑 Admin: vue globale de tous les clients');
     }
 
     if (nom) {
@@ -39,19 +43,38 @@ export class ClientsService {
       where.typeAdresse = typeAdresse;
     }
 
+    // Configuration de l'include selon le rôle
+    const includeConfig = {
+      _count: {
+        select: {
+          commandes: true,
+        },
+      },
+      // Pour les admins, inclure les info des magasins via les commandes
+      ...(userRole === 'ADMIN' && {
+        commandes: {
+          select: {
+            magasinId: true,
+            magasin: {
+              select: {
+                id: true,
+                nom: true
+              }
+            }
+          },
+          distinct: ['magasinId'],
+          take: 10 // Limiter pour éviter trop de données
+        }
+      })
+    };
+
     const [clients, total] = await Promise.all([
       this.prisma.client.findMany({
         where,
         skip: skip || 0,
         take: take || 50,
         orderBy: [{ nom: 'asc' }, { prenom: 'asc' }],
-        include: {
-          _count: {
-            select: {
-              commandes: true,
-            },
-          },
-        },
+        include: includeConfig,
       }),
       this.prisma.client.count({ where }),
     ]);

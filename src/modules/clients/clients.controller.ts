@@ -54,8 +54,14 @@ export class ClientsController {
         console.log('🔑 Headers authorization:', req.headers.authorization);
         console.log('👤 req.user:', req.user);
         console.log('🎭 Role détecté:', req.user?.role);
+        console.log('🏪 EntityType:', req.user?.entityType);
 
-        return this.clientsService.findAll(filters, req.user?.role, req.user?.magasinId);
+        // Pour les magasins, utiliser req.user.id comme magasinId
+        // Pour les users/admin, utiliser req.user.magasinId
+        const magasinId = req.user?.entityType === 'magasin' ? req.user.id : req.user?.magasinId;
+        console.log('🏪 MagasinId utilisé:', magasinId);
+
+        return this.clientsService.findAll(filters, req.user?.role, magasinId);
     }
 
     @Get('search')
