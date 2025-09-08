@@ -62,7 +62,7 @@ export class ClientsService {
               }
             }
           },
-          distinct: ['magasinId'],
+          distinct: ['magasinId'] as Prisma.CommandeScalarFieldEnum[],
           take: 10 // Limiter pour éviter trop de données
         }
       })
