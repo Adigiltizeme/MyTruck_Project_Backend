@@ -35,6 +35,12 @@ export class AirtableSyncService {
     private readonly airtableApiUrl: string;
     private readonly airtableToken: string;
     private readonly baseId: string;
+    
+    // Rate limiting pour respecter les quotas Airtable (5 req/sec max)
+    private lastRequestTime: number = 0;
+    private readonly minRequestInterval: number = 250; // 250ms = 4 req/sec (sécurité)
+    private readonly maxRetries: number = 3;
+    private readonly baseRetryDelay: number = 1000; // 1s
 
     constructor(
         private readonly prisma: PrismaService,
@@ -99,7 +105,7 @@ export class AirtableSyncService {
             },
         },
         chauffeurs: {
-            direction: SyncDirection.BIDIRECTIONAL,
+            direction: SyncDirection.DB_TO_AIRTABLE,
             priority: 'DB',
             frequency: '*/10 * * * *',
             critical: false,
@@ -116,7 +122,7 @@ export class AirtableSyncService {
             },
         },
         magasins: {
-            direction: SyncDirection.BIDIRECTIONAL,
+            direction: SyncDirection.DB_TO_AIRTABLE,
             priority: 'DB',
             frequency: '*/15 * * * *',
             critical: false,
@@ -409,15 +415,18 @@ export class AirtableSyncService {
                 for (let i = 0; i < recordsToCreate.length; i += batchSize) {
                     const batch = recordsToCreate.slice(i, i + batchSize);
 
-                    const response = await axios.post(
-                        `${this.airtableApiUrl}/${tableId}`,
-                        { records: batch },
-                        {
-                            headers: {
-                                'Authorization': `Bearer ${this.airtableToken}`,
-                                'Content-Type': 'application/json',
-                            },
-                        }
+                    const response = await this.rateLimitedRequest(() => 
+                        axios.post(
+                            `${this.airtableApiUrl}/${tableId}`,
+                            { records: batch },
+                            {
+                                headers: {
+                                    'Authorization': `Bearer ${this.airtableToken}`,
+                                    'Content-Type': 'application/json',
+                                },
+                                timeout: 10000, // 10s timeout
+                            }
+                        )
                     );
 
                     results.push(...response.data.records);
@@ -425,10 +434,6 @@ export class AirtableSyncService {
 
                     // Mettre à jour les airtableId dans la DB
                     await this.updateAirtableIds(tableId, batch, response.data.records);
-
-                    if (i + batchSize < recordsToCreate.length) {
-                        await this.sleep(200);
-                    }
                 }
             }
 
@@ -439,23 +444,22 @@ export class AirtableSyncService {
                 for (let i = 0; i < recordsToUpdate.length; i += batchSize) {
                     const batch = recordsToUpdate.slice(i, i + batchSize);
 
-                    const response = await axios.patch(
-                        `${this.airtableApiUrl}/${tableId}`,
-                        { records: batch },
-                        {
-                            headers: {
-                                'Authorization': `Bearer ${this.airtableToken}`,
-                                'Content-Type': 'application/json',
-                            },
-                        }
+                    const response = await this.rateLimitedRequest(() =>
+                        axios.patch(
+                            `${this.airtableApiUrl}/${tableId}`,
+                            { records: batch },
+                            {
+                                headers: {
+                                    'Authorization': `Bearer ${this.airtableToken}`,
+                                    'Content-Type': 'application/json',
+                                },
+                                timeout: 10000, // 10s timeout
+                            }
+                        )
                     );
 
                     results.push(...response.data.records);
                     this.logger.debug(`✅ Mis à jour ${batch.length} enregistrements dans ${tableId}`);
-
-                    if (i + batchSize < recordsToUpdate.length) {
-                        await this.sleep(200);
-                    }
                 }
             }
 
@@ -774,34 +778,39 @@ export class AirtableSyncService {
     // TÂCHES PLANIFIÉES
     // ========================
 
-    @Cron('*/5 * * * *') // Toutes les 5 minutes
+    @Cron('*/5 * * * *') // Toutes les 5 minutes - RÉACTIVÉ (Unidirectionnel uniquement)
     async syncCriticalTables(): Promise<void> {
-        console.log('🚫 Sync Airtable désactivée pendant migration');
-        return;
-        // const criticalTables = Object.entries(this.syncConfig)
-        //     .filter(([_, config]) => config.critical && config.direction !== SyncDirection.READ_ONLY)
-        //     .map(([tableName]) => tableName);
-
-        // this.logger.log(`🔄 Synchronisation automatique: ${criticalTables.join(', ')}`);
-
-        // for (const tableName of criticalTables) {
-        //     await this.syncToAirtable(tableName);
-        // }
-    }
-
-    @Cron('*/15 * * * *') // Toutes les 15 minutes
-    async syncBidirectionalTables(): Promise<void> {
-        // console.log('🚫 Sync Airtable désactivée pendant migration');
-        // return;
-        const bidirectionalTables = Object.entries(this.syncConfig)
-            .filter(([_, config]) => config.direction === SyncDirection.BIDIRECTIONAL)
+        const criticalTables = Object.entries(this.syncConfig)
+            .filter(([_, config]) => config.critical && config.direction === SyncDirection.DB_TO_AIRTABLE)
             .map(([tableName]) => tableName);
 
-        this.logger.log(`🔄 Synchronisation bidirectionnelle: ${bidirectionalTables.join(', ')}`);
-
-        for (const tableName of bidirectionalTables) {
-            await this.bidirectionalSync(tableName);
+        if (criticalTables.length === 0) {
+            console.log('📊 Aucune table critique à synchroniser (MyTruck → Airtable)');
+            return;
         }
+
+        this.logger.log(`🔄 Sync unidirectionnelle critique: ${criticalTables.join(', ')}`);
+
+        for (const tableName of criticalTables) {
+            await this.syncToAirtable(tableName);
+        }
+    }
+
+    @Cron('*/15 * * * *') // Toutes les 15 minutes - TEMPORAIREMENT DÉSACTIVÉ
+    async syncBidirectionalTables(): Promise<void> {
+        console.log('🚫 Sync bidirectionnelle temporairement désactivée - En attente implémentation automatisations MyTruck');
+        return;
+        
+        // SERA RÉACTIVÉ EN PHASE 3 après implémentation des automatisations dans MyTruck
+        // const bidirectionalTables = Object.entries(this.syncConfig)
+        //     .filter(([_, config]) => config.direction === SyncDirection.BIDIRECTIONAL)
+        //     .map(([tableName]) => tableName);
+
+        // this.logger.log(`🔄 Synchronisation bidirectionnelle: ${bidirectionalTables.join(', ')}`);
+
+        // for (const tableName of bidirectionalTables) {
+        //     await this.bidirectionalSync(tableName);
+        // }
     }
 
     // ========================
@@ -891,6 +900,86 @@ export class AirtableSyncService {
 
     private sleep(ms: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // ========================
+    // RATE LIMITING & RETRY LOGIC
+    // ========================
+
+    private async rateLimitedRequest<T>(requestFn: () => Promise<T>): Promise<T> {
+        // Respecter le rate limiting
+        const now = Date.now();
+        const timeSinceLastRequest = now - this.lastRequestTime;
+        
+        if (timeSinceLastRequest < this.minRequestInterval) {
+            const delayNeeded = this.minRequestInterval - timeSinceLastRequest;
+            await this.sleep(delayNeeded);
+        }
+        
+        this.lastRequestTime = Date.now();
+        
+        // Exécuter avec retry logic
+        return this.withRetry(requestFn);
+    }
+
+    private async withRetry<T>(requestFn: () => Promise<T>): Promise<T> {
+        let lastError: any;
+        
+        for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
+            try {
+                return await requestFn();
+            } catch (error) {
+                lastError = error;
+                
+                // Vérifier si c'est une erreur de rate limiting
+                if (this.isRateLimitError(error)) {
+                    const retryAfter = this.extractRetryAfter(error) || (this.baseRetryDelay * attempt);
+                    this.logger.warn(`🔄 Rate limit atteint, retry dans ${retryAfter}ms (tentative ${attempt}/${this.maxRetries})`);
+                    
+                    if (attempt < this.maxRetries) {
+                        await this.sleep(retryAfter);
+                        continue;
+                    }
+                }
+                
+                // Autres erreurs : retry avec backoff exponentiel
+                if (this.isRetryableError(error) && attempt < this.maxRetries) {
+                    const delay = this.baseRetryDelay * Math.pow(2, attempt - 1);
+                    this.logger.warn(`🔄 Erreur temporaire, retry dans ${delay}ms (tentative ${attempt}/${this.maxRetries})`);
+                    await this.sleep(delay);
+                    continue;
+                }
+                
+                // Si on arrive ici, on abandonne
+                break;
+            }
+        }
+        
+        throw lastError;
+    }
+
+    private isRateLimitError(error: any): boolean {
+        return error?.response?.status === 429 || 
+               error?.code === 'RATE_LIMITED' ||
+               error?.message?.includes('rate limit');
+    }
+
+    private isRetryableError(error: any): boolean {
+        const status = error?.response?.status;
+        return status >= 500 || // Erreurs serveur
+               status === 429 || // Rate limiting
+               error?.code === 'ECONNRESET' ||
+               error?.code === 'ETIMEDOUT' ||
+               error?.message?.includes('timeout');
+    }
+
+    private extractRetryAfter(error: any): number | null {
+        const retryAfter = error?.response?.headers?.['retry-after'];
+        if (retryAfter) {
+            const seconds = parseInt(retryAfter, 10);
+            return isNaN(seconds) ? null : seconds * 1000;
+        }
+        return null;
     }
 
     public getConfig(tableName: string) {
