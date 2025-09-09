@@ -1004,45 +1004,88 @@ export class CommandesService {
 
     // Méthodes utilitaires privées
     private async findOrCreateClient(tx: Prisma.TransactionClient, clientData: any) {
-        // Rechercher un client existant par nom et téléphone
+        this.logger.log(`🔍 findOrCreateClient: Recherche client ${clientData.nom} - ${clientData.telephone}`);
+        
+        // 🎯 RECHERCHE INTELLIGENTE: nom ET téléphone pour éviter doublons
         let client = await tx.client.findFirst({
             where: {
                 nom: clientData.nom,
                 telephone: clientData.telephone,
+                // Ne pas chercher les clients supprimés
+                deletionRequested: false
             },
         });
 
+        // 📅 CALCUL DATE DE RÉTENTION (2 ans conformément RGPD)
+        const futureRetentionDate = new Date();
+        futureRetentionDate.setFullYear(futureRetentionDate.getFullYear() + 2);
+
         if (!client) {
-            // Créer un nouveau client
+            // 🆕 CRÉATION CLIENT AVEC DONNÉES COMPLÈTES PÉRENNES
+            this.logger.log(`🆕 Création nouveau client: ${clientData.nom} ${clientData.prenom}`);
+            
             client = await tx.client.create({
                 data: {
                     nom: clientData.nom,
-                    prenom: clientData.prenom || '',
+                    prenom: clientData.prenom || null,
                     telephone: clientData.telephone,
-                    telephoneSecondaire: clientData.telephoneSecondaire || '',
+                    telephoneSecondaire: clientData.telephoneSecondaire || null,
                     adresseLigne1: clientData.adresseLigne1,
-                    batiment: clientData.batiment || '',
-                    etage: clientData.etage,
-                    interphone: clientData.interphone,
+                    ville: clientData.ville || null,
+                    batiment: clientData.batiment || null,
+                    etage: clientData.etage || null,
+                    interphone: clientData.interphone || null,
                     ascenseur: clientData.ascenseur || false,
                     typeAdresse: clientData.typeAdresse || 'Domicile',
+                    
+                    // 🎯 CHAMPS CRITIQUES POUR VISIBILITÉ
+                    dataRetentionUntil: futureRetentionDate,  // ✅ FIX: Date valide
+                    deletionRequested: false,                 // ✅ FIX: Non supprimé
+                    createdAt: new Date(),
+                    updatedAt: new Date()
                 },
             });
+            
+            this.logger.log(`✅ Client créé avec succès: ${client.id} - ${client.nom} ${client.prenom}`);
+            this.logger.log(`📅 Date de rétention: ${client.dataRetentionUntil.toISOString()}`);
+            
         } else {
-            // Mettre à jour les informations du client existant
+            // 🔄 MISE À JOUR INTELLIGENTE DU CLIENT EXISTANT
+            this.logger.log(`🔄 Mise à jour client existant: ${client.id} - ${client.nom}`);
+            
+            // Vérifier si la date de rétention doit être mise à jour
+            const needsRetentionUpdate = !client.dataRetentionUntil || client.dataRetentionUntil < new Date();
+            
             client = await tx.client.update({
                 where: { id: client.id },
                 data: {
+                    // Mettre à jour les informations si plus récentes
                     prenom: clientData.prenom || client.prenom,
                     telephoneSecondaire: clientData.telephoneSecondaire || client.telephoneSecondaire,
-                    adresseLigne1: clientData.adresseLigne1,
+                    adresseLigne1: clientData.adresseLigne1 || client.adresseLigne1,
+                    ville: clientData.ville || client.ville,
                     batiment: clientData.batiment || client.batiment,
                     etage: clientData.etage || client.etage,
                     interphone: clientData.interphone || client.interphone,
                     ascenseur: clientData.ascenseur ?? client.ascenseur,
                     typeAdresse: clientData.typeAdresse || client.typeAdresse,
+                    
+                    // 🎯 RENOUVELER LA RÉTENTION À CHAQUE COMMANDE
+                    dataRetentionUntil: needsRetentionUpdate ? futureRetentionDate : client.dataRetentionUntil,
+                    updatedAt: new Date()
                 },
             });
+            
+            if (needsRetentionUpdate) {
+                this.logger.log(`📅 Date de rétention mise à jour: ${client.dataRetentionUntil.toISOString()}`);
+            }
+        }
+
+        // 🧪 VALIDATION FINALE
+        if (!client.dataRetentionUntil || client.dataRetentionUntil < new Date()) {
+            this.logger.error(`❌ PROBLÈME: Client ${client.id} a une date de rétention invalide`);
+        } else {
+            this.logger.log(`✅ Client prêt: ${client.id} - Visible jusqu'au ${client.dataRetentionUntil.toISOString().split('T')[0]}`);
         }
 
         return client;
