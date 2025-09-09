@@ -93,17 +93,8 @@ export class ClientsService {
 
       console.log(`📊 Résultats: ${clients.length} clients trouvés sur ${total} total`);
 
-      // 🔧 AMÉLIORATION : Pseudonymisation conditionnelle
-      const processedClients = userRole === 'MAGASIN'
-        ? clients.map(client => ({
-          ...client,
-          // Masquage partiel pour magasins
-          nom: client.nom.length > 2 ? client.nom.substring(0, 2) + '***' : client.nom,
-          telephone: client.telephone ?
-            client.telephone.substring(0, 4) + '***' + client.telephone.slice(-2) : null,
-          pseudonymized: true
-        }))
-        : clients; // Données complètes pour admin
+      // ✅ ASSOUPLISSEMENT RGPD : Données complètes pour tous
+      const processedClients = clients; // Pas de pseudonymisation
 
       return {
         data: processedClients,
@@ -123,17 +114,7 @@ export class ClientsService {
     }
   }
 
-  private pseudonymizeClientData(client: any) {
-    return {
-      ...client,
-      nom: client.nom.substring(0, 2) + '***',
-      prenom: client.prenom ? client.prenom.substring(0, 2) + '***' : null,
-      telephone: client.telephone ? client.telephone.substring(0, 4) + '***' + client.telephone.slice(-2) : null,
-      telephoneSecondaire: client.telephoneSecondaire ? client.telephoneSecondaire.substring(0, 4) + '***' + client.telephoneSecondaire.slice(-2) : null,
-      adresseLigne1: 'Adresse masquée',
-      pseudonymized: true
-    };
-  }
+  // ✅ RGPD ASSOUPLI : Méthode de pseudonymisation supprimée
 
   async findOne(id: string) {
     const client = await this.prisma.client.findUnique({
