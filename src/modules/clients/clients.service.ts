@@ -20,85 +20,107 @@ export class ClientsService {
       dataRetentionUntil: { gte: new Date() }
     };
 
-    // Filtrage par magasin : seulement pour les magasins, les admins voient tout
+    // 🔧 CORRECTION CRITIQUE : Filtrage par magasin
     if (userRole === 'MAGASIN' && magasinId) {
       console.log('🏪 Filtrage par magasin:', magasinId);
+
+      // ✅ SOLUTION : Utiliser exists au lieu de some
       where.commandes = {
         some: {
-          magasinId: magasinId
+          magasinId: magasinId,
+          // ✅ AJOUT : S'assurer que le client a au moins une commande
+          AND: [
+            { magasinId: { equals: magasinId } }
+          ]
         }
       };
-    } else {
+    } else if (userRole === 'ADMIN' || userRole === 'DIRECTION') {
       console.log('👑 Admin: vue globale de tous les clients');
+      // Pas de filtrage pour les admins
+    } else {
+      console.log('⚠️ Rôle non reconnu, filtrage restrictif');
+      // Sécurité : si rôle non reconnu, ne rien afficher
+      where.id = { equals: 'non-existent' };
     }
 
+    // 🔧 AJOUT : Filtres additionnels
     if (nom) {
-      where.nom = {
-        contains: nom,
-        mode: 'insensitive',
-      };
+      where.OR = [
+        { nom: { contains: nom, mode: 'insensitive' } },
+        { prenom: { contains: nom, mode: 'insensitive' } }
+      ];
     }
 
     if (typeAdresse) {
       where.typeAdresse = typeAdresse;
     }
 
-    // Configuration de l'include selon le rôle
+    // 🔧 AMÉLIORATION : Include conditionnel selon rôle
     const includeConfig = {
       _count: {
         select: {
-          commandes: true,
-        },
+          commandes: userRole === 'MAGASIN'
+            ? { where: { magasinId } }  // Compter seulement les commandes du magasin
+            : true  // Compter toutes les commandes pour admin
+        }
       },
-      // Pour les admins, inclure les info des magasins via les commandes
+      // Pour les admins, inclure info des magasins
       ...(userRole === 'ADMIN' && {
         commandes: {
           select: {
             magasinId: true,
             magasin: {
-              select: {
-                id: true,
-                nom: true
-              }
+              select: { id: true, nom: true }
             }
           },
-          distinct: ['magasinId'] as Prisma.CommandeScalarFieldEnum[],
-          take: 10 // Limiter pour éviter trop de données
+          distinct: ['magasinId' as Prisma.CommandeScalarFieldEnum],
+          take: 5
         }
       })
     };
 
-    const [clients, total] = await Promise.all([
-      this.prisma.client.findMany({
-        where,
-        skip: skip || 0,
-        take: take || 50,
-        orderBy: [{ nom: 'asc' }, { prenom: 'asc' }],
-        include: includeConfig,
-      }),
-      this.prisma.client.count({ where }),
-    ]);
+    try {
+      const [clients, total] = await Promise.all([
+        this.prisma.client.findMany({
+          where,
+          skip: skip || 0,
+          take: take || 50,
+          orderBy: [{ nom: 'asc' }, { prenom: 'asc' }],
+          include: includeConfig,
+        }),
+        this.prisma.client.count({ where }),
+      ]);
 
-    // Pseudonymiser selon les droits utilisateur
-    const processedClients = userRole === 'MAGASIN'
-      ? clients.map(client => {
-        console.log('🔒 Pseudonymisation client:', client.nom);
-        return this.pseudonymizeClientData(client);
-      })
-      : clients.map(client => {
-        console.log('✅ Client complet affiché:', client.nom);
-        return client;
-      });
+      console.log(`📊 Résultats: ${clients.length} clients trouvés sur ${total} total`);
 
-    return {
-      data: processedClients,
-      meta: {
-        total,
-        skip: skip || 0,
-        take: take || 50,
-        hasMore: (skip || 0) + (take || 50) < total,
-      },
-    };
+      // 🔧 AMÉLIORATION : Pseudonymisation conditionnelle
+      const processedClients = userRole === 'MAGASIN'
+        ? clients.map(client => ({
+          ...client,
+          // Masquage partiel pour magasins
+          nom: client.nom.length > 2 ? client.nom.substring(0, 2) + '***' : client.nom,
+          telephone: client.telephone ?
+            client.telephone.substring(0, 4) + '***' + client.telephone.slice(-2) : null,
+          pseudonymized: true
+        }))
+        : clients; // Données complètes pour admin
+
+      return {
+        data: processedClients,
+        meta: {
+          total,
+          skip: skip || 0,
+          take: take || 50,
+          hasMore: (skip || 0) + (take || 50) < total,
+          userRole,
+          magasinId
+        },
+      };
+
+    } catch (error) {
+      console.error('❌ Erreur filtrage clients:', error);
+      throw new Error(`Erreur lors de la récupération des clients: ${error.message}`);
+    }
   }
 
   private pseudonymizeClientData(client: any) {

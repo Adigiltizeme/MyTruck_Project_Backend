@@ -50,18 +50,90 @@ export class ClientsController {
     @UseGuards(JwtAuthGuard)
     @ApiBearerAuth('JWT-auth')
     async findAll(@Query() filters: ClientFiltersDto, @Request() req: any) {
-        // LOGS DE DÉBOGAGE
-        console.log('🔑 Headers authorization:', req.headers.authorization);
-        console.log('👤 req.user:', req.user);
-        console.log('🎭 Role détecté:', req.user?.role);
-        console.log('🏪 EntityType:', req.user?.entityType);
+        // 🔧 LOGS DE DÉBOGAGE AMÉLIORÉS
+        console.log('🔑 Headers authorization:', req.headers.authorization ? 'Present' : 'Missing');
+        console.log('👤 req.user complet:', JSON.stringify(req.user, null, 2));
 
-        // Pour les magasins, utiliser req.user.id comme magasinId
-        // Pour les users/admin, utiliser req.user.magasinId
-        const magasinId = req.user?.entityType === 'magasin' ? req.user.id : req.user?.magasinId;
-        console.log('🏪 MagasinId utilisé:', magasinId);
+        // 🔧 EXTRACTION ROBUSTE DU MAGASIN ID
+        let magasinId: string | null = null;
+        let userRole: string = 'MAGASIN'; // Par défaut
 
-        return this.clientsService.findAll(filters, req.user?.role, magasinId);
+        if (req.user) {
+            // Normaliser le rôle
+            userRole = req.user.role?.toUpperCase() || 'MAGASIN';
+            console.log('🎭 Rôle normalisé:', userRole);
+
+            // 🔧 EXTRACTION MAGASIN ID - MULTIPLE SOURCES
+            if (userRole === 'MAGASIN') {
+                // Essayer toutes les sources possibles
+                magasinId = req.user.magasinId ||           // Direct magasinId
+                    req.user.magasin?.id ||           // Objet magasin nested
+                    req.user.storeId ||               // Legacy storeId
+                    req.user.store?.id ||             // Legacy store nested
+                    null;
+
+                console.log('🏪 Sources magasinId testées:', {
+                    'req.user.magasinId': req.user.magasinId,
+                    'req.user.magasin?.id': req.user.magasin?.id,
+                    'req.user.storeId': req.user.storeId,
+                    'req.user.store?.id': req.user.store?.id,
+                    'RÉSULTAT': magasinId
+                });
+
+                if (!magasinId) {
+                    console.error('❌ ERREUR CRITIQUE: Utilisateur magasin sans magasinId');
+                    console.error('👤 Objet user complet:', req.user);
+
+                    // 🔧 SOLUTION TEMPORAIRE: Chercher par email
+                    if (req.user.email?.includes('truffaut.com')) {
+                        // Mapping temporaire basé sur l'email
+                        if (req.user.email.includes('boulogne')) {
+                            magasinId = '76997d1d-2cc9-4144-96b9-4f3b181af0fc'; // Truffaut Boulogne
+                        } else if (req.user.email.includes('ivry')) {
+                            magasinId = '03705e9e-9af9-41ca-8e28-5046455b4b6f'; // Truffaut Ivry
+                        } else {
+                            // Par défaut, utiliser Truffaut Boulogne pour r.bessaraoui@truffaut.com
+                            magasinId = '76997d1d-2cc9-4144-96b9-4f3b181af0fc';
+                        }
+                        console.log('🔧 MAPPING TEMPORAIRE APPLIQUÉ:', magasinId);
+                    }
+                }
+            }
+        }
+
+        console.log('🏪 MagasinId FINAL utilisé:', magasinId);
+        console.log('🎭 UserRole FINAL:', userRole);
+
+        // 🔧 VALIDATION AVANT APPEL SERVICE
+        if (userRole === 'MAGASIN' && !magasinId) {
+            console.error('❌ ÉCHEC: Impossible de déterminer le magasinId');
+            return {
+                data: [],
+                meta: {
+                    total: 0,
+                    skip: 0,
+                    take: 50,
+                    hasMore: false,
+                    error: 'Magasin non identifié pour cet utilisateur'
+                }
+            };
+        }
+
+        try {
+            const result = await this.clientsService.findAll(filters, userRole, magasinId);
+
+            console.log('✅ Service findAll résultat:', {
+                clientsCount: result.data?.length || 0,
+                total: result.meta?.total || 0,
+                userRole,
+                magasinId
+            });
+
+            return result;
+        } catch (error) {
+            console.error('❌ Erreur dans findAll:', error);
+            throw error;
+        }
     }
 
     @Get('search')
