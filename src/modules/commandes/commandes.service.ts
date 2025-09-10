@@ -259,6 +259,9 @@ export class CommandesService {
                         maxCapacity: true,
                     },
                 },
+                statusHistory: {
+                    orderBy: { changedAt: 'asc' },
+                },
             },
         });
 
@@ -626,11 +629,11 @@ export class CommandesService {
             updateData.statutLivraison = updateCommandeDto.statutLivraison;
             console.log('📊 Mise à jour statut livraison:', updateCommandeDto.statutLivraison);
 
-            // ✅ RÈGLE MÉTIER : Auto-confirmation commande si livraison confirmée
-            if (updateCommandeDto.statutLivraison === 'CONFIRMEE' && existingCommande.statutCommande !== 'Confirmée') {
-                updateData.statutCommande = 'Confirmée';
-                console.log('📊 Auto-confirmation commande déclenchée');
-            }
+            // ❌ RÈGLE MÉTIER DÉSACTIVÉE : Auto-confirmation créait interdépendance des dates
+            // if (updateCommandeDto.statutLivraison === 'CONFIRMEE' && existingCommande.statutCommande !== 'Confirmée') {
+            //     updateData.statutCommande = 'Confirmée';
+            //     console.log('📊 Auto-confirmation commande déclenchée');
+            // }
         }
         if (updateCommandeDto.remarques !== undefined) {
             updateData.remarques = updateCommandeDto.remarques;
@@ -713,6 +716,29 @@ export class CommandesService {
             });
         }
 
+        // ✅ HISTORIQUE STATUTS : Détecter uniquement les changements directs (pas de règles métier)
+        const statusChanges: Array<{
+            statusType: 'COMMANDE' | 'LIVRAISON';
+            oldStatus: string;
+            newStatus: string;
+        }> = [];
+
+        if (updateCommandeDto.statutCommande !== undefined && updateCommandeDto.statutCommande !== existingCommande.statutCommande) {
+            statusChanges.push({
+                statusType: 'COMMANDE',
+                oldStatus: existingCommande.statutCommande,
+                newStatus: updateCommandeDto.statutCommande
+            });
+        }
+
+        if (updateCommandeDto.statutLivraison !== undefined && updateCommandeDto.statutLivraison !== existingCommande.statutLivraison) {
+            statusChanges.push({
+                statusType: 'LIVRAISON',
+                oldStatus: existingCommande.statutLivraison,
+                newStatus: updateCommandeDto.statutLivraison
+            });
+        }
+
         // Mettre à jour seulement si il y a des données à modifier
         if (Object.keys(updateData).length > 0) {
             await this.prisma.commande.update({
@@ -720,9 +746,15 @@ export class CommandesService {
                 data: updateData,
             });
 
+            // ✅ CRÉER HISTORIQUE STATUTS après la mise à jour réussie
+            for (const change of statusChanges) {
+                await this.createStatusHistoryEntry(id, change, 'system'); // TODO: utiliser l'ID utilisateur réel
+            }
+
             console.log('✅ Commande mise à jour avec conditions:', {
                 id: id,
-                updatedFields: Object.keys(updateData)
+                updatedFields: Object.keys(updateData),
+                statusChanges: statusChanges.length
             });
 
             console.log('📝 Champs commande mis à jour:', Object.keys(updateData));
@@ -1213,12 +1245,12 @@ export class CommandesService {
 
                 finalUpdateData.statutLivraison = updateData.statutLivraison;
 
-                // ✅ RÈGLE 2 : Auto-confirmation commande si livraison confirmée
-                if (updateData.statutLivraison === StatutLivraison.CONFIRMEE &&
-                    existingCommande.statutCommande !== StatutCommande.CONFIRMEE) {
-                    finalUpdateData.statutCommande = StatutCommande.CONFIRMEE;
-                    autoActions.push('Auto-confirmation commande déclenchée');
-                }
+                // ❌ RÈGLE 2 DÉSACTIVÉE : Auto-confirmation créait interdépendance des dates
+                // if (updateData.statutLivraison === StatutLivraison.CONFIRMEE &&
+                //     existingCommande.statutCommande !== StatutCommande.CONFIRMEE) {
+                //     finalUpdateData.statutCommande = StatutCommande.CONFIRMEE;
+                //     autoActions.push('Auto-confirmation commande déclenchée');
+                // }
 
                 // ✅ RÈGLE 3 : Notifications selon statut
                 switch (updateData.statutLivraison) {
@@ -1711,5 +1743,33 @@ export class CommandesService {
 
         // ✅ Pour l'instant, juste log console
         console.log('📋 AUDIT LOG:', logData);
+    }
+
+    /**
+     * ✅ NOUVELLE MÉTHODE : Créer une entrée d'historique des statuts
+     */
+    private async createStatusHistoryEntry(
+        commandeId: string, 
+        change: { statusType: 'COMMANDE' | 'LIVRAISON'; oldStatus: string; newStatus: string },
+        changedBy: string,
+        reason?: string
+    ) {
+        try {
+            await this.prisma.statusHistory.create({
+                data: {
+                    commandeId,
+                    statusType: change.statusType,
+                    oldStatus: change.oldStatus,
+                    newStatus: change.newStatus,
+                    changedBy,
+                    reason
+                }
+            });
+            
+            console.log(`📊 Historique créé: ${change.statusType} ${change.oldStatus} → ${change.newStatus}`);
+        } catch (error) {
+            console.error('❌ Erreur création historique statut:', error);
+            // Ne pas faire échouer la transaction principale
+        }
     }
 }

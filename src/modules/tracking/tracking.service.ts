@@ -83,6 +83,7 @@ export class TrackingService {
         await this.prisma.statusHistory.create({
             data: {
                 commandeId,
+                statusType: 'LIVRAISON', // ✅ AJOUT DU CHAMP MANQUANT
                 oldStatus: commande.statutLivraison,
                 newStatus,
                 changedBy,

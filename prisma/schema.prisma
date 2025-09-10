@@ -179,16 +179,22 @@ model Commande {
 }
 
 model StatusHistory {
-  id         String   @id @default(uuid())
+  id         String     @id @default(uuid())
   commandeId String
+  statusType StatusType // NOUVEAU: 'COMMANDE' ou 'LIVRAISON'
   oldStatus  String
   newStatus  String
   reason     String?
   changedBy  String
-  changedAt  DateTime @default(now())
-  commande   Commande @relation(fields: [commandeId], references: [id])
+  changedAt  DateTime   @default(now())
+  commande   Commande   @relation(fields: [commandeId], references: [id])
 
   @@map("status_history")
+}
+
+enum StatusType {
+  COMMANDE
+  LIVRAISON
 }
 
 model TrackingEvent {
