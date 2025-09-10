@@ -1220,6 +1220,8 @@ export class CommandesService {
         console.log(`📊 ===== MISE À JOUR STATUTS INTELLIGENTE =====`);
         console.log(`📊 Commande: ${commandeId}`);
         console.log(`📊 Données reçues:`, updateData);
+        console.log(`📊 statutCommande dans updateData:`, updateData.statutCommande);
+        console.log(`📊 statutLivraison dans updateData:`, updateData.statutLivraison);
         console.log(`📊 Utilisateur: ${userId}`);
 
         const existingCommande = await this.findOne(commandeId);
