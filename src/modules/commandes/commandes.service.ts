@@ -965,9 +965,61 @@ export class CommandesService {
             );
         }
 
-        await this.prisma.commande.delete({ where: { id } });
+        // Supprimer en cascade toutes les entités liées
+        await this.prisma.$transaction(async (tx) => {
+            // 1. Supprimer les rapports d'enlèvement et livraison
+            await tx.rapportEnlevement.deleteMany({
+                where: { commandeId: id }
+            });
+            await tx.rapportLivraison.deleteMany({
+                where: { commandeId: id }
+            });
 
-        this.logger.log(`🗑️ Commande supprimée: ${existingCommande.numeroCommande}`);
+            // 2. Supprimer les photos
+            await tx.photo.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 3. Supprimer les commentaires
+            await tx.commentaire.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 4. Supprimer les assignations de chauffeurs
+            await tx.chauffeurSurCommande.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 5. Supprimer l'historique des statuts
+            await tx.statusHistory.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 6. Supprimer les événements de tracking
+            await tx.trackingEvent.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 7. Supprimer les documents
+            await tx.document.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 8. Supprimer les cessions
+            await tx.cessionInterMagasin.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 9. Supprimer les articles
+            await tx.article.deleteMany({
+                where: { commandeId: id }
+            });
+
+            // 10. Enfin, supprimer la commande elle-même
+            await tx.commande.delete({ where: { id } });
+        });
+
+        this.logger.log(`🗑️ Commande supprimée avec toutes ses dépendances: ${existingCommande.numeroCommande}`);
         return { message: 'Commande supprimée avec succès' };
     }
 
