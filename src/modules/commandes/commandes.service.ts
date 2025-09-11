@@ -629,11 +629,11 @@ export class CommandesService {
             updateData.statutLivraison = updateCommandeDto.statutLivraison;
             console.log('📊 Mise à jour statut livraison:', updateCommandeDto.statutLivraison);
 
-            // ❌ RÈGLE MÉTIER DÉSACTIVÉE : Auto-confirmation créait interdépendance des dates
-            // if (updateCommandeDto.statutLivraison === 'CONFIRMEE' && existingCommande.statutCommande !== 'Confirmée') {
-            //     updateData.statutCommande = 'Confirmée';
-            //     console.log('📊 Auto-confirmation commande déclenchée');
-            // }
+            // ✅ RÈGLE MÉTIER RÉTABLIE : Auto-confirmation (compatible avec dates indépendantes)
+            if (updateCommandeDto.statutLivraison === 'CONFIRMEE' && existingCommande.statutCommande !== 'Confirmée') {
+                updateData.statutCommande = 'Confirmée';
+                console.log('📊 Auto-confirmation commande déclenchée');
+            }
         }
         if (updateCommandeDto.remarques !== undefined) {
             updateData.remarques = updateCommandeDto.remarques;
@@ -1247,12 +1247,12 @@ export class CommandesService {
 
                 finalUpdateData.statutLivraison = updateData.statutLivraison;
 
-                // ❌ RÈGLE 2 DÉSACTIVÉE : Auto-confirmation créait interdépendance des dates
-                // if (updateData.statutLivraison === StatutLivraison.CONFIRMEE &&
-                //     existingCommande.statutCommande !== StatutCommande.CONFIRMEE) {
-                //     finalUpdateData.statutCommande = StatutCommande.CONFIRMEE;
-                //     autoActions.push('Auto-confirmation commande déclenchée');
-                // }
+                // ✅ RÈGLE 2 RÉTABLIE : Auto-confirmation (compatible avec dates indépendantes)
+                if (updateData.statutLivraison === StatutLivraison.CONFIRMEE &&
+                    existingCommande.statutCommande !== StatutCommande.CONFIRMEE) {
+                    finalUpdateData.statutCommande = StatutCommande.CONFIRMEE;
+                    autoActions.push('Auto-confirmation commande déclenchée');
+                }
 
                 // ✅ RÈGLE 3 : Notifications selon statut
                 switch (updateData.statutLivraison) {
